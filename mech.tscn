@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://30ubfbepehwu"]
+
+[ext_resource type="Script" uid="uid://c8wf6wa0y7yb0" path="res://mech.gd" id="1_e36w2"]
+[ext_resource type="Texture2D" uid="uid://6uqtsgkxn4jw" path="res://assets/icons/missile-mech.png" id="2_e36w2"]
+
+[node name="Mech" type="Node2D"]
+script = ExtResource("1_e36w2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.350446, 0.431061, 0.883568, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_e36w2")
+region_rect = Rect2(0, 0, 485, 488)
+
+[connection signal="position_changed" from="." to="." method="_on_position_changed"]

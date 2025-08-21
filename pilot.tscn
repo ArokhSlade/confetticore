@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c36lqqsnbslbl"]
+
+[ext_resource type="Script" uid="uid://dgiaetr8rd12o" path="res://pilot.gd" id="1_gqrkc"]
+[ext_resource type="Texture2D" uid="uid://bvij8nveohfln" path="res://assets/icons/character.png" id="2_a8pgi"]
+
+[node name="Pilot" type="Node2D"]
+script = ExtResource("1_gqrkc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.642091, 0.741819, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_a8pgi")
