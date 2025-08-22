@@ -13,3 +13,4 @@ func switch_to_execute_mode():
 
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
+	

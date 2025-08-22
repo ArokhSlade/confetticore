@@ -15,3 +15,6 @@ func _on_ui_planning_finished():
 
 func _on_level_finished_moving_all_mechs():
 	ui.switch_to_planning_mode()
+
+func _on_ui_mech_path_changed(mech, point_path):
+	level.update_mech_path(mech, point_path)

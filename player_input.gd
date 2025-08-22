@@ -1,6 +1,8 @@
 extends Node
 class_name PlayerInput
 
+signal mech_path_changed(mech, point_path)
+
 @export var input_state : InputState = InputState.NEUTRAL
 @export var hex_map : ConfetticoreHexagonTileMapLayer
 
@@ -25,7 +27,7 @@ func _process(_delta):
 		_:
 			pass
 			
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			print("player input mouse button left")
@@ -46,8 +48,8 @@ func _input(event):
 					
 					var to_id = hex_map.pathfinding_get_point_id(mouse_coords)
 					
-					var path = hex_map.astar.get_point_path(from_id, to_id)
-					selected_mech.set_path(path)
+					var point_path = hex_map.astar.get_point_path(from_id, to_id)
+					mech_path_changed.emit(selected_mech, point_path)
 				_:
 					pass
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:

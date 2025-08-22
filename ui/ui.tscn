@@ -15,3 +15,4 @@ player_input = NodePath("PlayerInput")
 script = ExtResource("2_wl5ax")
 
 [connection signal="execute_button_pressed" from="HUD" to="." method="_on_hud_execute_button_pressed"]
+[connection signal="mech_path_changed" from="PlayerInput" to="." method="_on_player_input_mech_path_changed"]

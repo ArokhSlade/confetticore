@@ -13,6 +13,7 @@ signal finished_moving_all_mechs
 @export var state = GameState.PLAN
 @export var hex_map : HexagonTileMapLayer
 @export var mechs : Mechs
+@export var paths : Paths
 
 func get_hex_map():
 	return hex_map
@@ -27,3 +28,6 @@ func move_all_mechs():
 func _on_mechs_finished_moving_all():
 	state = GameState.PLAN
 	finished_moving_all_mechs.emit()
+
+func update_mech_path(mech, point_path):
+	paths.update_mech_path(mech, point_path)

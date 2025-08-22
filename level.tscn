@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dqnfsgb18u6f6"]
+[gd_scene load_steps=10 format=4 uid="uid://dqnfsgb18u6f6"]
 
 [ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level.gd" id="1_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://unqo5f8jesjm" path="res://level/mechs.tscn" id="4_1ainy"]
 [ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot/pilot.tscn" id="5_f2txt"]
+[ext_resource type="PackedScene" uid="uid://bnhun3q4koli2" path="res://level/paths.tscn" id="7_n6hdu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yx6j"]
 texture = ExtResource("1_vonw3")
@@ -38,10 +39,11 @@ custom_data_layer_0/name = "pathfinding"
 custom_data_layer_0/type = 3
 sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs")]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs", "paths")]
 script = ExtResource("1_0b4ue")
 hex_map = NodePath("HexagonTileMapLayer")
 mechs = NodePath("Mechs")
+paths = NodePath("Paths")
 
 [node name="HexagonTileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
 tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAgAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAA=")
@@ -63,6 +65,8 @@ pilot = NodePath("Pilot")
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
+
+[node name="Paths" parent="." instance=ExtResource("7_n6hdu")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(317, 326)
