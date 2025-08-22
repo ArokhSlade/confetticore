@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://30ubfbepehwu"]
+[gd_scene load_steps=4 format=3 uid="uid://30ubfbepehwu"]
 
-[ext_resource type="Script" uid="uid://c8wf6wa0y7yb0" path="res://mech.gd" id="1_e36w2"]
+[ext_resource type="Script" uid="uid://c8wf6wa0y7yb0" path="res://mech/mech.gd" id="1_e36w2"]
 [ext_resource type="Texture2D" uid="uid://6uqtsgkxn4jw" path="res://assets/icons/missile-mech.png" id="2_e36w2"]
+[ext_resource type="PackedScene" uid="uid://nxtsg3sv8qtq" path="res://mech/path_marker.tscn" id="3_yc0df"]
 
 [node name="Mech" type="Node2D"]
 script = ExtResource("1_e36w2")
+path_marker = ExtResource("3_yc0df")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.350446, 0.431061, 0.883568, 1)

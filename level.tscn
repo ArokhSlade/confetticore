@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://dqnfsgb18u6f6"]
+[gd_scene load_steps=9 format=4 uid="uid://dqnfsgb18u6f6"]
 
 [ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level.gd" id="1_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
-[ext_resource type="Script" uid="uid://buj6ft1vvdf2f" path="res://addons/hexagon_tilemaplayer/hexagon_tilemaplayer.gd" id="2_oi3di"]
-[ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech.tscn" id="3_oi3di"]
-[ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot.tscn" id="5_f2txt"]
+[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://confetticore_hexagon_tilemaplayer.gd" id="3_1ainy"]
+[ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot/pilot.tscn" id="5_f2txt"]
+[ext_resource type="Script" uid="uid://ovsxn7rfo4ye" path="res://player_input.gd" id="6_1ainy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yx6j"]
 texture = ExtResource("1_vonw3")
@@ -40,22 +41,25 @@ sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 [node name="Level" type="Node2D" node_paths=PackedStringArray("hex_layer", "mech")]
 script = ExtResource("1_0b4ue")
 hex_layer = NodePath("HexagonTileMapLayer")
-mech = NodePath("Mech")
+mech = NodePath("Mechs/Mech")
 
-[node name="HexagonTileMapLayer" type="TileMapLayer" parent="."]
+[node name="HexagonTileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
 tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAgAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_dhmdd")
-script = ExtResource("2_oi3di")
+script = ExtResource("3_1ainy")
+mechs = NodePath("../Mechs")
 pathfinding_enabled = true
 debug_mode = 1
 metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 
-[node name="Mech" parent="." node_paths=PackedStringArray("pilot", "level") instance=ExtResource("3_oi3di")]
+[node name="Mechs" type="Node2D" parent="."]
+
+[node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot", "level") instance=ExtResource("3_oi3di")]
 position = Vector2(-41, -8)
 pilot = NodePath("Pilot")
-level = NodePath("..")
+level = NodePath("../..")
 
-[node name="Pilot" parent="Mech" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="Mechs/Mech" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
@@ -63,3 +67,7 @@ experience = 1336
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(317, 326)
 zoom = Vector2(0.67, 0.67)
+
+[node name="PlayerInput" type="Node" parent="." node_paths=PackedStringArray("hex_map")]
+script = ExtResource("6_1ainy")
+hex_map = NodePath("../HexagonTileMapLayer")

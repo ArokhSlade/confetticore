@@ -1,6 +1,5 @@
 extends Node2D
-const Pilot = preload("res://pilot.gd")
-const Level = preload("res://level.gd")
+class_name Mech
 
 signal position_changed(Vector2i)
 
@@ -8,6 +7,12 @@ signal position_changed(Vector2i)
 var hit_points : int
 
 @export var level : Level
+
+@export var path : PackedVector2Array = []
+@export var path_marker : PackedScene
+
+var markers : Array
+var markers_changed_since_last_draw = false
 
 func _to_string():
 	return "mech"
@@ -25,7 +30,10 @@ func get_coords():
 func _ready():
 	_on_position_changed(get_coords())
 
-func _physics_process(delta):
+func _process(_delta):
+	draw_path()
+
+func _physics_process(_delta):
 	var coords = get_coords()
 	var old_coords = coords
 	
@@ -42,6 +50,33 @@ func _physics_process(delta):
 	if (coords != old_coords):
 		position_changed.emit(position)
 
-func _on_position_changed(position: Vector2i):
-	var coords = level.hex_layer.local_to_map(position)
+func _on_position_changed(new_position: Vector2i):
+	var coords = level.hex_layer.local_to_map(new_position)
 	print("mech coords %s" % coords)
+
+func set_path(new_path : PackedVector2Array):
+	clear_path()
+	self.path = new_path
+	
+func clear_path():
+	for marker : Node in markers:
+		marker.queue_free()
+	markers = []
+	
+	path = []
+		
+	markers_changed_since_last_draw = true
+	
+func draw_path():
+	
+	if not markers_changed_since_last_draw:
+		return
+	
+	print("drawing path")
+	for point in path:
+		var marker = path_marker.instantiate()
+		add_child(marker)
+		marker.global_position = point
+		markers.append(marker)
+	markers_changed_since_last_draw = false
+		

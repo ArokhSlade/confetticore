@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c36lqqsnbslbl"]
 
-[ext_resource type="Script" uid="uid://dgiaetr8rd12o" path="res://pilot.gd" id="1_gqrkc"]
+[ext_resource type="Script" uid="uid://dgiaetr8rd12o" path="res://pilot/pilot.gd" id="1_gqrkc"]
 [ext_resource type="Texture2D" uid="uid://bvij8nveohfln" path="res://assets/icons/character.png" id="2_a8pgi"]
 
 [node name="Pilot" type="Node2D"]

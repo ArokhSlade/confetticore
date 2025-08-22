@@ -1,6 +1,5 @@
 extends Node
-const Mech = preload("res://mech.gd")
-
+class_name Level
 
 @export var hex_layer : HexagonTileMapLayer
 @export var mech : Mech
