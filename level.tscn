@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
 [ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://confetticore_hexagon_tilemaplayer.gd" id="3_1ainy"]
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://unqo5f8jesjm" path="res://level/mechs.tscn" id="4_1ainy"]
 [ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot/pilot.tscn" id="5_f2txt"]
-[ext_resource type="Script" uid="uid://ovsxn7rfo4ye" path="res://player_input.gd" id="6_1ainy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yx6j"]
 texture = ExtResource("1_vonw3")
@@ -38,10 +38,10 @@ custom_data_layer_0/name = "pathfinding"
 custom_data_layer_0/type = 3
 sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_layer", "mech")]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs")]
 script = ExtResource("1_0b4ue")
-hex_layer = NodePath("HexagonTileMapLayer")
-mech = NodePath("Mechs/Mech")
+hex_map = NodePath("HexagonTileMapLayer")
+mechs = NodePath("Mechs")
 
 [node name="HexagonTileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
 tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAgAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAA=")
@@ -52,12 +52,12 @@ pathfinding_enabled = true
 debug_mode = 1
 metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 
-[node name="Mechs" type="Node2D" parent="."]
+[node name="Mechs" parent="." node_paths=PackedStringArray("mech_step_timer") instance=ExtResource("4_1ainy")]
+mech_step_timer = NodePath("../MechStepTimer")
 
-[node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot", "level") instance=ExtResource("3_oi3di")]
+[node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 position = Vector2(-41, -8)
 pilot = NodePath("Pilot")
-level = NodePath("../..")
 
 [node name="Pilot" parent="Mechs/Mech" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
@@ -68,6 +68,7 @@ experience = 1336
 position = Vector2(317, 326)
 zoom = Vector2(0.67, 0.67)
 
-[node name="PlayerInput" type="Node" parent="." node_paths=PackedStringArray("hex_map")]
-script = ExtResource("6_1ainy")
-hex_map = NodePath("../HexagonTileMapLayer")
+[node name="MechStepTimer" type="Timer" parent="."]
+
+[connection signal="finished_moving_all" from="Mechs" to="." method="_on_mechs_finished_moving_all"]
+[connection signal="timeout" from="MechStepTimer" to="Mechs" method="_on_mech_step_timer_timeout"]

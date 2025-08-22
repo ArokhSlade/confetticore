@@ -1,11 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://nxtsg3sv8qtq"]
 
-[sub_resource type="GDScript" id="GDScript_fn2vp"]
-script/source = "extends Polygon2D
-"
+[ext_resource type="Script" uid="uid://bxlk533afpifk" path="res://mech/path_marker.gd" id="1_0yhlg"]
 
 [node name="PathMarker" type="Polygon2D"]
 color = Color(0.857249, 0.824675, 0.210284, 1)
 polygon = PackedVector2Array(0, 16.8695, 16.8695, 0, 0, -16.8695, -16.8695, 0)
 uv = PackedVector2Array(-2, -72, -87, 3, -1, 83, 74, -2)
-script = SubResource("GDScript_fn2vp")
+script = ExtResource("1_0yhlg")

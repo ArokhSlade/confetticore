@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://4bxvw6r457g0"]
+
+[ext_resource type="Script" uid="uid://db3fj6iirdct4" path="res://ui/hud.gd" id="1_rbyyf"]
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("execute_button")]
+script = ExtResource("1_rbyyf")
+execute_button = NodePath("ExecuteButton")
+
+[node name="ExecuteButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.804688
+anchor_top = 0.847222
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Execute!"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ExecuteButton" to="." method="_on_execute_button_pressed"]

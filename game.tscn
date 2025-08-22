@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbewjrret8wkg"]
+
+[ext_resource type="Script" uid="uid://bkyplmgv0gi68" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://dqnfsgb18u6f6" path="res://level.tscn" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bgauqy5f3cvfo" path="res://ui/ui.tscn" id="6_mfdv2"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("level", "ui")]
+script = ExtResource("1_fc0e3")
+level = NodePath("Level")
+ui = NodePath("UI")
+
+[node name="Level" parent="." instance=ExtResource("1_feb5d")]
+
+[node name="UI" parent="." instance=ExtResource("6_mfdv2")]
+
+[connection signal="finished_moving_all_mechs" from="Level" to="." method="_on_level_finished_moving_all_mechs"]
+[connection signal="planning_finished" from="UI" to="." method="_on_ui_planning_finished"]

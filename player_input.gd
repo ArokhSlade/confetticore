@@ -1,4 +1,5 @@
 extends Node
+class_name PlayerInput
 
 @export var input_state : InputState = InputState.NEUTRAL
 @export var hex_map : ConfetticoreHexagonTileMapLayer
@@ -8,8 +9,11 @@ var selected_mech : Mech = null
 enum InputState {
 	NEUTRAL,
 	MECH_SELECTED,
-	
+	DORMANT
 }
+
+func setup(new_hex_map):
+	hex_map = new_hex_map
 
 func _process(_delta):
 	
@@ -28,6 +32,8 @@ func _input(event):
 			match (input_state):
 				InputState.NEUTRAL:
 					var mouse_hex = hex_map.get_closest_cell_from_mouse()
+					
+					# TODO(Gerald, 2025 08 22): control flow cuts across. better way?
 					selected_mech = hex_map.try_get_mech(mouse_hex)
 					if selected_mech != null:
 						input_state = InputState.MECH_SELECTED
@@ -56,7 +62,21 @@ func _input(event):
 	
 	if event is InputEventMouseMotion:
 		pass
-		
-					
-			
-		
+
+func finish_sleeping():
+	match (input_state):
+		InputState.DORMANT:
+			input_state = InputState.NEUTRAL
+		InputState.NEUTRAL, InputState.MECH_SELECTED:
+			print_debug("tried to finish sleeping while not dormant")
+		_:
+			pass
+
+func go_to_sleep():
+	match (input_state):
+		InputState.NEUTRAL, InputState.MECH_SELECTED:
+			input_state = InputState.DORMANT
+		InputState.DORMANT:
+			print_debug("tried to go to sleep while dormant")
+		_:
+			pass
