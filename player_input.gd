@@ -1,6 +1,8 @@
 extends Node
 class_name PlayerInput
 
+signal mech_selected(mech)
+signal mech_deselected
 signal mech_path_changed(mech, point_path)
 
 @export var input_state : InputState = InputState.NEUTRAL
@@ -39,6 +41,8 @@ func _unhandled_input(event):
 					selected_mech = hex_map.try_get_mech(mouse_hex)
 					if selected_mech != null:
 						input_state = InputState.MECH_SELECTED
+						mech_selected.emit(selected_mech)
+					
 				InputState.MECH_SELECTED:
 					var selected_mech_coords = hex_map.get_coords(selected_mech)
 					var from_id = hex_map.pathfinding_get_point_id(selected_mech_coords)
@@ -58,6 +62,7 @@ func _unhandled_input(event):
 					pass
 				InputState.MECH_SELECTED:
 					input_state = InputState.NEUTRAL
+					mech_deselected.emit()
 					selected_mech = null
 				_:
 					pass

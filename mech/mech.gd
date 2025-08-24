@@ -6,17 +6,26 @@ signal finished_moving
 var has_finished_moving = true
 
 @export var pilot : Pilot
-var hit_points : int
+
+@export var move_points : int = 5
 
 @export var level : Level
 @export var path : Path
 
-func _to_string():
-	return "mech"
+@export var move_range : int
+
+var path_length : int:
+	get:
+		if path:
+			return path.length
+		else:
+			return 0
 
 func get_coords():
 	var coords = level.hex_layer.local_to_map(self.position)
 	return coords
+
+
 
 func move_step():
 	if has_finished_moving:

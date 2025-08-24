@@ -4,6 +4,11 @@ class_name Path
 var points : PackedVector2Array
 var markers : Array[PathMarker]
 
+var length: int:
+	get:
+		assert(points.size() == markers.size())
+		return points.size()
+
 func setup(path : PackedVector2Array, path_marker: PackedScene):
 	points = path
 	for point in path:

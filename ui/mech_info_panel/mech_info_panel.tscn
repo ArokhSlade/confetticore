@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1dkw3ad7aw8c"]
+
+[ext_resource type="Script" uid="uid://pwy3mhqby7yi" path="res://ui/mech_info_panel/mech_info_panel.gd" id="1_8lom7"]
+
+[node name="MechInfoPanel" type="Panel" node_paths=PackedStringArray("move_info_label")]
+offset_right = 139.0
+offset_bottom = 103.0
+script = ExtResource("1_8lom7")
+move_info_label = NodePath("VBoxContainer/MoveInfoLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MechInfoHeader" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Mech Info"
+
+[node name="MoveInfoLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Move: 6/6"

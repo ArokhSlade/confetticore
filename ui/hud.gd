@@ -4,6 +4,7 @@ class_name HUD
 signal execute_button_pressed
 
 @export var execute_button : Button
+@export var mech_info_panel : MechInfoPanel
 
 func switch_to_planning_mode():
 	execute_button.disabled = false
@@ -14,3 +15,9 @@ func switch_to_execute_mode():
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
 	
+func update_mech_info_panel(mech):
+	mech_info_panel.show()
+	mech_info_panel.update(mech)
+
+func hide_mech_info_panel():
+	mech_info_panel.hide()

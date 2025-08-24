@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://4bxvw6r457g0"]
+[gd_scene load_steps=3 format=3 uid="uid://4bxvw6r457g0"]
 
 [ext_resource type="Script" uid="uid://db3fj6iirdct4" path="res://ui/hud.gd" id="1_rbyyf"]
+[ext_resource type="PackedScene" uid="uid://b1dkw3ad7aw8c" path="res://ui/mech_info_panel/mech_info_panel.tscn" id="2_276te"]
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("execute_button")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("execute_button", "mech_info_panel")]
 script = ExtResource("1_rbyyf")
 execute_button = NodePath("ExecuteButton")
+mech_info_panel = NodePath("MechInfoPanel")
 
 [node name="ExecuteButton" type="Button" parent="."]
 anchors_preset = -1
@@ -16,5 +18,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Execute!"
 metadata/_edit_use_anchors_ = true
+
+[node name="MechInfoPanel" parent="." instance=ExtResource("2_276te")]
+visible = false
 
 [connection signal="pressed" from="ExecuteButton" to="." method="_on_execute_button_pressed"]

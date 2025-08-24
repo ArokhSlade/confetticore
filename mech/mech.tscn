@@ -5,6 +5,7 @@
 
 [node name="Mech" type="Node2D"]
 script = ExtResource("1_e36w2")
+move_range = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.350446, 0.431061, 0.883568, 1)

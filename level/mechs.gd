@@ -42,3 +42,6 @@ func _on_mech_step_timer_timeout():
 	assert(not has_finished_moving_all)
 	for mech : Mech in get_children():
 		mech.move_step()
+
+func update_mech_path(mech, path):
+	mech.set_path(path)
