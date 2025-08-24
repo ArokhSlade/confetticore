@@ -19,13 +19,17 @@ func get_mechs_count():
 func move_all():
 	if get_mechs_count() == 0:
 		finished_moving_all.emit()
-		
+	
+	for mech : Mech in get_children():
+		mech.start_moving()
+	
 	has_finished_moving_all = false
 	mech_step_timer.start()
 		
 func on_mech_finished_moving():
 	mechs_finished_moving_count += 1
-	if get_mechs_count() == mechs_finished_moving_count:
+	var mechs_count = get_mechs_count()
+	if mechs_count == mechs_finished_moving_count:
 		finish_moving_all()
 		
 func finish_moving_all():	

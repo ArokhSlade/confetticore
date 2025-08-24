@@ -3,6 +3,8 @@ class_name Mech
 
 signal finished_moving
 
+var has_finished_moving = true
+
 @export var pilot : Pilot
 var hit_points : int
 
@@ -17,17 +19,24 @@ func get_coords():
 	return coords
 
 func move_step():
-	if path == null:
-		finished_moving.emit()
+	if has_finished_moving:
+		return
+		
+	if path == null or path.is_empty():
+		finish_turn()
 		return
 		
 	if not path.is_empty():
 		global_position = path.points[0]
 		path.pop_front()
 		
-	if path.is_empty():
-		path = null
-		finished_moving.emit()
-			
+func finish_turn():
+	path = null
+	has_finished_moving = true
+	finished_moving.emit()
+
+func start_moving():
+	has_finished_moving = false
+	
 func set_path(new_path):
 	path = new_path

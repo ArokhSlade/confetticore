@@ -58,10 +58,28 @@ metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 mech_step_timer = NodePath("../MechStepTimer")
 
 [node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
-position = Vector2(-41, -8)
+position = Vector2(-48, 0)
 pilot = NodePath("Pilot")
 
 [node name="Pilot" parent="Mechs/Mech" instance=ExtResource("5_f2txt")]
+position = Vector2(0, -26)
+call_sign = "gerald"
+experience = 1336
+
+[node name="Mech2" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+position = Vector2(523, 157)
+pilot = NodePath("Pilot")
+
+[node name="Pilot" parent="Mechs/Mech2" instance=ExtResource("5_f2txt")]
+position = Vector2(0, -26)
+call_sign = "gerald"
+experience = 1336
+
+[node name="Mech3" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+position = Vector2(-477, 720)
+pilot = NodePath("Pilot")
+
+[node name="Pilot" parent="Mechs/Mech3" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
