@@ -48,11 +48,19 @@ func _unhandled_input(event):
 					var from_id = hex_map.pathfinding_get_point_id(selected_mech_coords)
 					
 					var mouse_hex = hex_map.get_closest_cell_from_mouse()
-					var mouse_coords = hex_map.cube_to_map(mouse_hex)
-					
+					var mouse_coords = hex_map.cube_to_map(mouse_hex)					
 					var to_id = hex_map.pathfinding_get_point_id(mouse_coords)
 					
-					var point_path = hex_map.astar.get_point_path(from_id, to_id)
+					var point_path = hex_map.astar.get_point_path(from_id, to_id)					
+					
+					var first_point = hex_map.to_local(point_path[0])
+					first_point = hex_map.local_to_map(first_point)
+					first_point = hex_map.pathfinding_get_point_id(first_point)
+					
+					var first_point_is_from_id = point_path and point_path.size() >= 1 and first_point == from_id
+					assert(first_point_is_from_id)
+					point_path = point_path.slice(1)
+					
 					mech_path_changed.emit(selected_mech, point_path)
 				_:
 					pass
