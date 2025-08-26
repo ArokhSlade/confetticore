@@ -12,7 +12,7 @@ func update_mech_path(mech, point_path):
 		old_path.queue_free() #TODO(Gerald 2025 08 22): is this right?
 			
 	var path = Path.new()
-	var trimmed_point_path = point_path.slice(0,mech.move_range)
+	var trimmed_point_path = point_path.slice(0, mech.move_range)
 	path.setup(trimmed_point_path, path_marker)
 	mech_paths[mech] = path
 	add_child(path)

@@ -11,6 +11,7 @@ var mechs_finished_moving_count = 0
 func setup(mech_step_time : float):
 	mech_step_timer.wait_time = mech_step_time
 	for mech : Mech in get_children():
+		mech.setup()
 		mech.finished_moving.connect(on_mech_finished_moving)
 
 func get_mechs_count():
@@ -41,7 +42,7 @@ func finish_moving_all():
 func _on_mech_step_timer_timeout():
 	assert(not has_finished_moving_all)
 	for mech : Mech in get_children():
-		mech.move_step()
+		mech.update_state()
 
 func update_mech_path(mech, path):
 	mech.set_path(path)

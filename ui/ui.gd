@@ -2,7 +2,6 @@ extends Node
 class_name UI
 
 signal planning_finished
-signal mech_selected(mech)
 signal mech_path_changed(mech, point_path)
 
 @export var hud : HUD
