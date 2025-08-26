@@ -8,9 +8,6 @@ signal finished_moving
 
 @export var pilot : Pilot
 
-#TODO(Arokh, 2025 08 26): obsolete?
-@export var move_points : int = 5
-
 #TODO(Arokh, 2025 08 26): why export?
 @export var path : Path
 
