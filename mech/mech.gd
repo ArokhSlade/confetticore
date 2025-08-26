@@ -11,8 +11,6 @@ signal finished_moving
 #TODO(Arokh, 2025 08 26): obsolete?
 @export var move_points : int = 5
 
-#TODO(Arokh, 2025 08 26): static, set by higher-up
-@export var level : Level
 #TODO(Arokh, 2025 08 26): why export?
 @export var path : Path
 
@@ -26,10 +24,6 @@ var path_length : int:
 			return path.length
 		else:
 			return 0
-
-func get_coords():
-	var coords = level.hex_layer.local_to_map(self.position)
-	return coords
 
 func setup():
 	for mech_state : MechState in $States.get_children():
