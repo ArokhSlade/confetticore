@@ -8,8 +8,7 @@ signal finished_moving
 
 @export var pilot : Pilot
 
-#TODO(Arokh, 2025 08 26): why export?
-@export var path : Path
+var path : Path
 
 @export var move_range : int
 

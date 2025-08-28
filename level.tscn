@@ -67,6 +67,7 @@ call_sign = "gerald"
 experience = 1336
 
 [node name="Mech2" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+modulate = Color(1, 0.1, 0.1, 1)
 position = Vector2(523, 157)
 pilot = NodePath("Pilot")
 
@@ -76,6 +77,7 @@ call_sign = "gerald"
 experience = 1336
 
 [node name="Mech3" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+modulate = Color(0.03, 1, 0.401833, 1)
 position = Vector2(-477, 720)
 pilot = NodePath("Pilot")
 
