@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://nxtsg3sv8qtq"]
 
-[ext_resource type="Script" uid="uid://bxlk533afpifk" path="res://mech/path_marker.gd" id="1_0yhlg"]
+[ext_resource type="Script" uid="uid://bxlk533afpifk" path="res://paths/path_marker.gd" id="1_0yhlg"]
 
 [node name="PathMarker" type="Polygon2D"]
 color = Color(0.857249, 0.824675, 0.210284, 1)

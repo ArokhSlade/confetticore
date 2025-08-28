@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnhun3q4koli2"]
+
+[ext_resource type="Script" uid="uid://b15slkbtqajo5" path="res://paths/paths.gd" id="1_vd26f"]
+[ext_resource type="PackedScene" uid="uid://nxtsg3sv8qtq" path="res://paths/path_marker.tscn" id="2_4i18l"]
+
+[node name="Paths" type="Node2D"]
+script = ExtResource("1_vd26f")
+path_marker = ExtResource("2_4i18l")
