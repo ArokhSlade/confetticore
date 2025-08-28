@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://dqnfsgb18u6f6"]
 
-[ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level.gd" id="1_0b4ue"]
+[ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level/level.gd" id="1_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
 [ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://confetticore_hexagon_tilemaplayer.gd" id="3_1ainy"]
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
