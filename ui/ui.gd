@@ -12,7 +12,7 @@ func setup(hex_map):
 
 func switch_to_planning_mode():
 	hud.switch_to_planning_mode()
-	player_input.finish_sleeping()
+	player_input.wake_up()
 
 func switch_to_execute_mode():
 	hud.switch_to_execute_mode()

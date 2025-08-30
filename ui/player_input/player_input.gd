@@ -21,13 +21,6 @@ func setup(new_hex_map):
 func _unhandled_input(event):
 	var new_state = input_state.handle_input(event)
 	try_transition_to(new_state)
-	#if event is InputEventMouseButton:
-		#if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			#pass
-		#if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-			#pass	
-	#if event is InputEventMouseMotion:
-		#pass
 
 func try_transition_to(new_state):
 	if new_state != input_state:
@@ -35,7 +28,7 @@ func try_transition_to(new_state):
 		input_state = new_state
 		input_state.on_enter()
 
-func finish_sleeping():
+func wake_up():
 	assert(dormant, "tried to finish sleeping while not dormant")
 	dormant = false
 	
