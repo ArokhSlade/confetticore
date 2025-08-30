@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://4bxvw6r457g0" path="res://ui/hud.tscn" id="1_ks8t7"]
 [ext_resource type="Script" uid="uid://ro6q6pqtraxa" path="res://ui/ui.gd" id="1_wl5ax"]
-[ext_resource type="Script" uid="uid://ovsxn7rfo4ye" path="res://player_input.gd" id="2_wl5ax"]
+[ext_resource type="Script" uid="uid://ovsxn7rfo4ye" path="res://ui/player_input/player_input.gd" id="2_wl5ax"]
 
 [node name="UI" type="Node" node_paths=PackedStringArray("hud", "player_input")]
 script = ExtResource("1_wl5ax")
