@@ -19,8 +19,9 @@ func setup(new_hex_map):
 	hex_map = new_hex_map
 
 func _unhandled_input(event):
-	var new_state = input_state.handle_input(event)
-	try_transition_to(new_state)
+	if not dormant:
+		var new_state = input_state.handle_input(event)
+		try_transition_to(new_state)
 
 func try_transition_to(new_state):
 	if new_state != input_state:
