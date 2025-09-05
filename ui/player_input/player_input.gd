@@ -20,7 +20,13 @@ func setup(new_hex_map):
 
 func _unhandled_input(event):
 	if not dormant:
-		var new_state = input_state.handle_input(event)
+		var new_state = input_state
+		if event is InputEventMouseButton:
+			if event.pressed:
+				if event.button_index == MOUSE_BUTTON_LEFT:
+					new_state = input_state.on_primary_click()
+				elif event.button_index == MOUSE_BUTTON_RIGHT:
+					new_state = input_state.on_secondary_click()			
 		try_transition_to(new_state)
 
 func try_transition_to(new_state):
