@@ -28,6 +28,15 @@ func try_get_mech(cube : Vector3i) -> Mech:
 			return mech
 	return null
 
+func get_occupant(hex : Hex):
+	var cell_data = get_cell_tile_data(hex.map_coords)
+	var occupant = cell_data.get_custom_data("occupant")
+	return occupant
+	
+func is_occupied(hex : Hex):
+	var result = get_occupant(hex) != null
+	return result
+
 class Hex:
 	var cube_coords : Vector3i 
 	var hex_map : ConfetticoreHexagonTileMapLayer
@@ -42,10 +51,5 @@ class Hex:
 		cube_coords = hex_map.local_to_cube(local_coords)
 			
 	func is_occupied() -> bool:
-		var result = true
-		
-		var cell_data = hex_map.get_cell_tile_data(map_coords)
-		var occupied_data = cell_data.get_custom_data("occupant")
-		
-		result = result and occupied_data != null
+		var result = hex_map.is_occupied(self)
 		return result
