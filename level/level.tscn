@@ -56,8 +56,9 @@ pathfinding_enabled = true
 debug_mode = 1
 metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 
-[node name="Mechs" parent="." node_paths=PackedStringArray("mech_step_timer") instance=ExtResource("4_1ainy")]
+[node name="Mechs" parent="." node_paths=PackedStringArray("mech_step_timer", "hex_map") instance=ExtResource("4_1ainy")]
 mech_step_timer = NodePath("../MechStepTimer")
+hex_map = NodePath("../HexagonTileMapLayer")
 
 [node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 position = Vector2(-48, 0)

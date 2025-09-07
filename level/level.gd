@@ -29,5 +29,5 @@ func _on_mechs_finished_moving_all():
 	state = GameState.PLAN
 	finished_moving_all_mechs.emit()
 
-func update_mech_path(mech, point_path):
-	paths.update_mech_path(mech, point_path)
+func update_mech_path(mech, target):
+	mechs.update_mech_path(mech, target)

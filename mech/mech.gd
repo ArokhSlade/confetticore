@@ -2,18 +2,22 @@ extends Node2D
 class_name Mech
 
 const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
+const Hex = HexMap.Hex
 
 signal finished_moving
+signal moved(mech, old_hex, new_hex)
 
 @onready var dormant_state = $States/Dormant
 @onready var moving_state = $States/Moving
 
 @export var pilot : Pilot
 @export var move_range : int
+@export var path_finder : PathFinder
 
 var state : MechState
 var path : Path
 var hex_map : HexMap
+var hex : Hex
 
 var path_length : int:
 	get:
@@ -27,6 +31,7 @@ func setup(in_hex_map):
 		mech_state.setup(self)
 	state = dormant_state
 	hex_map = in_hex_map
+	path_finder.setup(hex_map)
 
 func update_state():
 	var old_state = state
@@ -37,9 +42,19 @@ func update_state():
 
 func _move_step():
 	if not path.is_empty():
+		#var old_hex = hex
+		#hex = path.pop_front()
+		#
+		#global_position = hex.global_coords
+		#moved.emit(self, old_hex, hex)
+		#
+		#hex_map.move(self, hex)
 		global_position = path.points[0]
-		path.pop_front()
-		
+		var hex : Hex = path.pop_front()
+		#moved.emit(self, old_hex, hex)
+		#
+		#hex_map.move(self, hex)
+
 func _finish_moving():
 	path = null
 	finished_moving.emit()
@@ -47,6 +62,6 @@ func _finish_moving():
 func start_moving():
 	assert(state == dormant_state)
 	state.switch(moving_state)
-	
-func set_path(new_path):
-	path = new_path
+
+func update_path(target):
+	path = path_finder.compute_path(target)

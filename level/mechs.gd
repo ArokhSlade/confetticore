@@ -20,6 +20,10 @@ func setup(mech_step_time : float):
 func get_mechs_count():
 	return get_children().size()
 
+func update_mech_path(mech, target):
+	mech.update_path(target)
+
+
 func move_all():
 	if get_mechs_count() == 0:
 		finished_moving_all.emit()

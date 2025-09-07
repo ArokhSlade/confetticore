@@ -22,8 +22,8 @@ func _on_hud_execute_button_pressed():
 	switch_to_execute_mode()
 	planning_finished.emit()
 
-func _on_player_input_mech_path_changed(mech, path):
-	mech_path_changed.emit(mech, path)
+func _on_player_input_mech_path_changed(mech, target):
+	mech_path_changed.emit(mech, target)
 	hud.update_mech_info_panel(mech)
 
 func _on_player_input_mech_selected(mech):
