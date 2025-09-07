@@ -4,26 +4,48 @@ class_name ConfetticoreHexagonTileMapLayer
 
 @export var mechs : Node2D
 
-func get_hex(node_2d : Node2D):
+func get_cube(node_2d : Node2D):
 	var local_position = to_local(node_2d.global_position)
-	var hex = local_to_cube(local_position)
-	return hex
+	var cube = local_to_cube(local_position)
+	return cube
 
 func get_coords(node_2d : Node2D):
-	var hex = get_hex(node_2d)
-	var coords = cube_to_map(hex)
+	var cube = get_cube(node_2d)
+	var coords = cube_to_map(cube)
 	return coords
 	
-func has_mech(hex : Vector3i):
-	for mech : Mech in mechs.get_children():		
-		var mech_hex = get_hex(mech)
-		if mech_hex == hex:
+func has_mech(cube : Vector3i):
+	for mech : Mech in mechs.get_children():
+		var mech_cube = get_cube(mech)
+		if mech_cube == cube:
 			return true
 	return false
 			
-func try_get_mech(hex : Vector3i) -> Mech:
-	for mech : Mech in mechs.get_children():		
-		var mech_hex = get_hex(mech)
-		if mech_hex == hex:
+func try_get_mech(cube : Vector3i) -> Mech:
+	for mech : Mech in mechs.get_children():
+		var mech_cube = get_cube(mech)
+		if mech_cube == cube:
 			return mech
 	return null
+
+class Hex:
+	var cube_coords : Vector3i 
+	var hex_map : ConfetticoreHexagonTileMapLayer
+	
+	var map_coords : Vector2i:
+		get:
+			var result = hex_map.cube_to_map(cube_coords)
+			return result
+			
+	func _init(in_hex_map: ConfetticoreHexagonTileMapLayer = null, local_coords : Vector2 = Vector2.ZERO):
+		hex_map = in_hex_map
+		cube_coords = hex_map.local_to_cube(local_coords)
+			
+	func is_occupied() -> bool:
+		var result = true
+		
+		var cell_data = hex_map.get_cell_tile_data(map_coords)
+		var occupied_data = cell_data.get_custom_data("occupant")
+		
+		result = result and occupied_data != null
+		return result

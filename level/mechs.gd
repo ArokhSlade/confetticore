@@ -1,9 +1,12 @@
 extends Node2D
 class_name Mechs
 
+const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
+
 signal finished_moving_all
 
 @export var mech_step_timer : Timer
+@export var hex_map : HexMap
 
 var has_finished_moving_all = true
 var mechs_finished_moving_count = 0
@@ -11,7 +14,7 @@ var mechs_finished_moving_count = 0
 func setup(mech_step_time : float):
 	mech_step_timer.wait_time = mech_step_time
 	for mech : Mech in get_children():
-		mech.setup()
+		mech.setup(hex_map)
 		mech.finished_moving.connect(on_mech_finished_moving)
 
 func get_mechs_count():

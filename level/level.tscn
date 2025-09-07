@@ -37,6 +37,8 @@ tile_offset_axis = 1
 tile_size = Vector2i(190, 160)
 custom_data_layer_0/name = "pathfinding"
 custom_data_layer_0/type = 3
+custom_data_layer_1/name = "occupant"
+custom_data_layer_1/type = 0
 sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs", "paths")]
@@ -86,7 +88,8 @@ position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Paths" parent="." instance=ExtResource("7_n6hdu")]
+[node name="Paths" parent="." node_paths=PackedStringArray("hex_map") instance=ExtResource("7_n6hdu")]
+hex_map = NodePath("../HexagonTileMapLayer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(317, 326)

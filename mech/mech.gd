@@ -1,18 +1,19 @@
 extends Node2D
 class_name Mech
 
+const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
+
 signal finished_moving
 
 @onready var dormant_state = $States/Dormant
 @onready var moving_state = $States/Moving
 
 @export var pilot : Pilot
-
-var path : Path
-
 @export var move_range : int
 
 var state : MechState
+var path : Path
+var hex_map : HexMap
 
 var path_length : int:
 	get:
@@ -21,10 +22,11 @@ var path_length : int:
 		else:
 			return 0
 
-func setup():
+func setup(in_hex_map):
 	for mech_state : MechState in $States.get_children():
 		mech_state.setup(self)
 	state = dormant_state
+	hex_map = in_hex_map
 
 func update_state():
 	var old_state = state

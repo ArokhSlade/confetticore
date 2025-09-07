@@ -1,7 +1,11 @@
 extends Node2D
 class_name Paths
 
+const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
+
 @export var path_marker : PackedScene
+@export var hex_map : HexMap
+
 var markers : Array
 var mech_paths : Dictionary
 
@@ -13,7 +17,7 @@ func update_mech_path(mech, point_path):
 			
 	var path = Path.new()
 	var trimmed_point_path = point_path.slice(0, mech.move_range)
-	path.setup(trimmed_point_path, path_marker)
+	path.setup(trimmed_point_path, path_marker, hex_map)
 	mech_paths[mech] = path
 	add_child(path)
 	mech.set_path(path)
