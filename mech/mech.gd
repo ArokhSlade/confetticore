@@ -4,8 +4,8 @@ class_name Mech
 const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
 const Hex = HexMap.Hex
 
+
 signal finished_moving
-signal moved(mech, old_hex, new_hex)
 
 @onready var dormant_state = $States/Dormant
 @onready var moving_state = $States/Moving
@@ -51,8 +51,8 @@ func _move_step():
 		#
 		#hex_map.move(self, hex)
 		global_position = path.points[0]
-		var hex : Hex = path.pop_front()
-		moved.emit(self, old_hex, hex)
+		hex = path.pop_front()
+		hex_map.move_occupant(self, old_hex, hex)
 		#
 		#hex_map.move(self, hex)
 
