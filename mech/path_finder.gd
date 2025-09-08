@@ -5,13 +5,11 @@ class_name PathFinder
 @export var mech : Mech
 @export var path_marker : PackedScene
 
-var astar : AStar2D
 var hex_map : HexMap
 var path : Path
 
 func setup(in_hex_map):
 	hex_map = in_hex_map
-	astar = hex_map.astar
 	
 func compute_path(target_hex) -> Path:
 	var mech_coords = hex_map.get_map_coords(mech)
