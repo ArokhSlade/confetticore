@@ -32,6 +32,7 @@ func setup(in_hex_map):
 	state = dormant_state
 	hex_map = in_hex_map
 	path_finder.setup(hex_map)
+	hex = hex_map.get_hex_at_global(global_position)
 
 func update_state():
 	var old_state = state
@@ -42,7 +43,7 @@ func update_state():
 
 func _move_step():
 	if not path.is_empty():
-		#var old_hex = hex
+		var old_hex = hex
 		#hex = path.pop_front()
 		#
 		#global_position = hex.global_coords
@@ -51,7 +52,7 @@ func _move_step():
 		#hex_map.move(self, hex)
 		global_position = path.points[0]
 		var hex : Hex = path.pop_front()
-		#moved.emit(self, old_hex, hex)
+		moved.emit(self, old_hex, hex)
 		#
 		#hex_map.move(self, hex)
 

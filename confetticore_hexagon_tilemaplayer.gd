@@ -25,6 +25,19 @@ func add_mech_to_hex_data(mech : Mech):
 	if not hex_data.has(mech_cube_coords):
 		hex_data[mech_cube_coords] = Hex.new(self,mech_cube_coords)
 	hex_data[mech_cube_coords].occupant = mech
+	
+	mech.moved.connect(on_mech_moved)
+	#TODO(ArokhSlade, 2025 09 08)
+	# mech.died.connect(on_mech_died)
+
+func on_mech_moved(mech, old_hex, new_hex):
+	old_hex.occupant = null
+	new_hex.occupant = mech
+
+#TODO(ArokhSlade, 2025 09 08): mech.died does not exist yet.
+func on_mech_died(mech, hex):
+	mech.moved.disconnect(on_mech_moved)
+	
 
 func get_cube_coords(node_2d : Node2D):
 	var local_position = to_local(node_2d.global_position)
@@ -53,6 +66,10 @@ func try_get_mech(cube_coords : Vector3i) -> Mech:
 func get_hex_at_local(local_coords) -> Hex:
 	return get_hex_at_cube(local_to_cube(local_coords))
 
+func get_hex_at_global(global_coords):
+	var local_coords = to_local(global_coords)
+	return get_hex_at_local(local_coords)
+	
 func get_hex_at_cube(cube_coords) -> Hex:
 	if not hex_data.has(cube_coords):
 		hex_data[cube_coords] = Hex.new(self, cube_coords)

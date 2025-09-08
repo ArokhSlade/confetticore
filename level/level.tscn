@@ -40,11 +40,10 @@ custom_data_layer_1/name = "occupant"
 custom_data_layer_1/type = 0
 sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs", "paths")]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs")]
 script = ExtResource("1_0b4ue")
 hex_map = NodePath("HexagonTileMapLayer")
 mechs = NodePath("HexagonTileMapLayer/Mechs")
-paths = NodePath("")
 
 [node name="HexagonTileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
 tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAABAAAAAgAAAAAAAgA=")
@@ -60,7 +59,7 @@ mech_step_timer = NodePath("../../MechStepTimer")
 hex_map = NodePath("..")
 
 [node name="Mech" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
-position = Vector2(-48, 0)
+position = Vector2(379, 79)
 pilot = NodePath("Pilot")
 
 [node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech" instance=ExtResource("5_f2txt")]
