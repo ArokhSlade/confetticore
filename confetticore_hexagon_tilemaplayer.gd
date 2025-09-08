@@ -2,9 +2,29 @@
 extends HexagonTileMapLayer
 class_name ConfetticoreHexagonTileMapLayer
 
-@export var mechs : Node2D
+@export var mechs : Mechs
 
 var hex_data : Dictionary[Vector3i, Hex]
+
+func _ready():
+	super._ready()
+	setup()
+	
+func setup():
+	add_mechs_to_hex_data()
+	
+func add_mechs_to_hex_data():
+	#TODO(ArokhSlade, 2025 08 09): composite pattern?
+	for mech in mechs.get_mechs():
+		add_mech_to_hex_data(mech)
+#
+func add_mech_to_hex_data(mech : Mech):
+	var mech_cube_coords = local_to_cube(mech.position)
+	
+	assert(not hex_data.has(mech_cube_coords) or hex_data[mech_cube_coords].occupant == null)
+	if not hex_data.has(mech_cube_coords):
+		hex_data[mech_cube_coords] = Hex.new(self,mech_cube_coords)
+	hex_data[mech_cube_coords].occupant = mech
 
 func get_cube_coords(node_2d : Node2D):
 	var local_position = to_local(node_2d.global_position)
@@ -30,24 +50,13 @@ func try_get_mech(cube_coords : Vector3i) -> Mech:
 			return mech
 	return null
 
-func get_occupant(hex : Hex):
-	var cell_data = get_cell_tile_data(hex.map_coords)
-	var occupant = cell_data.get_custom_data("occupant")
-	return occupant
-	
-func is_occupied(hex : Hex):
-	var result = get_occupant(hex) != null
-	return result
-
 func get_hex_at_local(local_coords) -> Hex:
-	var hex = Hex.new(self, local_coords)
-	return hex
+	return get_hex_at_cube(local_to_cube(local_coords))
 
-func get_hex_at_cube(cube_coords) -> Hex:	
-	return get_hex_at_local(cube_to_local(cube_coords))
-
-
-
+func get_hex_at_cube(cube_coords) -> Hex:
+	if not hex_data.has(cube_coords):
+		hex_data[cube_coords] = Hex.new(self, cube_coords)
+	return hex_data[cube_coords]
 
 class Hex:
 	var cube_coords : Vector3i 
@@ -61,12 +70,12 @@ class Hex:
 			var result = hex_map.cube_to_map(cube_coords)
 			return result
 			
-	func _init(in_hex_map: ConfetticoreHexagonTileMapLayer = null, local_coords : Vector2 = Vector2.ZERO):
+	#NOTE(Gerald, 2025 08 09): uses cube coords for now, 
+	# may change when something else turns out to be more common
+	func _init(in_hex_map, coords):
 		hex_map = in_hex_map
-		cube_coords = hex_map.local_to_cube(local_coords)
 		map_coords = hex_map.cube_to_map(cube_coords)
 		tile_data = hex_map.get_cell_tile_data(map_coords)
 			
-	func is_occupied() -> bool:
-		var result = hex_map.is_occupied(self)
-		return result
+	func is_occupied():
+		return occupant != null

@@ -1,10 +1,15 @@
 extends MechState
 
 func next():
-	if mech.path == null or mech.path.is_empty() or mech.path.front.is_occupied():
+	
+	if mech.path == null or mech.path.is_empty():
 		next_state = mech.dormant_state	
-	else:
-		mech._move_step()
+	else: 
+		var front_hex = mech.path.front
+		if front_hex.is_occupied():
+			next_state = mech.dormant_state	
+		else:
+			mech._move_step()
 	
 	return next_state
 

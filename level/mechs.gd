@@ -17,6 +17,9 @@ func setup(mech_step_time : float):
 		mech.setup(hex_map)
 		mech.finished_moving.connect(on_mech_finished_moving)
 
+func get_mechs():
+	return get_children()
+
 func get_mechs_count():
 	return get_children().size()
 
