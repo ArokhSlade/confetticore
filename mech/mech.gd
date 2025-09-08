@@ -42,7 +42,8 @@ func update_state():
 func _move_step():
 	if not path.is_empty():
 		var old_hex = hex
-		global_position = path.points[0]
+		#TODO(ArokhSlade, 2025 09 08): refactor path to contain Hex'es, and refer to global coordinates
+		position = path.points[0]
 		hex = path.pop_front()
 		hex_map.move_occupant(self, old_hex, hex)
 

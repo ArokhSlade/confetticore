@@ -21,6 +21,18 @@ func get_hex_map():
 
 func setup(mech_step_time):
 	mechs.setup(mech_step_time)
+	add_mechs_to_hex_data()	
+	
+func add_mechs_to_hex_data():
+	#TODO(ArokhSlade, 2025 08 09): composite pattern?
+	for mech in mechs.get_mechs():
+		add_mech_to_hex_data(mech)
+#
+func add_mech_to_hex_data(mech : Mech):
+	var mech_cube_coords = hex_map.local_to_cube(mech.position)
+	var hex = hex_map.get_hex_at_cube(mech_cube_coords)
+	assert(hex.occupant == null)
+	hex.occupant = mech
 
 func move_all_mechs():
 	mechs.move_all()
@@ -29,9 +41,6 @@ func move_all_mechs():
 func update_mech_path(mech, target):
 	mechs.update_mech_path(mech, target)
 	
-func get_hex(cube_coords) -> Hex:
-	return hex_map.get_hex(cube_coords)
-
-func _on_hex_map_finished_moving_all_mechs():
+func _on_mechs_finished_moving_all():
 	state = GameState.PLAN
 	finished_moving_all_mechs.emit()
