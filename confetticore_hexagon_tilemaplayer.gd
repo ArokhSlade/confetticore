@@ -1,18 +1,39 @@
 @tool
 extends HexagonTileMapLayer
-class_name ConfetticoreHexagonTileMapLayer
+class_name HexMap
+
+# TODO(ArokhSlade 2025 08 22): do we really need this?
+enum GameState 
+{
+	PLAN,
+	EXECUTE
+}
+
+signal finished_moving_all_mechs
 
 @export var mechs : Mechs
+@export var state = GameState.PLAN
 
 var hex_data : Dictionary[Vector3i, Hex]
 
 func _ready():
 	super._ready()
-	setup()
-	
-func setup():
 	add_mechs_to_hex_data()
 	
+func setup(mech_step_time):
+	mechs.setup(mech_step_time)
+
+func move_all_mechs():
+	mechs.move_all()
+	state = GameState.EXECUTE
+
+func _on_mechs_finished_moving_all():
+	state = GameState.PLAN
+	finished_moving_all_mechs.emit()
+
+func update_mech_path(mech, target):
+	mechs.update_mech_path(mech, target)
+
 func add_mechs_to_hex_data():
 	#TODO(ArokhSlade, 2025 08 09): composite pattern?
 	for mech in mechs.get_mechs():
@@ -41,11 +62,7 @@ func get_map_coords(node_2d : Node2D):
 	return map_coords
 	
 func has_mech(cube_coords : Vector3i):
-	for mech : Mech in mechs.get_children():
-		var mech_cube = get_cube_coords(mech)
-		if mech_cube == cube_coords:
-			return true
-	return false
+	return try_get_mech(cube_coords) != null
 			
 func try_get_mech(cube_coords : Vector3i) -> Mech:
 	for mech : Mech in mechs.get_children():
@@ -68,7 +85,7 @@ func get_hex_at_cube(cube_coords) -> Hex:
 
 class Hex:
 	var cube_coords : Vector3i 
-	var hex_map : ConfetticoreHexagonTileMapLayer
+	var hex_map : HexMap
 	
 	var tile_data : TileData
 	var occupant : Object
