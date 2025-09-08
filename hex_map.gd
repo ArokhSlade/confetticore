@@ -1,6 +1,8 @@
 @tool
 extends HexagonTileMapLayer
-class_name ConfetticoreHexagonTileMapLayer
+class_name HexMap
+
+signal finished_moving_all_mechs
 
 @export var mechs : Mechs
 
@@ -68,7 +70,7 @@ func get_hex_at_cube(cube_coords) -> Hex:
 
 class Hex:
 	var cube_coords : Vector3i 
-	var hex_map : ConfetticoreHexagonTileMapLayer
+	var hex_map : HexMap
 	
 	var tile_data : TileData
 	var occupant : Object
@@ -86,3 +88,7 @@ class Hex:
 			
 	func is_occupied():
 		return occupant != null
+
+
+func _on_mechs_finished_moving_all():
+	finished_moving_all_mechs.emit()

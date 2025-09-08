@@ -1,7 +1,6 @@
 extends Node
 class_name PathFinder
 
-const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
 
 @export var mech : Mech
 @export var path_marker : PackedScene

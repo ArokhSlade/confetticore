@@ -1,9 +1,7 @@
 extends Node2D
 class_name Mech
 
-const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
 const Hex = HexMap.Hex
-
 
 signal finished_moving
 
@@ -44,17 +42,9 @@ func update_state():
 func _move_step():
 	if not path.is_empty():
 		var old_hex = hex
-		#hex = path.pop_front()
-		#
-		#global_position = hex.global_coords
-		#moved.emit(self, old_hex, hex)
-		#
-		#hex_map.move(self, hex)
 		global_position = path.points[0]
 		hex = path.pop_front()
 		hex_map.move_occupant(self, old_hex, hex)
-		#
-		#hex_map.move(self, hex)
 
 func _finish_moving():
 	path = null

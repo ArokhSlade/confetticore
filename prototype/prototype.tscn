@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://du781e22c4qnm"]
 
 [ext_resource type="TileSet" uid="uid://goiedgftrwpr" path="res://level/hexagon_tile_map_layer.tres" id="1_p732r"]
-[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://confetticore_hexagon_tilemaplayer.gd" id="2_ekn36"]
+[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://hex_map.gd" id="2_ekn36"]
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_v60eg"]
 
 [sub_resource type="Animation" id="Animation_voj52"]

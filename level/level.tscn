@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level/level.gd" id="1_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
-[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://confetticore_hexagon_tilemaplayer.gd" id="3_1ainy"]
+[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://hex_map.gd" id="3_1ainy"]
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://unqo5f8jesjm" path="res://level/mechs.tscn" id="4_1ainy"]
 [ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot/pilot.tscn" id="5_f2txt"]
@@ -42,10 +42,10 @@ sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs")]
 script = ExtResource("1_0b4ue")
-hex_map = NodePath("HexagonTileMapLayer")
-mechs = NodePath("HexagonTileMapLayer/Mechs")
+hex_map = NodePath("HexMap")
+mechs = NodePath("HexMap/Mechs")
 
-[node name="HexagonTileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
+[node name="HexMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
 tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAABAAAAAgAAAAAAAgA=")
 tile_set = SubResource("TileSet_dhmdd")
 script = ExtResource("3_1ainy")
@@ -54,35 +54,35 @@ pathfinding_enabled = true
 debug_mode = 1
 metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 
-[node name="Mechs" parent="HexagonTileMapLayer" node_paths=PackedStringArray("mech_step_timer", "hex_map") instance=ExtResource("4_1ainy")]
+[node name="Mechs" parent="HexMap" node_paths=PackedStringArray("mech_step_timer", "hex_map") instance=ExtResource("4_1ainy")]
 mech_step_timer = NodePath("../../MechStepTimer")
 hex_map = NodePath("..")
 
-[node name="Mech" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech" parent="HexMap/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 position = Vector2(379, 79)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="HexMap/Mechs/Mech" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Mech2" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech2" parent="HexMap/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(1, 0.1, 0.1, 1)
 position = Vector2(523, 157)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech2" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="HexMap/Mechs/Mech2" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Mech3" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech3" parent="HexMap/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(0.03, 1, 0.401833, 1)
 position = Vector2(-477, 720)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech3" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="HexMap/Mechs/Mech3" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
@@ -93,5 +93,6 @@ zoom = Vector2(0.67, 0.67)
 
 [node name="MechStepTimer" type="Timer" parent="."]
 
-[connection signal="finished_moving_all" from="HexagonTileMapLayer/Mechs" to="." method="_on_mechs_finished_moving_all"]
-[connection signal="timeout" from="MechStepTimer" to="HexagonTileMapLayer/Mechs" method="_on_mech_step_timer_timeout"]
+[connection signal="finished_moving_all_mechs" from="HexMap" to="." method="_on_hex_map_finished_moving_all_mechs"]
+[connection signal="finished_moving_all" from="HexMap/Mechs" to="HexMap" method="_on_mechs_finished_moving_all"]
+[connection signal="timeout" from="MechStepTimer" to="HexMap/Mechs" method="_on_mech_step_timer_timeout"]

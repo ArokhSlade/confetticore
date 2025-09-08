@@ -5,7 +5,7 @@ signal mech_selected(mech)
 signal mech_deselected
 signal mech_path_changed(mech, target_cube)
 
-@export var hex_map : ConfetticoreHexagonTileMapLayer
+@export var hex_map : HexMap
 
 @export var neutral_state : PlayerInputState
 @export var mech_selected_state : PlayerInputState

@@ -1,8 +1,6 @@
 extends Node2D
 class_name Mechs
 
-const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
-
 signal finished_moving_all
 
 @export var mech_step_timer : Timer

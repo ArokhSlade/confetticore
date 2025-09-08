@@ -1,7 +1,6 @@
 extends Node2D
 class_name Path
 
-const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
 const Hex = HexMap.Hex
 
 var points : PackedVector2Array
