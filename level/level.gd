@@ -1,6 +1,9 @@
 extends Node
 class_name Level
 
+const HexMap = preload("res://confetticore_hexagon_tilemaplayer.gd")
+const Hex = HexMap.Hex
+
 # TODO(Gerald 2025 08 22): do we really need this?
 enum GameState 
 {
@@ -11,7 +14,7 @@ enum GameState
 signal finished_moving_all_mechs
 
 @export var state = GameState.PLAN
-@export var hex_map : HexagonTileMapLayer
+@export var hex_map : HexMap
 @export var mechs : Mechs
 @export var paths : Paths
 
@@ -31,3 +34,6 @@ func _on_mechs_finished_moving_all():
 
 func update_mech_path(mech, target):
 	mechs.update_mech_path(mech, target)
+	
+func get_hex(cube_coords) -> Hex:
+	return hex_map.get_hex(cube_coords)

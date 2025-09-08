@@ -24,7 +24,7 @@ func setup(path : PackedVector2Array, path_marker: PackedScene, in_hex_map : Hex
 
 func pop_front() -> Hex:
 	assert(is_valid() and not is_empty())
-	var result = Hex.new(hex_map, points[0])
+	var result = hex_map.get_hex_at_local(points[0])
 	markers[0].queue_free()
 	points = points.slice(1)
 	markers = markers.slice(1)
@@ -32,7 +32,7 @@ func pop_front() -> Hex:
 
 var front : Hex:
 	get:
-		var result = Hex.new(hex_map, points[0])
+		var result = hex_map.get_hex_at_local(points[0])
 		return result
 
 func set_start(start_index):

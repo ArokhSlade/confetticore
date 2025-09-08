@@ -44,47 +44,47 @@ sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 [node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs", "paths")]
 script = ExtResource("1_0b4ue")
 hex_map = NodePath("HexagonTileMapLayer")
-mechs = NodePath("Mechs")
+mechs = NodePath("HexagonTileMapLayer/Mechs")
 paths = NodePath("Paths")
 
 [node name="HexagonTileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("mechs")]
-tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAgAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAAAwAFAAIAAgAAAAAAAwAHAAIAAgAAAAAAAwAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAABAAAAAgAAAAAAAgA=")
 tile_set = SubResource("TileSet_dhmdd")
 script = ExtResource("3_1ainy")
-mechs = NodePath("../Mechs")
+mechs = NodePath("Mechs")
 pathfinding_enabled = true
 debug_mode = 1
 metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 
-[node name="Mechs" parent="." node_paths=PackedStringArray("mech_step_timer", "hex_map") instance=ExtResource("4_1ainy")]
-mech_step_timer = NodePath("../MechStepTimer")
-hex_map = NodePath("../HexagonTileMapLayer")
+[node name="Mechs" parent="HexagonTileMapLayer" node_paths=PackedStringArray("mech_step_timer", "hex_map") instance=ExtResource("4_1ainy")]
+mech_step_timer = NodePath("../../MechStepTimer")
+hex_map = NodePath("..")
 
-[node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 position = Vector2(-48, 0)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="Mechs/Mech" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Mech2" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech2" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(1, 0.1, 0.1, 1)
 position = Vector2(523, 157)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="Mechs/Mech2" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech2" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Mech3" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech3" parent="HexagonTileMapLayer/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(0.03, 1, 0.401833, 1)
 position = Vector2(-477, 720)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="Mechs/Mech3" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="HexagonTileMapLayer/Mechs/Mech3" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
@@ -98,5 +98,5 @@ zoom = Vector2(0.67, 0.67)
 
 [node name="MechStepTimer" type="Timer" parent="."]
 
-[connection signal="finished_moving_all" from="Mechs" to="." method="_on_mechs_finished_moving_all"]
-[connection signal="timeout" from="MechStepTimer" to="Mechs" method="_on_mech_step_timer_timeout"]
+[connection signal="finished_moving_all" from="HexagonTileMapLayer/Mechs" to="." method="_on_mechs_finished_moving_all"]
+[connection signal="timeout" from="MechStepTimer" to="HexagonTileMapLayer/Mechs" method="_on_mech_step_timer_timeout"]
