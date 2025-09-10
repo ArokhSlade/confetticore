@@ -47,12 +47,6 @@ class Hex:
 	
 	var tile_data : TileData
 	var occupant : Object 
-			
-	var global_coords : Vector2:
-		get:
-			var result = hex_map.cube_to_local(cube_coords)
-			result = hex_map.to_global(result)
-			return result
 	
 	func _init(in_hex_map, in_cube_coords):
 		hex_map = in_hex_map
