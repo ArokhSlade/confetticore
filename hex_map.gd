@@ -9,28 +9,28 @@ func move_occupant(occupant, old_hex, new_hex):
 		old_hex.occupant = null
 	new_hex.occupant = occupant
 
-func get_cube_coords(node_2d : Node2D):
-	var local_position = to_local(node_2d.global_position)
-	var cube_coords = local_to_cube(local_position)
-	return cube_coords
-
 func get_hex(node_2d : Node2D):
 	var local_coords = to_local(node_2d.global_position)
 	var cube = local_to_cube(local_coords)
 	var hex = hex_data[cube]
 	return hex
-
+	
+func get_cube_coords(node_2d : Node2D):
+	var local_position = to_local(node_2d.global_position)
+	var cube_coords = local_to_cube(local_position)
+	return cube_coords
+	
 func get_map_coords(node_2d : Node2D):
 	var local_coords = to_local(node_2d.global_position)
 	var map_coords = local_to_map(local_coords)
 	return map_coords
 
-func get_hex_at_local(local_coords) -> Hex:
+func local_to_hex(local_coords) -> Hex:
 	return cube_to_hex(local_to_cube(local_coords))
 
 func get_hex_at_global(global_coords):
 	var local_coords = to_local(global_coords)
-	return get_hex_at_local(local_coords)
+	return local_to_hex(local_coords)
 	
 func hex_to_global(hex : Hex):
 	var local_coords = cube_to_local(hex.cube_coords)

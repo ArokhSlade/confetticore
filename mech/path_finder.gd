@@ -36,7 +36,7 @@ func compute_path(target_hex) -> Path:
 	
 	var steps : Array[HexMap.Hex] = []
 	for point in trimmed_point_path:
-		var step = hex_map.get_hex_at_local(point)
+		var step = hex_map.local_to_hex(point)
 		steps.append(step)
 	
 	path = Path.new(path_marker, hex_map, steps)
