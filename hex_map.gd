@@ -28,7 +28,7 @@ func get_map_coords(node_2d : Node2D):
 func local_to_hex(local_coords) -> Hex:
 	return cube_to_hex(local_to_cube(local_coords))
 
-func get_hex_at_global(global_coords):
+func global_to_hex(global_coords):
 	var local_coords = to_local(global_coords)
 	return local_to_hex(local_coords)
 	

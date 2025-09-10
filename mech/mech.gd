@@ -39,7 +39,7 @@ func update_state():
 
 func _move_step():
 	if not path.is_empty():
-		var old_hex = hex_map.get_hex_at_global(global_position)
+		var old_hex = hex_map.global_to_hex(global_position)
 		var new_hex = path.pop_front()
 		var new_position = hex_map.hex_to_global(new_hex)
 		global_position = new_position

@@ -27,7 +27,7 @@ func _init(path_marker : PackedScene, in_hex_map : HexMap, in_steps : Array[Hex]
 static func create_from_global_coords(global_points : PackedVector2Array, path_marker: PackedScene, in_hex_map : HexMap):
 	var steps = []
 	for point in global_points:
-		var step = in_hex_map.get_hex_at_global(point)
+		var step = in_hex_map.global_to_hex(point)
 		steps.append(step)
 	var instance = Path.new(path_marker, in_hex_map, steps)
 
