@@ -15,7 +15,7 @@ func get_closest_hex_from_mouse():
 
 func get_hex(node_2d : Node2D):
 	var cube = get_cube_coords(node_2d)
-	var hex = hex_data[cube]
+	var hex = cube_to_hex(cube)
 	return hex
 	
 func get_cube_coords(node_2d : Node2D):
