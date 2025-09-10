@@ -24,7 +24,6 @@ func get_mechs_count():
 func update_mech_path(mech, target):
 	mech.update_path(target)
 
-
 func move_all():
 	if get_mechs_count() == 0:
 		finished_moving_all.emit()
