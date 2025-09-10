@@ -29,8 +29,7 @@ func add_mechs_to_hex_data():
 		add_mech_to_hex_data(mech)
 #
 func add_mech_to_hex_data(mech : Mech):
-	var mech_cube_coords = hex_map.local_to_cube(mech.position)
-	var hex = hex_map.get_hex_at_cube(mech_cube_coords)
+	var hex = hex_map.get_hex(mech)
 	assert(hex.occupant == null)
 	hex.occupant = mech
 

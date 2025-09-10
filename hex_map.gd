@@ -14,13 +14,19 @@ func get_cube_coords(node_2d : Node2D):
 	var cube_coords = local_to_cube(local_position)
 	return cube_coords
 
+func get_hex(node_2d : Node2D):
+	var local_coords = to_local(node_2d.global_position)
+	var cube = local_to_cube(local_coords)
+	var hex = hex_data[cube]
+	return hex
+
 func get_map_coords(node_2d : Node2D):
-	var cube_coords = get_cube_coords(node_2d)
-	var map_coords = cube_to_map(cube_coords)
+	var local_coords = to_local(node_2d.global_position)
+	var map_coords = local_to_map(local_coords)
 	return map_coords
 
 func get_hex_at_local(local_coords) -> Hex:
-	return get_hex_at_cube(local_to_cube(local_coords))
+	return cube_to_hex(local_to_cube(local_coords))
 
 func get_hex_at_global(global_coords):
 	var local_coords = to_local(global_coords)
@@ -31,14 +37,14 @@ func hex_to_global(hex : Hex):
 	var global_coords = to_global(local_coords)
 	return global_coords
 	
-func get_hex_at_cube(cube_coords) -> Hex:
+func cube_to_hex(cube_coords) -> Hex:
 	if not hex_data.has(cube_coords):
 		hex_data[cube_coords] = Hex.new(self, cube_coords)
 	return hex_data[cube_coords]
 
 func get_closest_hex_from_mouse():
 	var mouse_cube_coords = get_closest_cell_from_mouse()
-	return get_hex_at_cube(mouse_cube_coords)
+	return cube_to_hex(mouse_cube_coords)
 	
 	
 class Hex:
