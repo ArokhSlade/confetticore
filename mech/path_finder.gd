@@ -18,6 +18,7 @@ func compute_path(target_hex) -> Path:
 	var target_coords = hex_map.cube_to_map(target_hex)
 	var to_id = hex_map.pathfinding_get_point_id(target_coords)
 
+	#NOTE(ArokhSlade, 2025 09 10): points are local
 	var point_path = hex_map.astar.get_point_path(from_id, to_id)
 
 	#NOTE(Gerald, 2025 09 07) sanity check
@@ -33,6 +34,11 @@ func compute_path(target_hex) -> Path:
 	if path != null:
 		path.queue_free()
 	path = Path.new()
+	
+	for i in trimmed_point_path.size():
+		var local_point = trimmed_point_path[i]
+		trimmed_point_path[i] = hex_map.to_global(local_point)
+		
 	path.setup(trimmed_point_path, path_marker, hex_map)
 	add_child(path)
 	
