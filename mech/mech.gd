@@ -15,7 +15,6 @@ signal finished_moving
 var state : MechState
 var path : Path
 var hex_map : HexMap
-var hex : Hex
 
 var path_length : int:
 	get:
@@ -30,7 +29,6 @@ func setup(in_hex_map):
 	state = dormant_state
 	hex_map = in_hex_map
 	path_finder.setup(hex_map)
-	hex = hex_map.get_hex_at_global(global_position)
 
 func update_state():
 	var old_state = state
@@ -41,11 +39,11 @@ func update_state():
 
 func _move_step():
 	if not path.is_empty():
-		var old_hex = hex
+		var old_hex = hex_map.get_hex_at_global(global_position)
 		#TODO(ArokhSlade, 2025 09 08): refactor path to contain Hex'es, and refer to global coordinates
 		position = path.points[0]
-		hex = path.pop_front()
-		hex_map.move_occupant(self, old_hex, hex)
+		var new_hex = path.pop_front()
+		hex_map.move_occupant(self, old_hex, new_hex)
 
 func _finish_moving():
 	path = null
