@@ -47,10 +47,6 @@ class Hex:
 	
 	var tile_data : TileData
 	var occupant : Object 
-	var map_coords : Vector2i:
-		get:
-			var result = hex_map.cube_to_map(cube_coords)
-			return result
 			
 	var global_coords : Vector2:
 		get:
@@ -61,7 +57,7 @@ class Hex:
 	func _init(in_hex_map, in_cube_coords):
 		hex_map = in_hex_map
 		cube_coords = in_cube_coords
-		map_coords = hex_map.cube_to_map(cube_coords)
+		var map_coords = hex_map.cube_to_map(cube_coords)
 		tile_data = hex_map.get_cell_tile_data(map_coords)
 			
 	func is_occupied():
