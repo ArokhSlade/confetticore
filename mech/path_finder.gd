@@ -11,11 +11,11 @@ var path : Path
 func setup(in_hex_map):
 	hex_map = in_hex_map
 	
-func compute_path(target_hex) -> Path:
+func compute_path(target_cube) -> Path:
 	var mech_coords = hex_map.get_map_coords(mech)
 	var from_id = hex_map.pathfinding_get_point_id(mech_coords)
 	
-	var target_coords = hex_map.cube_to_map(target_hex)
+	var target_coords = hex_map.cube_to_map(target_cube)
 	var to_id = hex_map.pathfinding_get_point_id(target_coords)
 
 	#NOTE(ArokhSlade, 2025 09 10): points are local
