@@ -35,6 +35,11 @@ func get_hex_at_cube(cube_coords) -> Hex:
 		hex_data[cube_coords] = Hex.new(self, cube_coords)
 	return hex_data[cube_coords]
 
+func get_closest_hex_from_mouse():
+	var mouse_cube_coords = get_closest_cell_from_mouse()
+	return get_hex_at_cube(mouse_cube_coords)
+	
+	
 class Hex:
 	var cube_coords : Vector3i 
 	var hex_map : HexMap
@@ -45,6 +50,12 @@ class Hex:
 		get:
 			var result = hex_map.cube_to_map(cube_coords)
 			return result
+			
+	var global_coords : Vector2:
+		get:
+			var result = hex_map.cube_to_local(cube_coords)
+			result = hex_map.to_global(result)
+			return result
 	
 	func _init(in_hex_map, in_cube_coords):
 		hex_map = in_hex_map
@@ -54,7 +65,3 @@ class Hex:
 			
 	func is_occupied():
 		return occupant != null
-
-func get_closest_hex_from_mouse():
-	var mouse_cube_coords = get_closest_cell_from_mouse()
-	return get_hex_at_cube(mouse_cube_coords)

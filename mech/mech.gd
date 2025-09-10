@@ -40,9 +40,9 @@ func update_state():
 func _move_step():
 	if not path.is_empty():
 		var old_hex = hex_map.get_hex_at_global(global_position)
-		#TODO(ArokhSlade, 2025 09 08): refactor path to contain Hex'es, and refer to global coordinates
-		position = path.points[0]
 		var new_hex = path.pop_front()
+		var new_position = new_hex.global_coords
+		global_position = new_position
 		hex_map.move_occupant(self, old_hex, new_hex)
 
 func _finish_moving():
