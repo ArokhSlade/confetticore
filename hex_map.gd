@@ -54,6 +54,3 @@ class Hex:
 			
 	func is_occupied():
 		return occupant != null
-	
-	func print_data():
-		print("hex data: " + str(tile_data.get_custom_data_by_layer_id(0)))
