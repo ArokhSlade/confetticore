@@ -4,10 +4,6 @@ class_name HexMap
 
 var hex_data : Dictionary[Vector3i, Hex]
 
-func update_occupant(hex, new_occupant):
-	hex_data[hex] = new_occupant
-	
-
 func move_occupant(occupant, old_hex, new_hex):
 	if (old_hex != null):
 		old_hex.occupant = null
