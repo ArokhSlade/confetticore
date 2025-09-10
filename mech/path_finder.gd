@@ -22,7 +22,7 @@ func compute_path(target_hex) -> Path:
 	var point_path = hex_map.astar.get_point_path(from_id, to_id)
 
 	#NOTE(Gerald, 2025 09 07) sanity check
-	var first_point = hex_map.to_local(point_path[0])
+	var first_point = point_path[0]
 	first_point = hex_map.local_to_map(first_point)
 	first_point = hex_map.pathfinding_get_point_id(first_point)
 	var first_point_is_from_id = point_path and point_path.size() >= 1 and first_point == from_id
@@ -33,13 +33,14 @@ func compute_path(target_hex) -> Path:
 	
 	if path != null:
 		path.queue_free()
-	path = Path.new()
 	
-	for i in trimmed_point_path.size():
-		var local_point = trimmed_point_path[i]
-		trimmed_point_path[i] = hex_map.to_global(local_point)
-		
-	path.setup(trimmed_point_path, path_marker, hex_map)
+	var steps : Array[HexMap.Hex] = []
+	for point in trimmed_point_path:
+		var step = hex_map.get_hex_at_local(point)
+		steps.append(step)
+	
+	path = Path.new(path_marker, hex_map, steps)
+	
 	add_child(path)
 	
 	return path

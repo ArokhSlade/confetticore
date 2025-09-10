@@ -26,6 +26,11 @@ func get_hex_at_global(global_coords):
 	var local_coords = to_local(global_coords)
 	return get_hex_at_local(local_coords)
 	
+func hex_to_global(hex : Hex):
+	var local_coords = cube_to_local(hex.cube_coords)
+	var global_coords = to_global(local_coords)
+	return global_coords
+	
 func get_hex_at_cube(cube_coords) -> Hex:
 	if not hex_data.has(cube_coords):
 		hex_data[cube_coords] = Hex.new(self, cube_coords)
