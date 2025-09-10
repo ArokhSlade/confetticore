@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dqnfsgb18u6f6"]
+[gd_scene load_steps=9 format=4 uid="uid://dqnfsgb18u6f6"]
 
 [ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level/level.gd" id="1_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://unqo5f8jesjm" path="res://level/mechs.tscn" id="4_1ainy"]
 [ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot/pilot.tscn" id="5_f2txt"]
-[ext_resource type="Script" uid="uid://dms0vr01nyw28" path="res://debug/debug_button.gd" id="7_ivpvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yx6j"]
 texture = ExtResource("1_vonw3")
@@ -76,12 +75,6 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DEBUGButton" type="Button" parent="Mechs/Mech"]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Print Data"
-script = ExtResource("7_ivpvi")
-
 [node name="Mech2" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(0.384608, 1, 0.93165, 1)
 position = Vector2(523, 157)
@@ -129,5 +122,4 @@ zoom = Vector2(0.67, 0.67)
 [node name="MechStepTimer" type="Timer" parent="."]
 
 [connection signal="finished_moving_all" from="Mechs" to="." method="_on_mechs_finished_moving_all"]
-[connection signal="pressed" from="Mechs/Mech/DEBUGButton" to="Mechs/Mech/DEBUGButton" method="_on_pressed"]
 [connection signal="timeout" from="MechStepTimer" to="Mechs" method="_on_mech_step_timer_timeout"]
