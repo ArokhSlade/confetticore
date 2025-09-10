@@ -43,16 +43,17 @@ func get_closest_hex_from_mouse():
 	
 class Hex:
 	var cube_coords : Vector3i 
-	var hex_map : HexMap
 	
 	var tile_data : TileData
 	var occupant : Object 
 	
-	func _init(in_hex_map, in_cube_coords):
-		hex_map = in_hex_map
+	func _init(hex_map : HexMap, in_cube_coords):
 		cube_coords = in_cube_coords
 		var map_coords = hex_map.cube_to_map(cube_coords)
 		tile_data = hex_map.get_cell_tile_data(map_coords)
 			
 	func is_occupied():
 		return occupant != null
+	
+	func print_data():
+		print("hex data: " + str(tile_data.get_custom_data_by_layer_id(0)))
