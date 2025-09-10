@@ -15,21 +15,13 @@ var length: int:
 func _init(path_marker : PackedScene, in_hex_map : HexMap, in_steps : Array[Hex] = []):
 	hex_map = in_hex_map
 	steps = in_steps
-	markers = []
-	
+	markers = []	
 	for step in steps:
 		var global_coords = hex_map.hex_to_global(step)
 		var marker = path_marker.instantiate()
 		add_child(marker)
 		marker.global_position = global_coords
 		markers.append(marker)
-
-static func create_from_global_coords(global_points : PackedVector2Array, path_marker: PackedScene, in_hex_map : HexMap):
-	var steps = []
-	for point in global_points:
-		var step = in_hex_map.global_to_hex(point)
-		steps.append(step)
-	var instance = Path.new(path_marker, in_hex_map, steps)
 
 func pop_front() -> Hex:
 	assert(is_valid() and not is_empty())
