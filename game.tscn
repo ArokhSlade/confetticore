@@ -14,5 +14,5 @@ ui = NodePath("UI")
 [node name="UI" parent="." instance=ExtResource("6_mfdv2")]
 
 [connection signal="finished_moving_all_mechs" from="Level" to="." method="_on_level_finished_moving_all_mechs"]
-[connection signal="mech_path_changed" from="UI" to="." method="_on_ui_mech_path_changed"]
+[connection signal="mech_target_selected" from="UI" to="." method="_on_ui_mech_target_selected"]
 [connection signal="planning_finished" from="UI" to="." method="_on_ui_planning_finished"]

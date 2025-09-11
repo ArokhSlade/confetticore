@@ -37,8 +37,8 @@ func move_all_mechs():
 	mechs.move_all()
 	state = GameState.EXECUTE
 
-func update_mech_path(mech, target):
-	mechs.update_mech_path(mech, target)
+func update_mech_target(mech, target):
+	mechs.update_mech_target(mech, target)
 	
 func _on_mechs_finished_moving_all():
 	state = GameState.PLAN

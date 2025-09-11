@@ -2,7 +2,7 @@ extends Node
 class_name UI
 
 signal planning_finished
-signal mech_path_changed(mech, point_path)
+signal mech_target_selected(mech, target)
 
 @export var hud : HUD
 @export var player_input : PlayerInput
@@ -22,12 +22,12 @@ func _on_hud_execute_button_pressed():
 	switch_to_execute_mode()
 	planning_finished.emit()
 
-func _on_player_input_mech_path_changed(mech, target):
-	mech_path_changed.emit(mech, target)
-	hud.update_mech_info_panel(mech)
-
 func _on_player_input_mech_selected(mech):
 	hud.update_mech_info_panel(mech)
 
 func _on_player_input_mech_deselected():
 	hud.hide_mech_info_panel()
+
+
+func _on_player_input_mech_target_selected(mech, target_cube):
+	mech_target_selected.emit(mech, target_cube)

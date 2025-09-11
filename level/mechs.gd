@@ -21,8 +21,8 @@ func get_mechs():
 func get_mechs_count():
 	return get_children().size()
 
-func update_mech_path(mech, target):
-	mech.update_path(target)
+func update_mech_target(mech, target):
+	mech.update_target(target)
 
 func move_all():
 	if get_mechs_count() == 0:

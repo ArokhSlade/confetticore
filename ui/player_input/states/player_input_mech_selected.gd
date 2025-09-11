@@ -4,8 +4,8 @@ extends PlayerInputState
 func on_primary_click() -> PlayerInputState:
 	
 	var target_cube = player_input.hex_map.get_closest_cell_from_mouse()
-
-	player_input.mech_path_changed.emit(player_input.selected_mech, target_cube)	
+	
+	player_input.mech_target_selected.emit(player_input.selected_mech, target_cube)	
 	return self
 	
 func on_secondary_click() -> PlayerInputState:

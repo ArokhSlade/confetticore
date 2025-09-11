@@ -1,6 +1,11 @@
 extends Node2D
 class_name Mech
 
+enum Affiliation {
+	RED,
+	BLUE
+}
+
 const Hex = HexMap.Hex
 
 signal finished_moving
@@ -11,10 +16,16 @@ signal finished_moving
 @export var pilot : Pilot
 @export var move_range : int
 @export var path_finder : PathFinder
+@export var hp : int = 5
+@export var damage: int = 2
+@export var affiliation = Affiliation.RED
 
 var state : MechState
 var path : Path
 var hex_map : HexMap
+
+var combat_target : Mech
+
 
 var path_length : int:
 	get:
@@ -53,9 +64,33 @@ func _finish_moving():
 	path = null
 	finished_moving.emit()
 
+func start_exectution():
+	pass
+
 func start_moving():
 	assert(state == dormant_state)
 	state.switch(moving_state)
 
-func update_path(target):
-	path = path_finder.compute_path(target)
+func update_target(target_cube):
+	var hex = hex_map.cube_to_hex(target_cube)
+	if hex.is_occupied():
+		var occupant = hex.occupant
+		if occupant is Mech:
+			if occupant.affiliation != self.affiliation:
+				plan_attack(occupant)
+	else:
+		plan_move(target_cube)
+
+func plan_attack(enemy : Mech):
+	var enemy_cube = hex_map.get_cube_coords(enemy)
+	path_next_to(enemy_cube)
+	combat_target = enemy
+	pass
+
+func path_next_to(enemy_cube):
+	path = path_finder.compute_path(enemy_cube)
+	path.pop_back()
+
+func plan_move(target_cube):
+	path = path_finder.compute_path(target_cube)
+	combat_target = null
