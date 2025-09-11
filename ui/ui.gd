@@ -17,6 +17,9 @@ func switch_to_planning_mode():
 func switch_to_execute_mode():
 	hud.switch_to_execute_mode()
 	player_input.go_to_sleep()
+	
+func update_tick_count_display(tick_count):
+	hud.update_tick_count_display(tick_count)
 
 func _on_hud_execute_button_pressed():
 	switch_to_execute_mode()
@@ -27,7 +30,6 @@ func _on_player_input_mech_selected(mech):
 
 func _on_player_input_mech_deselected():
 	hud.hide_mech_info_panel()
-
 
 func _on_player_input_mech_target_selected(mech, target_cube):
 	mech_target_selected.emit(mech, target_cube)

@@ -8,8 +8,6 @@ enum Affiliation {
 
 const Hex = HexMap.Hex
 
-signal finished_moving
-
 @onready var dormant_state = $States/Dormant
 @onready var moving_state = $States/Moving
 @onready var attack_state = $States/Attacking
@@ -80,14 +78,9 @@ func _wait_step():
 	if not path.is_empty():
 		path.pop_back()
 
-func _finish_moving():
-	path = null
-	finished_moving.emit()
-
 #TODO(ArokhSlade, 2025 09 11): 
 # this looks like transition logic of the planning state
 func start_execution():
-	assert(state == dormant_state)
 	if combat_target != null:
 		if distance_to(combat_target) <= attack_range:
 			state.switch(attack_state)
@@ -95,6 +88,9 @@ func start_execution():
 			state.switch(moving_state)
 	else:
 		state.switch(moving_state)
+
+func stop_execution():
+	state.switch(dormant_state)
 
 func start_moving():
 	assert(state == dormant_state)

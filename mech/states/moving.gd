@@ -14,6 +14,3 @@ func next():
 			mech._move_step()
 	
 	return next_state
-
-func on_exit():
-	mech._finish_moving()

@@ -12,6 +12,3 @@ func next():
 		next_state = mech.dormant_state
 	
 	return next_state
-
-func on_exit():
-	mech._finish_moving()

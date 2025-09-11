@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0twv4uiteecm"]
+
+[ext_resource type="Script" uid="uid://cii1qq7cfiigg" path="res://ui/tick_count_display.gd" id="1_f4dvp"]
+
+[node name="TickCountDisplay" type="Panel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -139.0
+offset_bottom = 103.0
+grow_horizontal = 0
+script = ExtResource("1_f4dvp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DisplayHeaderLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tick Count"
+
+[node name="TickCountLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "0 / 0"
