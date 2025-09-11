@@ -45,6 +45,10 @@ func _move_step():
 		global_position = new_position
 		hex_map.move_occupant(self, old_hex, new_hex)
 
+func _wait_step():
+	if not path.is_empty():
+		path.pop_back()
+
 func _finish_moving():
 	path = null
 	finished_moving.emit()

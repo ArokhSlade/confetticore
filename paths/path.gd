@@ -36,6 +36,19 @@ func pop_front() -> Hex:
 	markers = markers.slice(1)
 	return result
 
+var back : Hex:
+	get:
+		var result = steps[steps.size()-1]
+		return result
+
+func pop_back() -> Hex:
+	assert(is_valid() and not is_empty())
+	var result = back
+	markers[steps.size()-1].queue_free()
+	steps = steps.slice(0,-1)
+	markers = markers.slice(0,-1)
+	return result
+
 func set_start(start_index):
 	steps = steps.slice(start_index)
 	markers = markers.slice(start_index)

@@ -7,7 +7,7 @@ func next():
 	else: 
 		var front_hex = mech.path.front
 		if front_hex.is_occupied():
-			next_state = mech.dormant_state	
+			mech._wait_step()
 		else:
 			mech._move_step()
 	
