@@ -23,6 +23,11 @@ func _init(path_marker : PackedScene, in_hex_map : HexMap, in_steps : Array[Hex]
 		marker.global_position = global_coords
 		markers.append(marker)
 
+var front : Hex:
+	get:
+		var result = steps[0]
+		return result
+
 func pop_front() -> Hex:
 	assert(is_valid() and not is_empty())
 	var result = front
@@ -30,11 +35,6 @@ func pop_front() -> Hex:
 	steps = steps.slice(1)
 	markers = markers.slice(1)
 	return result
-
-var front : Hex:
-	get:
-		var result = steps[0]
-		return result
 
 func set_start(start_index):
 	steps = steps.slice(start_index)
