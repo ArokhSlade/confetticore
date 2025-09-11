@@ -49,10 +49,6 @@ func pop_back() -> Hex:
 	markers = markers.slice(0,-1)
 	return result
 
-func set_start(start_index):
-	steps = steps.slice(start_index)
-	markers = markers.slice(start_index)
-
 func is_empty():
 	assert(markers.is_empty() == steps.is_empty())
 	return markers.is_empty()
