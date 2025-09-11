@@ -45,6 +45,19 @@ func hex_to_global(hex : Hex):
 	var local_coords = cube_to_local(hex.cube_coords)
 	var global_coords = to_global(local_coords)
 	return global_coords
+
+func distance_cube(cube_0, cube_1):
+	var result = absi(cube_1.x - cube_0.x) + absi(cube_1.y - cube_0.y) + absi(cube_1.z - cube_0.z)
+	result /= 2
+	return result
+
+func distance_hex(hex_0, hex_1):
+	return distance_cube(hex_0.cube_coords, hex_1.cube_coords)
+	
+func distance_node2d(node_0, node_1):
+	var hex_0 = get_hex(node_0)
+	var hex_1 = get_hex(node_1)
+	return distance_hex(hex_0, hex_1)
 	
 class Hex:
 	var cube_coords : Vector3i 

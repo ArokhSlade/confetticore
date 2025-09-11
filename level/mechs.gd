@@ -29,7 +29,7 @@ func move_all():
 		finished_moving_all.emit()
 	
 	for mech : Mech in get_children():
-		mech.start_moving()
+		mech.start_execution()
 	
 	has_finished_moving_all = false
 	mech_step_timer.start()
