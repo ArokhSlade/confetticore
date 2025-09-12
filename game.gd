@@ -16,12 +16,12 @@ func _ready():
 func start_execution():
 	level.start_execution()
 	tick_timer.start(tick_duration)
-	ui.switch_to_execute_mode()
+	ui.switch_to_execute_mode(level.ticks_per_turn)
 
 func execute_tick():
 	level.execute_tick()
 	tick_count += 1
-	ui.update_tick_count_display(tick_count)
+	ui.update_tick_count_display(tick_count, level.ticks_per_turn)
 
 func stop_execution():
 	level.stop_execution()

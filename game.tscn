@@ -6,6 +6,7 @@
 
 [node name="Game" type="Node" node_paths=PackedStringArray("level", "ui", "tick_timer")]
 script = ExtResource("1_fc0e3")
+tick_duration = null
 level = NodePath("Level")
 ui = NodePath("UI")
 tick_timer = NodePath("TickTimer")

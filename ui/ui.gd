@@ -14,12 +14,12 @@ func switch_to_planning_mode():
 	hud.switch_to_planning_mode()
 	player_input.wake_up()
 
-func switch_to_execute_mode():
-	hud.switch_to_execute_mode()
+func switch_to_execute_mode(ticks_per_turn):
+	hud.switch_to_execute_mode(ticks_per_turn)
 	player_input.go_to_sleep()
 	
-func update_tick_count_display(tick_count):
-	hud.update_tick_count_display(tick_count)
+func update_tick_count_display(tick_count, ticks_per_turn):
+	hud.update_tick_count_display(tick_count, ticks_per_turn)
 
 func _on_hud_execute_button_pressed():
 	execute_phase_requested.emit()
