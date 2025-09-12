@@ -18,17 +18,6 @@ func setup(new_hex_map):
 	input_state = neutral_state
 	hex_map = new_hex_map
 
-func _unhandled_input(event):
-	if not dormant:
-		var new_state = input_state
-		if event is InputEventMouseButton:
-			if event.pressed:
-				if event.button_index == MOUSE_BUTTON_LEFT:
-					new_state = input_state.on_primary_click()
-				elif event.button_index == MOUSE_BUTTON_RIGHT:
-					new_state = input_state.on_secondary_click()			
-		try_transition_to(new_state)
-
 func try_transition_to(new_state):
 	if new_state != input_state:
 		input_state.on_exit()
@@ -42,3 +31,13 @@ func wake_up():
 func go_to_sleep():
 	assert(not dormant, "tried to go to sleep while dormant")
 	dormant = true
+
+func _on_input_receiver_primary_click_pressed():
+	if not dormant:
+		var new_state = input_state.on_primary_click()
+		try_transition_to(new_state)
+
+func _on_input_receiver_secondary_click_pressed():
+	if not dormant:
+		var new_state = input_state.on_secondary_click()
+		try_transition_to(new_state)
