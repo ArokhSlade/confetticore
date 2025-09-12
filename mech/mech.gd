@@ -95,7 +95,7 @@ func start_moving():
 	assert(state == dormant_state)
 	state.switch(moving_state)
 
-func update_target(target_cube):
+func update_orders(target_cube):
 	var hex = hex_map.cube_to_hex(target_cube)
 	if hex.is_occupied():
 		var occupant = hex.occupant

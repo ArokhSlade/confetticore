@@ -14,8 +14,8 @@ func get_mechs():
 func get_mechs_count():
 	return get_children().size()
 
-func update_mech_target(mech, target):
-	mech.update_target(target)
+func update_mech_orders(mech, target):
+	mech.update_orders(target)
 
 func start_execution():
 	for mech : Mech in get_children():

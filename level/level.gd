@@ -52,8 +52,8 @@ func stop_execution():
 	execution_stopped.emit()
 	state = GameState.PLAN
 
-func update_mech_target(mech, target):
-	mechs.update_mech_target(mech, target)
+func update_mech_orders(mech, target):
+	mechs.update_mech_orders(mech, target)
 
 func _on_execution_tick_timer_timeout():
 	assert(tick_count < ticks_per_turn)

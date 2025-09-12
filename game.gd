@@ -15,7 +15,7 @@ func _on_ui_planning_finished():
 	level.start_execution()
 
 func _on_ui_mech_target_selected(mech, target):
-	level.update_mech_target(mech, target)
+	level.update_mech_orders(mech, target)
 
 func _on_level_tick_count_changed(tick_count):
 	ui.update_tick_count_display(tick_count)
