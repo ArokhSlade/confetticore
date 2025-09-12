@@ -17,16 +17,16 @@ signal execution_stopped
 @export var hex_map : HexMap
 @export var mechs : Mechs
 @export var tick_timer : Timer
-var mech_step_time : float
+var execution_tick_duration : float
 var ticks_per_turn : int
 var tick_count = 0
 
 func get_hex_map():
 	return hex_map
 
-func setup(in_mech_step_time, in_ticks_per_turn):
+func setup(in_execution_tick_duration, in_ticks_per_turn):
 	ticks_per_turn = in_ticks_per_turn
-	mech_step_time = in_mech_step_time	
+	execution_tick_duration = in_execution_tick_duration	
 	mechs.setup()
 	add_mechs_to_hex_data()	
 	
@@ -42,7 +42,7 @@ func add_mech_to_hex_data(mech : Mech):
 
 func start_execution():
 	mechs.start_execution()
-	tick_timer.start(mech_step_time)
+	tick_timer.start(execution_tick_duration)
 	state = GameState.EXECUTE
 	
 func stop_execution():
@@ -55,7 +55,7 @@ func stop_execution():
 func update_mech_target(mech, target):
 	mechs.update_mech_target(mech, target)
 
-func _on_mech_step_timer_timeout():
+func _on_execution_tick_timer_timeout():
 	assert(tick_count < ticks_per_turn)
 	mechs.execute_tick()
 	tick_count += 1
