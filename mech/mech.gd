@@ -74,8 +74,7 @@ func die():
 	state.switch(dead_state)
 
 func _wait_step():
-	if not path.is_empty():
-		path.pop_back()
+	pass
 
 #TODO(ArokhSlade, 2025 09 11): 
 # this looks like transition logic of the planning state
