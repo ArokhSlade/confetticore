@@ -23,7 +23,7 @@ func start_execution():
 
 func execute_tick():
 	for mech : Mech in get_children():
-		mech.update_state()
+		mech.execute_tick()
 
 func stop_execution():
 	for mech : Mech in get_children():

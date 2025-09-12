@@ -40,7 +40,7 @@ func setup(in_hex_map):
 	hex_map = in_hex_map
 	path_finder.setup(hex_map)
 
-func update_state():
+func execute_tick():
 	var old_state = state
 	state = state.next()
 	if state != old_state:
