@@ -1,7 +1,7 @@
 extends Node
 class_name UI
 
-signal planning_finished
+signal execute_phase_requested
 signal mech_target_selected(mech, target)
 
 @export var hud : HUD
@@ -22,8 +22,7 @@ func update_tick_count_display(tick_count):
 	hud.update_tick_count_display(tick_count)
 
 func _on_hud_execute_button_pressed():
-	switch_to_execute_mode()
-	planning_finished.emit()
+	execute_phase_requested.emit()
 
 func _on_player_input_mech_selected(mech):
 	hud.update_mech_info_panel(mech)

@@ -16,7 +16,7 @@ func _ready():
 func start_execution():
 	level.start_execution()
 	tick_timer.start(tick_duration)
-	ui.update_tick_count_display(tick_count)
+	ui.switch_to_execute_mode()
 
 func execute_tick():
 	level.execute_tick()
@@ -28,9 +28,8 @@ func stop_execution():
 	tick_timer.stop()
 	tick_count = 0
 	ui.switch_to_planning_mode()
-	ui.update_tick_count_display(tick_count)
 
-func _on_ui_planning_finished():
+func _on_ui_execute_phase_requested():
 	start_execution()
 
 func _on_ui_mech_target_selected(mech, target):

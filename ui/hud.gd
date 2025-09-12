@@ -9,9 +9,11 @@ signal execute_button_pressed
 
 func switch_to_planning_mode():
 	execute_button.disabled = false
+	tick_count_display.hide()
 	
 func switch_to_execute_mode():
 	execute_button.disabled = true
+	tick_count_display.show()
 
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
