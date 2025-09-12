@@ -10,23 +10,16 @@ enum GameState
 	EXECUTE
 }
 
-signal tick_count_changed(tick_count)
-signal execution_stopped
-
 @export var state = GameState.PLAN
 @export var hex_map : HexMap
 @export var mechs : Mechs
 @export var tick_timer : Timer
-var execution_tick_duration : float
-var ticks_per_turn : int
-var tick_count = 0
+@export var ticks_per_turn : int = 5
 
 func get_hex_map():
 	return hex_map
 
-func setup(in_execution_tick_duration, in_ticks_per_turn):
-	ticks_per_turn = in_ticks_per_turn
-	execution_tick_duration = in_execution_tick_duration	
+func setup():
 	mechs.setup()
 	add_mechs_to_hex_data()	
 	
@@ -42,23 +35,14 @@ func add_mech_to_hex_data(mech : Mech):
 
 func start_execution():
 	mechs.start_execution()
-	tick_timer.start(execution_tick_duration)
 	state = GameState.EXECUTE
+	
+func execute_tick():
+	mechs.execute_tick()
 	
 func stop_execution():
 	mechs.stop_execution()
-	tick_timer.stop()
-	tick_count = 0
-	execution_stopped.emit()
 	state = GameState.PLAN
 
 func update_mech_orders(mech, target):
 	mechs.update_mech_orders(mech, target)
-
-func _on_execution_tick_timer_timeout():
-	assert(tick_count < ticks_per_turn)
-	mechs.execute_tick()
-	tick_count += 1
-	tick_count_changed.emit(tick_count)
-	if tick_count == ticks_per_turn:
-		stop_execution()

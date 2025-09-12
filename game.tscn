@@ -4,16 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://dqnfsgb18u6f6" path="res://level/level.tscn" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bgauqy5f3cvfo" path="res://ui/ui.tscn" id="6_mfdv2"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("level", "ui")]
+[node name="Game" type="Node" node_paths=PackedStringArray("level", "ui", "tick_timer")]
 script = ExtResource("1_fc0e3")
 level = NodePath("Level")
 ui = NodePath("UI")
+tick_timer = NodePath("TickTimer")
 
 [node name="Level" parent="." instance=ExtResource("1_feb5d")]
 
 [node name="UI" parent="." instance=ExtResource("6_mfdv2")]
 
-[connection signal="execution_stopped" from="Level" to="." method="_on_level_execution_stopped"]
-[connection signal="tick_count_changed" from="Level" to="." method="_on_level_tick_count_changed"]
+[node name="TickTimer" type="Timer" parent="."]
+
 [connection signal="mech_target_selected" from="UI" to="." method="_on_ui_mech_target_selected"]
 [connection signal="planning_finished" from="UI" to="." method="_on_ui_planning_finished"]
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
