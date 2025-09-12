@@ -68,7 +68,6 @@ _data = {
 
 [node name="Mech" type="Node2D" node_paths=PackedStringArray("path_finder")]
 script = ExtResource("1_e36w2")
-move_range = 6
 path_finder = NodePath("PathFinder")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

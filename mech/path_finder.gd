@@ -29,13 +29,12 @@ func compute_path(target_cube) -> Path:
 	assert(first_point_is_from_id)
 	
 	point_path = point_path.slice(1)
-	var trimmed_point_path = point_path.slice(0, mech.move_range)
 	
 	if path != null:
 		path.queue_free()
 	
 	var steps : Array[HexMap.Hex] = []
-	for point in trimmed_point_path:
+	for point in point_path:
 		var step = hex_map.local_to_hex(point)
 		steps.append(step)
 	

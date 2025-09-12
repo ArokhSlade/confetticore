@@ -14,7 +14,6 @@ const Hex = HexMap.Hex
 @onready var dead_state = $States/Dead
 
 @export var pilot : Pilot
-@export var move_range : int
 @export var path_finder : PathFinder
 @export var hp : int = 5
 @export var damage: int = 2
