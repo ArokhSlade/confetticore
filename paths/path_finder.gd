@@ -2,7 +2,7 @@ extends Node
 class_name PathFinder
 
 
-@export var mech : Mech
+@export var client : Node2D
 @export var path_marker : PackedScene
 
 var hex_map : HexMap
@@ -12,8 +12,8 @@ func setup(in_hex_map):
 	hex_map = in_hex_map
 	
 func compute_path(target_cube) -> Path:
-	var mech_coords = hex_map.get_map_coords(mech)
-	var from_id = hex_map.pathfinding_get_point_id(mech_coords)
+	var client_coords = hex_map.get_map_coords(client)
+	var from_id = hex_map.pathfinding_get_point_id(client_coords)
 	
 	var target_coords = hex_map.cube_to_map(target_cube)
 	var to_id = hex_map.pathfinding_get_point_id(target_coords)
