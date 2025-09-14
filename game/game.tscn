@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbewjrret8wkg"]
 
-[ext_resource type="Script" uid="uid://bkyplmgv0gi68" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="Script" uid="uid://bkyplmgv0gi68" path="res://game/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dqnfsgb18u6f6" path="res://level/level.tscn" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bgauqy5f3cvfo" path="res://ui/ui.tscn" id="6_mfdv2"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("level", "ui", "tick_timer")]
 script = ExtResource("1_fc0e3")
-tick_duration = null
 level = NodePath("Level")
+tick_duration = null
 ui = NodePath("UI")
 tick_timer = NodePath("TickTimer")
 

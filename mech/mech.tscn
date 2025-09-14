@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://6uqtsgkxn4jw" path="res://assets/icons/missile-mech.png" id="2_e36w2"]
 [ext_resource type="Script" uid="uid://bp586srp1ywjj" path="res://mech/states/dormant.gd" id="3_wmpuk"]
 [ext_resource type="Script" uid="uid://dicg28tjhe5il" path="res://mech/states/moving.gd" id="4_sabuu"]
-[ext_resource type="Script" uid="uid://cnb02bfra54o8" path="res://mech/attacking.gd" id="5_3fitu"]
+[ext_resource type="Script" uid="uid://cnb02bfra54o8" path="res://mech/states/attacking.gd" id="5_3fitu"]
 [ext_resource type="Script" uid="uid://b6qw2702nqqor" path="res://paths/path_finder.gd" id="5_sabuu"]
 [ext_resource type="PackedScene" uid="uid://nxtsg3sv8qtq" path="res://paths/path_marker.tscn" id="6_5hb5k"]
-[ext_resource type="Script" uid="uid://cmhwmf77ictex" path="res://mech/dead.gd" id="6_qb0tl"]
+[ext_resource type="Script" uid="uid://cmhwmf77ictex" path="res://mech/states/dead.gd" id="6_qb0tl"]
 
 [sub_resource type="Animation" id="Animation_qb0tl"]
 length = 0.001
