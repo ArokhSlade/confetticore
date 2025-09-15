@@ -8,7 +8,7 @@ enum Affiliation {
 
 const Hex = HexMap.Hex
 
-@onready var dormant_state = $States/Dormant
+@onready var idle_state = $States/Idle
 @onready var moving_state = $States/Moving
 @onready var attack_state = $States/Attacking
 @onready var dead_state = $States/Dead
@@ -36,7 +36,7 @@ var path_length : int:
 func setup(in_hex_map):
 	for mech_state : MechState in $States.get_children():
 		mech_state.setup(self)
-	state = dormant_state
+	state = idle_state
 	hex_map = in_hex_map
 	path_finder.setup(hex_map)
 

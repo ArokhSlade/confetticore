@@ -2,7 +2,7 @@ extends MechState
 
 func next():
 	if mech.path == null or mech.path.is_empty():
-		next_state = mech.dormant_state
+		next_state = mech.idle_state
 	elif mech.combat_target != null and mech.distance_to(mech.combat_target) <= mech.attack_range:
 		next_state = mech.attack_state
 	else: 
