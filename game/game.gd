@@ -4,6 +4,7 @@ class_name Game
 @export var level : Level
 @export var tick_duration : float = .5
 @export var ui : UI
+@export var ai : AIPlayer
 @export var tick_timer : Timer
 
 var tick_count = 0
@@ -12,6 +13,7 @@ func _ready():
 	level.setup()
 	var hex_map = level.get_hex_map()
 	ui.setup(hex_map)
+	ai.setup(level.mechs, level.hex_map)
 
 func start_execution():
 	level.start_execution()
@@ -27,6 +29,7 @@ func stop_execution():
 	level.stop_execution()
 	tick_timer.stop()
 	tick_count = 0
+	ai.give_orders()
 	ui.switch_to_planning_mode()
 
 func _on_ui_execute_phase_requested():

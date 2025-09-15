@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmh7amuaaqpmd"]
+
+[ext_resource type="Script" uid="uid://cyowcdb8j4ub5" path="res://ai/ai_player.gd" id="1_hk5k1"]
+
+[node name="AIPlayer" type="Node"]
+script = ExtResource("1_hk5k1")

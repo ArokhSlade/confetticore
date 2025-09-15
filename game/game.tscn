@@ -1,19 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbewjrret8wkg"]
+[gd_scene load_steps=5 format=3 uid="uid://cbewjrret8wkg"]
 
 [ext_resource type="Script" uid="uid://bkyplmgv0gi68" path="res://game/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dqnfsgb18u6f6" path="res://level/level.tscn" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dmh7amuaaqpmd" path="res://ai/ai_player.tscn" id="6_dakft"]
 [ext_resource type="PackedScene" uid="uid://bgauqy5f3cvfo" path="res://ui/ui.tscn" id="6_mfdv2"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("level", "ui", "tick_timer")]
+[node name="Game" type="Node" node_paths=PackedStringArray("level", "ui", "ai", "tick_timer")]
 script = ExtResource("1_fc0e3")
 level = NodePath("Level")
-tick_duration = null
 ui = NodePath("UI")
+ai = NodePath("AIPlayer")
 tick_timer = NodePath("TickTimer")
 
 [node name="Level" parent="." instance=ExtResource("1_feb5d")]
 
 [node name="UI" parent="." instance=ExtResource("6_mfdv2")]
+
+[node name="AIPlayer" parent="." instance=ExtResource("6_dakft")]
 
 [node name="TickTimer" type="Timer" parent="."]
 
