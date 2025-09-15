@@ -25,7 +25,9 @@ func _init(path_marker : PackedScene, in_hex_map : HexMap, in_steps : Array[Hex]
 
 var front : Hex:
 	get:
-		var result = steps[0]
+		var result = null
+		if not is_empty():
+			result = steps[0]
 		return result
 
 func pop_front() -> Hex:

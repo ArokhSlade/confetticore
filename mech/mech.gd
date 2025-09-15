@@ -43,8 +43,12 @@ func setup(in_hex_map):
 func execute_tick():
 	var old_state = state
 	state = state.next()
-	if state != old_state:
+	check_switch(state, old_state)
+
+func check_switch(new_state, old_state):
+	if new_state != old_state:
 		old_state.on_exit()
+		state = new_state
 		state.on_enter()
 		
 func is_dead():
@@ -81,18 +85,14 @@ func _wait_step():
 func start_execution():
 	if combat_target != null:
 		if distance_to(combat_target) <= attack_range:
-			state.switch(attack_state)
+			check_switch(attack_state, state)
 		else:
-			state.switch(moving_state)
+			check_switch(moving_state, state)
 	else:
-		state.switch(moving_state)
+		check_switch(moving_state, state)
 
 func stop_execution():
-	state.switch(dormant_state)
-
-func start_moving():
-	assert(state == dormant_state)
-	state.switch(moving_state)
+	check_switch(moving_state, state)
 
 func update_orders(target_cube):
 	var hex = hex_map.cube_to_hex(target_cube)

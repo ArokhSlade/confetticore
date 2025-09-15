@@ -19,7 +19,9 @@ func give_orders():
 	get_opposing_mechs()
 	for mech in owned_mechs:
 		var target_mech = pick_target_mech()
-		var target_cube = hex_map.get_cube_coords(target_mech)
+		var target_cube = hex_map.get_cube_coords(mech)
+		if target_mech != null:
+			target_cube = hex_map.get_cube_coords(target_mech)
 		mech.update_orders(target_cube)
 		
 func get_opposing_mechs():

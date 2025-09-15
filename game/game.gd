@@ -13,7 +13,11 @@ func _ready():
 	level.setup()
 	var hex_map = level.get_hex_map()
 	ui.setup(hex_map)
-	ai.setup(level.mechs, level.hex_map)
+	ai.setup(level.mechs, level.hex_map)	
+	DEBUG_initiate_planning_mode_for_the_first_time()
+
+func DEBUG_initiate_planning_mode_for_the_first_time():
+	ai.give_orders()
 
 func start_execution():
 	level.start_execution()
