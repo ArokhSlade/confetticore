@@ -20,23 +20,23 @@ var selected_hex : Hex
 func setup(in_hex_map):
 	hex_map = in_hex_map
 
-func try_get_mech_at_position(position):
+func try_get_mech_at_position(global_viewpoint_coords):
 	var result = null
-	var global_position = viewport_to_world(position)
-	var hex = hex_map.get_closest_hex_from_global_coords(global_position)
+	var global_coords = global_viewport_to_world_coords(global_viewpoint_coords)
+	var hex = hex_map.get_closest_hex_from_global_coords(global_coords)
 	if hex != null and hex.is_occupied():
 		if hex.occupant is Mech:
 			result = hex.occupant
 	return result
 	
-func viewport_to_world(position):
+func global_viewport_to_world_coords(global_viewpoint_coords):
 	var viewport = get_tree().root
 	var viewport_to_world_transform = viewport.get_canvas_transform().affine_inverse()
-	var global_position = viewport_to_world_transform * position
-	return global_position
+	var global_coords = viewport_to_world_transform * global_viewpoint_coords
+	return global_coords
 
-func _on_input_receiver_primary_click_pressed(position):
-	var mech = try_get_mech_at_position(position)
+func _on_input_receiver_primary_click_pressed(global_viewpoint_coords):
+	var mech = try_get_mech_at_position(global_viewpoint_coords)
 	if mech != null:
 		mech_selected.emit(mech)
 
