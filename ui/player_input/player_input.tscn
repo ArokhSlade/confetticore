@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc5y0yr8gi5cp"]
+[gd_scene load_steps=5 format=3 uid="uid://dc5y0yr8gi5cp"]
 
 [ext_resource type="Script" uid="uid://ovsxn7rfo4ye" path="res://ui/player_input/player_input.gd" id="1_s86fl"]
 [ext_resource type="Script" uid="uid://di5a2ofw37ihc" path="res://ui/player_input/states/player_input_neutral.gd" id="2_5ecqg"]
 [ext_resource type="Script" uid="uid://bgus11ckcpim2" path="res://ui/player_input/states/player_input_mech_selected.gd" id="3_fb735"]
+[ext_resource type="Script" uid="uid://rlwj7spucy7n" path="res://ui/input_receiver.gd" id="4_fb735"]
 
 [node name="PlayerInput" type="Node" node_paths=PackedStringArray("neutral_state", "mech_selected_state")]
 script = ExtResource("1_s86fl")
@@ -16,3 +17,9 @@ player_input = NodePath("..")
 [node name="MechSelected" type="Node" parent="." node_paths=PackedStringArray("player_input")]
 script = ExtResource("3_fb735")
 player_input = NodePath("..")
+
+[node name="InputReceiver" type="Node" parent="."]
+script = ExtResource("4_fb735")
+
+[connection signal="primary_click_pressed" from="InputReceiver" to="." method="_on_input_receiver_primary_click_pressed"]
+[connection signal="secondary_click_pressed" from="InputReceiver" to="." method="_on_input_receiver_secondary_click_pressed"]

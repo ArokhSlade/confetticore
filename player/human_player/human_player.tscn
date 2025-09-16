@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn2p0i2p62i68"]
+
+[ext_resource type="Script" uid="uid://b38yfb2k7u4g4" path="res://player/human_player/human_player.gd" id="1_kbvut"]
+[ext_resource type="Script" uid="uid://6jq1gkp227tu" path="res://ui/player_input/input_interpreter.gd" id="3_e757a"]
+[ext_resource type="Script" uid="uid://di5a2ofw37ihc" path="res://ui/player_input/states/player_input_neutral.gd" id="4_fcj0g"]
+[ext_resource type="Script" uid="uid://bgus11ckcpim2" path="res://ui/player_input/states/player_input_mech_selected.gd" id="5_84gii"]
+[ext_resource type="Script" uid="uid://rlwj7spucy7n" path="res://ui/input_receiver.gd" id="6_uamtv"]
+
+[node name="HumanPlayer" type="Node"]
+script = ExtResource("1_kbvut")
+
+[node name="InputInterpreter" type="Node" parent="."]
+script = ExtResource("3_e757a")
+
+[node name="Neutral" type="Node" parent="InputInterpreter" node_paths=PackedStringArray("player_input")]
+script = ExtResource("4_fcj0g")
+player_input = NodePath("")
+
+[node name="MechSelected" type="Node" parent="InputInterpreter" node_paths=PackedStringArray("player_input")]
+script = ExtResource("5_84gii")
+player_input = NodePath("")
+
+[node name="InputReceiver" type="Node" parent="InputInterpreter"]
+script = ExtResource("6_uamtv")
+
+[connection signal="mech_selected" from="InputInterpreter" to="." method="_on_input_interpreter_mech_selected"]
+[connection signal="primary_click_pressed" from="InputInterpreter/InputReceiver" to="InputInterpreter" method="_on_input_receiver_primary_click_pressed"]
+[connection signal="secondary_click_pressed" from="InputInterpreter/InputReceiver" to="InputInterpreter" method="_on_input_receiver_secondary_click_pressed"]

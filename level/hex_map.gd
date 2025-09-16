@@ -12,6 +12,12 @@ func move_occupant(occupant, old_hex, new_hex):
 func get_closest_hex_from_mouse():
 	var mouse_cube_coords = get_closest_cell_from_mouse()
 	return cube_to_hex(mouse_cube_coords)
+	
+func get_closest_hex_from_global_coords(global_coords):
+	var local_coords = to_local(global_coords)
+	var cube_coords = get_closest_cell_from_local(local_coords)
+	var result = cube_to_hex(cube_coords)
+	return result
 
 func get_hex(node_2d : Node2D):
 	var cube = get_cube_coords(node_2d)

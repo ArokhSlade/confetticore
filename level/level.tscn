@@ -98,7 +98,7 @@ vertical_alignment = 1
 modulate = Color(0.03, 1, 0.401833, 1)
 position = Vector2(-45, 635)
 pilot = NodePath("Pilot")
-affiliation = 1
+affiliation = 2
 metadata/_edit_group_ = true
 
 [node name="Pilot" parent="Mechs/Mech3" instance=ExtResource("5_f2txt")]

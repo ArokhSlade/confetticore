@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bkyplmgv0gi68" path="res://game/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dqnfsgb18u6f6" path="res://level/level.tscn" id="1_feb5d"]
-[ext_resource type="PackedScene" uid="uid://dmh7amuaaqpmd" path="res://ai/ai_player.tscn" id="6_dakft"]
+[ext_resource type="PackedScene" uid="uid://dmh7amuaaqpmd" path="res://player/ai_player/ai_player.tscn" id="6_dakft"]
 [ext_resource type="PackedScene" uid="uid://bgauqy5f3cvfo" path="res://ui/ui.tscn" id="6_mfdv2"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("level", "ui", "ai", "tick_timer")]

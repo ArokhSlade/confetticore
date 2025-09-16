@@ -2,6 +2,7 @@ extends Node2D
 class_name Mech
 
 enum Affiliation {
+	NONE,
 	RED,
 	BLUE
 }
