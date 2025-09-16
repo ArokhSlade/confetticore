@@ -9,6 +9,9 @@ func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputStat
 func on_secondary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
 	return self
 	
+func on_pointer_moved(global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
+	return self
+
 func on_enter():
 	pass
 	

@@ -23,5 +23,6 @@ player_input = NodePath("../..")
 [node name="InputReceiver" type="Node" parent="."]
 script = ExtResource("4_fb735")
 
+[connection signal="pointer_moved" from="InputReceiver" to="." method="_on_input_receiver_pointer_moved"]
 [connection signal="primary_click_pressed" from="InputReceiver" to="." method="_on_input_receiver_primary_click_pressed"]
 [connection signal="secondary_click_pressed" from="InputReceiver" to="." method="_on_input_receiver_secondary_click_pressed"]

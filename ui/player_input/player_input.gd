@@ -40,3 +40,8 @@ func _on_input_receiver_secondary_click_pressed(global_viewport_coords = Vector2
 	if not dormant:
 		var new_state = input_state.on_secondary_click(global_viewport_coords)
 		try_transition_to(new_state)
+
+func _on_input_receiver_pointer_moved(global_viewport_coords):
+	if not dormant:
+		var new_state = input_state.on_pointer_moved(global_viewport_coords)
+		try_transition_to(new_state)
