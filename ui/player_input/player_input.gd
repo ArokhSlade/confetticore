@@ -45,3 +45,9 @@ func _on_input_receiver_pointer_moved(global_viewport_coords):
 	if not dormant:
 		var new_state = input_state.on_pointer_moved(global_viewport_coords)
 		try_transition_to(new_state)
+
+func global_viewport_to_world_coords(global_viewpoint_coords):
+	var viewport = get_tree().root
+	var viewport_to_world_transform = viewport.get_canvas_transform().affine_inverse()
+	var global_coords = viewport_to_world_transform * global_viewpoint_coords
+	return global_coords
