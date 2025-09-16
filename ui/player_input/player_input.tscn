@@ -25,8 +25,9 @@ player_input = NodePath("../..")
 script = ExtResource("3_fb735")
 player_input = NodePath("../..")
 
-[node name="EnemyMechSelected" type="Node" parent="States"]
+[node name="EnemyMechSelected" type="Node" parent="States" node_paths=PackedStringArray("player_input")]
 script = ExtResource("4_jj41r")
+player_input = NodePath("../..")
 
 [node name="InputReceiver" type="Node" parent="."]
 script = ExtResource("4_fb735")

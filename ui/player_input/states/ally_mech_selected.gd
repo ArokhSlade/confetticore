@@ -22,5 +22,5 @@ func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputStat
 	return next_state
 	
 func on_secondary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
-	super()
-	return self
+	var next_state = super(_global_viewport_coords)
+	return next_state

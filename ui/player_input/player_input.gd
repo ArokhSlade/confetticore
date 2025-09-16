@@ -13,8 +13,7 @@ signal order_created(order)
 
 var dormant = false
 var input_state : PlayerInputState
-var selected_ally_mech : Mech = null
-var selected_enemy_mech : Mech = null
+var selected_mech : Mech = null
 var hex_map : HexMap
 
 func setup(new_hex_map):
