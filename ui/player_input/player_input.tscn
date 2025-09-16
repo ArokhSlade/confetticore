@@ -7,16 +7,18 @@
 
 [node name="PlayerInput" type="Node" node_paths=PackedStringArray("neutral_state", "mech_selected_state")]
 script = ExtResource("1_s86fl")
-neutral_state = NodePath("Neutral")
-mech_selected_state = NodePath("MechSelected")
+neutral_state = NodePath("States/Neutral")
+mech_selected_state = NodePath("States/MechSelected")
 
-[node name="Neutral" type="Node" parent="." node_paths=PackedStringArray("player_input")]
+[node name="States" type="Node" parent="."]
+
+[node name="Neutral" type="Node" parent="States" node_paths=PackedStringArray("player_input")]
 script = ExtResource("2_5ecqg")
-player_input = NodePath("..")
+player_input = NodePath("../..")
 
-[node name="MechSelected" type="Node" parent="." node_paths=PackedStringArray("player_input")]
+[node name="MechSelected" type="Node" parent="States" node_paths=PackedStringArray("player_input")]
 script = ExtResource("3_fb735")
-player_input = NodePath("..")
+player_input = NodePath("../..")
 
 [node name="InputReceiver" type="Node" parent="."]
 script = ExtResource("4_fb735")

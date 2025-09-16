@@ -1,15 +1,12 @@
 extends Node
 class_name PlayerInput
 
-const InputInterpreter = preload("res://ui/player_input/input_interpreter.gd")
-
 signal mech_selected(mech)
 signal mech_deselected
 signal mech_target_selected(mech, target_cube)
 
 @export var neutral_state : PlayerInputState
 @export var mech_selected_state : PlayerInputState
-@export var input_interpreter : InputInterpreter
 
 var dormant = false
 var input_state : PlayerInputState
@@ -34,12 +31,12 @@ func go_to_sleep():
 	assert(not dormant, "tried to go to sleep while dormant")
 	dormant = true
 
-func _on_input_receiver_primary_click_pressed(position = Vector2i.ZERO):
+func _on_input_receiver_primary_click_pressed(global_viewport_coords = Vector2i.ZERO):
 	if not dormant:
-		var new_state = input_state.on_primary_click(position)
+		var new_state = input_state.on_primary_click(global_viewport_coords)
 		try_transition_to(new_state)
 
-func _on_input_receiver_secondary_click_pressed(position = Vector2i.ZERO):
+func _on_input_receiver_secondary_click_pressed(global_viewport_coords = Vector2i.ZERO):
 	if not dormant:
-		var new_state = input_state.on_secondary_click(position)
+		var new_state = input_state.on_secondary_click(global_viewport_coords)
 		try_transition_to(new_state)
