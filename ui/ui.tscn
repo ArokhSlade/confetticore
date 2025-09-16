@@ -16,5 +16,4 @@ player_input = NodePath("PlayerInput")
 [connection signal="execute_button_pressed" from="HUD" to="." method="_on_hud_execute_button_pressed"]
 [connection signal="mech_deselected" from="PlayerInput" to="." method="_on_player_input_mech_deselected"]
 [connection signal="mech_selected" from="PlayerInput" to="." method="_on_player_input_mech_selected"]
-[connection signal="mech_target_selected" from="PlayerInput" to="." method="_on_player_input_mech_target_selected"]
 [connection signal="order_created" from="PlayerInput" to="." method="_on_player_input_order_created"]

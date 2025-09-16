@@ -1,6 +1,8 @@
 extends Node
 class_name AIPlayer
 
+signal order_created(order)
+
 @export var affiliation = Mech.Affiliation.BLUE
 
 var all_mechs : Mechs
@@ -18,11 +20,17 @@ func give_orders():
 	get_owned_mechs()
 	get_opposing_mechs()
 	for mech in owned_mechs:
+		var order = Order.new()
+		order.executor = mech
+		
 		var target_mech = pick_target_mech()
-		var target_cube = hex_map.get_cube_coords(mech)
 		if target_mech != null:
-			target_cube = hex_map.get_cube_coords(target_mech)
-		mech.update_orders(target_cube)
+			order.type = Order.Type.ATTACK
+			order.attack_target = target_mech
+		else:	
+			order.type = Order.Type.MOVE
+			order.move_target = hex_map.get_hex(mech)
+		order_created.emit(order)
 		
 func get_opposing_mechs():
 	for mech in all_mechs.get_mechs():

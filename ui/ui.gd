@@ -2,7 +2,6 @@ extends Node
 class_name UI
 
 signal execute_phase_requested
-signal mech_target_selected(mech, target)
 signal order_created(order)
 
 @export var hud : HUD
@@ -30,10 +29,6 @@ func _on_player_input_mech_selected(mech):
 
 func _on_player_input_mech_deselected():
 	hud.hide_mech_info_panel()
-
-func _on_player_input_mech_target_selected(mech, target_cube):
-	mech_target_selected.emit(mech, target_cube)
-
 
 func _on_player_input_order_created(order):
 	order_created.emit(order)

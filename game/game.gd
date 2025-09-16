@@ -39,9 +39,6 @@ func start_planning_phase():
 func _on_ui_execute_phase_requested():
 	start_execution_phase()
 
-func _on_ui_mech_target_selected(mech, target):
-	level.update_mech_orders(mech, target)
-
 func _on_tick_timer_timeout():
 	assert(tick_count < level.ticks_per_turn)
 	execute_tick()
@@ -49,4 +46,8 @@ func _on_tick_timer_timeout():
 		start_planning_phase()
 
 func _on_ui_order_created(order):
+	level.update_order(order)
+
+
+func _on_ai_player_order_created(order):
 	level.update_order(order)

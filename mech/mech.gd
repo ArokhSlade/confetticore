@@ -101,16 +101,6 @@ func update_order(order:Order):
 			plan_attack(order.attack_target)
 		Order.Type.MOVE:
 			plan_move(order.move_target)
-			
-func update_orders(target_cube):
-	var hex = hex_map.cube_to_hex(target_cube)
-	if hex.is_occupied():
-		var occupant = hex.occupant
-		if occupant is Mech:
-			if occupant.affiliation != self.affiliation:
-				plan_attack(occupant)
-	else:
-		plan_move(target_cube)
 
 func plan_attack(enemy : Mech):
 	var enemy_cube = hex_map.get_cube_coords(enemy)

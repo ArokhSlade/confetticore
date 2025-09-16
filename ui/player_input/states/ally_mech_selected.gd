@@ -1,5 +1,5 @@
-extends PlayerInputState
-
+extends "res://ui/player_input/states/mech_selected.gd"
+# const MechSelectedState = preload("res://ui/player_input/states/mech_selected.gd")
 
 func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:	
 	var next_state = self
@@ -8,9 +8,7 @@ func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputStat
 		if hex.occupant is Mech:
 			var mech = hex.occupant as Mech
 			if mech.affiliation == player_input.affiliation:
-				player_input.order_builder.set_executor(mech)
-				player_input.selected_ally_mech = mech
-				player_input.mech_selected.emit(player_input.selected_ally_mech)
+				super(global_viewport_coords)
 			else:
 				player_input.order_builder.set_type(Order.Type.ATTACK)
 				player_input.order_builder.set_attack_target(mech)
@@ -23,7 +21,6 @@ func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputStat
 		player_input.order_created.emit(order)
 	return next_state
 	
-func on_secondary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
-	player_input.mech_deselected.emit()
-	player_input.selected_ally_mech = null
-	return player_input.neutral_state
+func on_secondary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
+	super()
+	return self

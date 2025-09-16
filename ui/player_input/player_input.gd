@@ -3,7 +3,6 @@ class_name PlayerInput
 
 signal mech_selected(mech)
 signal mech_deselected
-signal mech_target_selected(mech, target_cube)
 signal order_created(order)
 
 @export var neutral_state : PlayerInputState
