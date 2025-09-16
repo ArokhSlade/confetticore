@@ -46,3 +46,6 @@ func stop_execution():
 
 func update_mech_orders(mech, target):
 	mechs.update_mech_orders(mech, target)
+
+func update_order(order):
+	mechs.update_order(order)

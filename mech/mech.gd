@@ -95,6 +95,13 @@ func start_execution():
 func stop_execution():
 	check_switch(moving_state, state)
 
+func update_order(order:Order):
+	match order.type:
+		Order.Type.ATTACK:
+			plan_attack(order.attack_target)
+		Order.Type.MOVE:
+			plan_move(order.move_target)
+			
 func update_orders(target_cube):
 	var hex = hex_map.cube_to_hex(target_cube)
 	if hex.is_occupied():
@@ -116,8 +123,8 @@ func path_next_to(enemy_cube):
 	if path.back.cube_coords == enemy_cube:
 		path.pop_back()
 
-func plan_move(target_cube):
-	path = path_finder.compute_path(target_cube)
+func plan_move(target_hex):
+	path = path_finder.compute_path_to_hex(target_hex)
 	combat_target = null
 	
 func distance_to(target_node2d):

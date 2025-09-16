@@ -4,13 +4,18 @@ class_name PlayerInput
 signal mech_selected(mech)
 signal mech_deselected
 signal mech_target_selected(mech, target_cube)
+signal order_created(order)
 
 @export var neutral_state : PlayerInputState
-@export var mech_selected_state : PlayerInputState
+@export var ally_mech_selected_state : PlayerInputState
+@export var enemy_mech_selected_state : PlayerInputState
+@export var affiliation : Mech.Affiliation
+@export var order_builder : OrderBuilder
 
 var dormant = false
 var input_state : PlayerInputState
-var selected_mech : Mech = null
+var selected_ally_mech : Mech = null
+var selected_enemy_mech : Mech = null
 var hex_map : HexMap
 
 func setup(new_hex_map):
