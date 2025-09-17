@@ -53,6 +53,7 @@ func check_switch(new_state, old_state):
 		state.on_enter()
 		
 func is_dead():
+	assert(state == dead_state or hp > 0)
 	return hp <= 0
 
 func _move_step():
@@ -76,7 +77,7 @@ func modify_hp(value:int):
 		die()
 
 func die():
-	state.switch(dead_state)
+	check_switch(dead_state, state)
 
 func _wait_step():
 	pass
@@ -84,6 +85,8 @@ func _wait_step():
 #TODO(ArokhSlade, 2025 09 11): 
 # this looks like transition logic of the planning state
 func start_execution():
+	if is_dead():
+		return
 	if combat_target != null:
 		if distance_to(combat_target) <= attack_range:
 			check_switch(attack_state, state)
@@ -93,7 +96,7 @@ func start_execution():
 		check_switch(moving_state, state)
 
 func stop_execution():
-	check_switch(moving_state, state)
+	pass
 
 func update_order(order:Order):
 	match order.type:
