@@ -1,7 +1,7 @@
 extends MechState
 
 func next():
-	
+	var next_state = self
 	if mech.combat_target == null or mech.combat_target.is_dead():
 		next_state = mech.idle_state	
 	elif mech.distance_to(mech.combat_target) > mech.attack_range:
