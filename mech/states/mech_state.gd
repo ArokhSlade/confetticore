@@ -24,15 +24,6 @@ func enter():
 	
 func exit(): 
 	pass
-
-func start_execution():
-	if mech.combat_target != null:
-		if mech.distance_to(mech.combat_target) <= mech.attack_range:
-			check_transition(mech.attack_state)
-		else:
-			check_transition(mech.moving_state)
-	else:
-		check_transition(mech.moving_state)
 	
 func die():
 	check_transition(mech.dead_state)

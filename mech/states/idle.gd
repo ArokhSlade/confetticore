@@ -1,3 +1,4 @@
 extends MechState
 
-# does nothing special
+func execute_tick():
+	mech.idle()

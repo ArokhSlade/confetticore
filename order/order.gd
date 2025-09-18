@@ -5,7 +5,7 @@ const Hex = HexMap.Hex
 
 enum Type {
 	NONE,
-	STAY,
+	IDLE,
 	MOVE,
 	ATTACK
 }
