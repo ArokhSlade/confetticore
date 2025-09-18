@@ -27,13 +27,6 @@ var hex_map : HexMap
 
 var combat_target : Mech
 
-var path_length : int:
-	get:
-		if path:
-			return path.length
-		else:
-			return 0
-
 func setup(in_hex_map):
 	for mech_state : MechState in $States.get_children():
 		mech_state.setup(self)
