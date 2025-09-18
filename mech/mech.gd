@@ -14,6 +14,15 @@ const Hex = HexMap.Hex
 @onready var attacking_state = $States/Attacking
 @onready var dead_state = $States/Dead
 
+@export var attack_strategy : Strategy
+@export var move_strategy : Strategy
+@export var idle_strategy : Strategy
+
+@export var attack_action : MechAction
+@export var idle_action : MechAction
+@export var move_action : MechAction
+@export var dead_action : MechAction
+
 @export var pilot : Pilot
 @export var path_finder : PathFinder
 @export var hp : int = 5
@@ -21,24 +30,32 @@ const Hex = HexMap.Hex
 @export var affiliation = Affiliation.RED
 @export var attack_range : int = 1
 
-var state : MechState
 var path : Path
 var hex_map : HexMap
-var order : Order
-var plan : Plan
 
+var order : Order
+var strategy : Strategy
+var action : MechAction
+
+#TODO(ArokhSlade 2025 09 18): obsolete?
+var state : MechState
+var plan : Plan
 var combat_target : Mech
 
 func setup(in_hex_map):
 	for mech_state : MechState in $States.get_children():
 		mech_state.setup(self)
+	for action : MechAction in $Actions.get_children():
+		action.setup(self)
+	for strategy in $Strategies.get_children():
+		strategy.setup(self)
+	
 	state = idle_state
 	hex_map = in_hex_map
 	path_finder.setup(hex_map)
 
 func start_execution():
-	reset_action_memory()
-	update_plan()
+	update_strategy()
 
 #TODO(ArokhSlade, 2025 08 18): delete these parameters
 func reset_action_memory():
@@ -50,21 +67,26 @@ func stop_execution():
 	pass
 
 func execute_tick():
-	var action : Action = decide_next_action()
-	var target_state = state
-	match(action):
-		Action.IDLE:
-			target_state = idle_state
-		Action.MOVE:
-			target_state = moving_state
-		Action.ATTACK:
-			target_state = attacking_state
-	state.check_transition(target_state)
-	state.execute_tick()
+	action = strategy.decide_action()
+	action.execute_tick()
 
 func update_order(in_order:Order):
 	order = in_order
 
+func update_strategy():
+	if order == null:
+		order = Order.new()
+		order.type = Order.Type.IDLE
+	match order.type:
+		Order.Type.ATTACK:
+			strategy = attack_strategy
+		Order.Type.MOVE:
+			strategy = move_strategy
+		_:
+			strategy = idle_strategy
+	#TODO(ArohkSlade 2025 09 18): do this differently (ctor?)
+	strategy.setup_order(order)
+		
 func update_plan():
 	if order == null:
 		order = Order.new()
@@ -124,31 +146,7 @@ func move():
 		hex_map.move_occupant(self, old_hex, new_hex)
 
 func decide_next_action():
-	var action = Action.NONE
-	if plan is MovePlan:
-		path = plan.path
-		if path == null or path.is_empty():
-			action = Action.IDLE
-		#TODO(ArokhSlade, 2025 09 18): delete?
-		#elif combat_target != null and distance_to(combat_target) <= attack_range:
-			#action = Action.ATTACK
-		else: 
-			var front_hex = path.front
-			if front_hex.is_occupied():
-				action = Action.IDLE
-			else:
-				action = Action.MOVE
-	elif plan is AttackPlan:
-		combat_target = plan.target
-		if combat_target == null or combat_target.is_dead():
-			action = Action.IDLE
-		elif distance_to(combat_target) > attack_range:
-			print_debug("combat target out of range")
-			action = Action.IDLE
-		else: 
-			action = Action.ATTACK
-		
-	return action
+	action = strategy.decide_action()
 
 func attack():
 	assert(combat_target != null)
@@ -172,6 +170,13 @@ func path_next_to(enemy_cube):
 	path = path_finder.compute_path(enemy_cube)
 	if path.back.cube_coords == enemy_cube:
 		path.pop_back()
+		
+func get_path_next_to_node_2d(target : Node2D):
+	var target_cube = path_finder.hex_map.get_cube_coords(target)
+	var path = path_finder.compute_path(target_cube)
+	if path.back.cube_coords == target_cube:
+		path.pop_back()
+	return path
 
 func distance_to(target_node2d):
 	return hex_map.distance_node2d(self, target_node2d)

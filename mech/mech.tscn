@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://30ubfbepehwu"]
+[gd_scene load_steps=19 format=3 uid="uid://30ubfbepehwu"]
 
 [ext_resource type="Script" uid="uid://c8wf6wa0y7yb0" path="res://mech/mech.gd" id="1_e36w2"]
 [ext_resource type="Texture2D" uid="uid://6uqtsgkxn4jw" path="res://assets/icons/missile-mech.png" id="2_e36w2"]
@@ -8,6 +8,13 @@
 [ext_resource type="Script" uid="uid://b6qw2702nqqor" path="res://paths/path_finder.gd" id="5_sabuu"]
 [ext_resource type="PackedScene" uid="uid://nxtsg3sv8qtq" path="res://paths/path_marker.tscn" id="6_5hb5k"]
 [ext_resource type="Script" uid="uid://cmhwmf77ictex" path="res://mech/states/dead.gd" id="6_qb0tl"]
+[ext_resource type="Script" uid="uid://dmvs6w3g4e8u0" path="res://mech/strategy/attack_strategy/attack_strategy.gd" id="7_41flq"]
+[ext_resource type="Script" uid="uid://glioij4qmp5h" path="res://mech/actions/idle.gd" id="7_mm4l4"]
+[ext_resource type="Script" uid="uid://b3h1w14jitcwd" path="res://mech/strategy/idle_strategy/idle_strategy.gd" id="7_nxjto"]
+[ext_resource type="Script" uid="uid://b4liafd6uwfec" path="res://mech/strategy/move_strategy/move_strategy.gd" id="8_07iek"]
+[ext_resource type="Script" uid="uid://dvahu7agsjba2" path="res://mech/actions/moving.gd" id="8_k7qfb"]
+[ext_resource type="Script" uid="uid://dcrlmqmbgu8iq" path="res://mech/actions/attacking.gd" id="9_3tcis"]
+[ext_resource type="Script" uid="uid://fktacpt0obdm" path="res://mech/actions/dead.gd" id="10_owfoe"]
 
 [sub_resource type="Animation" id="Animation_qb0tl"]
 length = 0.001
@@ -66,8 +73,15 @@ _data = {
 &"attack": SubResource("Animation_3fitu")
 }
 
-[node name="Mech" type="Node2D" node_paths=PackedStringArray("path_finder")]
+[node name="Mech" type="Node2D" node_paths=PackedStringArray("attack_strategy", "move_strategy", "idle_strategy", "attack_action", "idle_action", "move_action", "dead_action", "path_finder")]
 script = ExtResource("1_e36w2")
+attack_strategy = NodePath("Strategies/Attack")
+move_strategy = NodePath("Strategies/Move")
+idle_strategy = NodePath("Strategies/Idle")
+attack_action = NodePath("Actions/Attack")
+idle_action = NodePath("Actions/Idle")
+move_action = NodePath("Actions/Move")
+dead_action = NodePath("Actions/Die")
 path_finder = NodePath("PathFinder")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -88,6 +102,31 @@ script = ExtResource("5_3fitu")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("6_qb0tl")
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="Actions"]
+script = ExtResource("7_mm4l4")
+
+[node name="Move" type="Node" parent="Actions"]
+script = ExtResource("8_k7qfb")
+
+[node name="Attack" type="Node" parent="Actions"]
+script = ExtResource("9_3tcis")
+
+[node name="Die" type="Node" parent="Actions"]
+script = ExtResource("10_owfoe")
+
+[node name="Strategies" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="Strategies"]
+script = ExtResource("7_nxjto")
+
+[node name="Move" type="Node" parent="Strategies"]
+script = ExtResource("8_07iek")
+
+[node name="Attack" type="Node" parent="Strategies"]
+script = ExtResource("7_41flq")
 
 [node name="PathFinder" type="Node" parent="." node_paths=PackedStringArray("client")]
 script = ExtResource("5_sabuu")
