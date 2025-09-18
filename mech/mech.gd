@@ -42,21 +42,13 @@ func setup(in_hex_map):
 	path_finder.setup(hex_map)
 
 func execute_tick():
-	var old_state = state
-	state = state.next()
-	check_switch(state, old_state)
-
-func check_switch(new_state, old_state):
-	if new_state != old_state:
-		old_state.on_exit()
-		state = new_state
-		state.on_enter()
+	state.execute_tick()
 		
 func is_dead():
 	assert(state == dead_state or hp > 0)
 	return hp <= 0
 
-func _move_step():
+func move_step():
 	if not path.is_empty():
 		var old_hex = hex_map.global_to_hex(global_position)
 		var new_hex = path.pop_front()
@@ -77,23 +69,15 @@ func modify_hp(value:int):
 		die()
 
 func die():
-	check_switch(dead_state, state)
+	state.die()
 
-func _wait_step():
+func wait_step():
 	pass
 
 #TODO(ArokhSlade, 2025 09 11): 
 # this looks like transition logic of the planning state
 func start_execution():
-	if is_dead():
-		return
-	if combat_target != null:
-		if distance_to(combat_target) <= attack_range:
-			check_switch(attack_state, state)
-		else:
-			check_switch(moving_state, state)
-	else:
-		check_switch(moving_state, state)
+	state.start_execution()
 
 func stop_execution():
 	pass

@@ -4,7 +4,7 @@ func on_enter():
 	player_input.order_builder.reset()
 	player_input.selected_mech = null
 
-func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
+func on_primary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
 	var result = self
 	
 	var mouse_hex = player_input.hex_map.get_closest_hex_from_mouse()

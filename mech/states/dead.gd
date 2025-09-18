@@ -1,8 +1,17 @@
 extends MechState
 
 
-func on_enter():
+func enter():
 	mech.hide()
 	
-func on_exit():
+func exit():
 	mech.show()
+
+func start_execution():
+		return
+
+func execute_tick():
+	assert(mech.hp <= 0, "mech has positive hp while in dead state")
+
+func die():
+	push_error("die() called while in dead state")
