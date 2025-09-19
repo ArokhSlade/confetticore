@@ -9,4 +9,4 @@ func execute_tick():
 		var new_hex = path.pop_front()
 		var new_position = hex_map.hex_to_global(new_hex)
 		mech.global_position = new_position
-		hex_map.move_occupant(self, old_hex, new_hex)
+		hex_map.move_occupant(mech, old_hex, new_hex)
