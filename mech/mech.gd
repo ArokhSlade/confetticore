@@ -33,7 +33,6 @@ const Hex = HexMap.Hex
 
 @export var animation_player : AnimationPlayer
 
-var path : Path
 var hex_map : HexMap
 
 var order : Order
@@ -43,14 +42,13 @@ var action : MechAction
 #TODO(ArokhSlade 2025 09 18): obsolete?
 var state : MechState
 var plan : Plan
-var combat_target : Mech
 
 func setup(in_hex_map):
 	for mech_state : MechState in $States.get_children():
 		mech_state.setup(self)
 	for action : MechAction in $Actions.get_children():
 		action.setup(self)
-	for strategy in $Strategies.get_children():
+	for strategy : Strategy in $Strategies.get_children():
 		strategy.setup(self)
 	
 	state = idle_state
@@ -59,11 +57,6 @@ func setup(in_hex_map):
 
 func start_execution():
 	update_strategy()
-
-#TODO(ArokhSlade, 2025 08 18): delete these parameters
-func reset_action_memory():
-	combat_target = null
-	path = null
 
 #TODO:delete
 func stop_execution():
@@ -79,7 +72,7 @@ func update_order(in_order:Order):
 func update_strategy():
 	if order == null:
 		order = StayOrder.new()
-	strategy = strategy_builder.create_strategy(order)	
+	strategy = strategy_builder.create_strategy(order, path_finder)	
 	strategy.setup(self)
 
 func update_plan():
@@ -132,22 +125,8 @@ func make_move_plan(target_hex):
 	move_plan.path = path	
 	return move_plan	
 
-func move():
-	if not path.is_empty():
-		var old_hex = hex_map.global_to_hex(global_position)
-		var new_hex = path.pop_front()
-		var new_position = hex_map.hex_to_global(new_hex)
-		global_position = new_position
-		hex_map.move_occupant(self, old_hex, new_hex)
-
 func decide_next_action():
 	action = strategy.decide_action()
-
-func attack():
-	assert(combat_target != null)
-	assert(distance_to(combat_target) <= attack_range)
-	$AnimationPlayer.play("attack")
-	combat_target.modify_hp(-damage)
 
 func modify_hp(value:int):
 	assert(state != dead_state)
@@ -161,17 +140,7 @@ func die():
 func idle():
 	pass
 	
-func path_next_to(enemy_cube):
-	path = path_finder.compute_path(enemy_cube)
-	if path.back.cube_coords == enemy_cube:
-		path.pop_back()
-		
-func get_path_next_to_node_2d(target : Node2D):
-	var target_cube = path_finder.hex_map.get_cube_coords(target)
-	var path = path_finder.compute_path(target_cube)
-	if path.back.cube_coords == target_cube:
-		path.pop_back()
-	return path
+
 
 func distance_to(target_node2d):
 	return hex_map.distance_node2d(self, target_node2d)

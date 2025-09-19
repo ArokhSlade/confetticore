@@ -125,11 +125,13 @@ script = ExtResource("10_owfoe")
 [node name="Idle" type="Node" parent="Strategies"]
 script = ExtResource("7_nxjto")
 
-[node name="Move" type="Node" parent="Strategies"]
+[node name="Move" type="Node" parent="Strategies" node_paths=PackedStringArray("path_finder")]
 script = ExtResource("8_07iek")
+path_finder = NodePath("../../PathFinder")
 
-[node name="Attack" type="Node" parent="Strategies"]
+[node name="Attack" type="Node" parent="Strategies" node_paths=PackedStringArray("path_finder")]
 script = ExtResource("7_41flq")
+path_finder = NodePath("../../PathFinder")
 
 [node name="PathFinder" type="Node" parent="." node_paths=PackedStringArray("client")]
 script = ExtResource("5_sabuu")

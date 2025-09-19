@@ -1,12 +1,14 @@
 extends Strategy
 
+@export var path_finder : PathFinder
+
 var target : HexMap.Hex
 
 func decide_action() -> MechAction:
 	if target == null:
 		return mech.idle_action
 	
-	var path = mech.path_finder.compute_path_to_hex(target)
+	var path = path_finder.compute_path_to_hex(target)
 	if path.is_empty():
 		return mech.idle_action
 	
