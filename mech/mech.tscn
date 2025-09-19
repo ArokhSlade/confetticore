@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://30ubfbepehwu"]
+[gd_scene load_steps=20 format=3 uid="uid://30ubfbepehwu"]
 
 [ext_resource type="Script" uid="uid://c8wf6wa0y7yb0" path="res://mech/mech.gd" id="1_e36w2"]
 [ext_resource type="Texture2D" uid="uid://6uqtsgkxn4jw" path="res://assets/icons/missile-mech.png" id="2_e36w2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dvahu7agsjba2" path="res://mech/actions/moving.gd" id="8_k7qfb"]
 [ext_resource type="Script" uid="uid://dcrlmqmbgu8iq" path="res://mech/actions/attacking.gd" id="9_3tcis"]
 [ext_resource type="Script" uid="uid://fktacpt0obdm" path="res://mech/actions/dead.gd" id="10_owfoe"]
+[ext_resource type="PackedScene" uid="uid://bucprkvvjwrae" path="res://mech/strategy/strategy_builder/strategy_builder.tscn" id="16_k7qfb"]
 
 [sub_resource type="Animation" id="Animation_qb0tl"]
 length = 0.001
@@ -73,7 +74,7 @@ _data = {
 &"attack": SubResource("Animation_3fitu")
 }
 
-[node name="Mech" type="Node2D" node_paths=PackedStringArray("attack_strategy", "move_strategy", "idle_strategy", "attack_action", "idle_action", "move_action", "dead_action", "path_finder")]
+[node name="Mech" type="Node2D" node_paths=PackedStringArray("attack_strategy", "move_strategy", "idle_strategy", "attack_action", "idle_action", "move_action", "dead_action", "path_finder", "strategy_builder")]
 script = ExtResource("1_e36w2")
 attack_strategy = NodePath("Strategies/Attack")
 move_strategy = NodePath("Strategies/Move")
@@ -83,6 +84,7 @@ idle_action = NodePath("Actions/Idle")
 move_action = NodePath("Actions/Move")
 dead_action = NodePath("Actions/Die")
 path_finder = NodePath("PathFinder")
+strategy_builder = NodePath("StrategyBuilder")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -137,3 +139,5 @@ path_marker = ExtResource("6_5hb5k")
 libraries = {
 &"": SubResource("AnimationLibrary_41flq")
 }
+
+[node name="StrategyBuilder" parent="." instance=ExtResource("16_k7qfb")]

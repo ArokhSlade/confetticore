@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmh7amuaaqpmd"]
+[gd_scene load_steps=3 format=3 uid="uid://dmh7amuaaqpmd"]
 
 [ext_resource type="Script" uid="uid://cyowcdb8j4ub5" path="res://player/ai_player/ai_player.gd" id="1_hk5k1"]
+[ext_resource type="PackedScene" uid="uid://7wcgbgnxj4ed" path="res://order/order_builder/order_builder.tscn" id="2_wh2bx"]
 
-[node name="AIPlayer" type="Node"]
+[node name="AIPlayer" type="Node" node_paths=PackedStringArray("order_builder")]
 script = ExtResource("1_hk5k1")
+order_builder = NodePath("OrderBuilder")
+
+[node name="OrderBuilder" parent="." instance=ExtResource("2_wh2bx")]

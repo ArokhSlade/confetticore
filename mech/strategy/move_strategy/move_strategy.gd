@@ -2,13 +2,7 @@ extends Strategy
 
 var target : HexMap.Hex
 
-func setup_order(order : Order):
-	assert(order.type == Order.Type.MOVE)
-	target = order.move_target
-
 func decide_action() -> MechAction:
-	
-	
 	if target == null:
 		return mech.idle_action
 	

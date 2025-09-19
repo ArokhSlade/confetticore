@@ -29,6 +29,7 @@ const Hex = HexMap.Hex
 @export var damage: int = 2
 @export var affiliation = Affiliation.RED
 @export var attack_range : int = 1
+@export var strategy_builder : StrategyBuilder
 
 var path : Path
 var hex_map : HexMap
@@ -75,18 +76,10 @@ func update_order(in_order:Order):
 
 func update_strategy():
 	if order == null:
-		order = Order.new()
-		order.type = Order.Type.IDLE
-	match order.type:
-		Order.Type.ATTACK:
-			strategy = attack_strategy
-		Order.Type.MOVE:
-			strategy = move_strategy
-		_:
-			strategy = idle_strategy
-	#TODO(ArohkSlade 2025 09 18): do this differently (ctor?)
-	strategy.setup_order(order)
-		
+		order = StayOrder.new()
+	strategy = strategy_builder.create_strategy(order)	
+	strategy.setup(self)
+
 func update_plan():
 	if order == null:
 		order = Order.new()

@@ -6,11 +6,6 @@ var attack_state : StrategyState
 
 var target : Mech
 
-func setup_order(order):
-	assert(order.type == Order.Type.ATTACK)
-	target = order.attack_target
-	
-
 func decide_action() -> MechAction:
 	#TODO(ArokhSlade 2025 09 18): temporary, replace with mech.attack(target)
 	#or perhaps attack.set_target(target)?

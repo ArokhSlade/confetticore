@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bucprkvvjwrae"]
+
+[ext_resource type="Script" uid="uid://8gk1ioth0bl6" path="res://mech/strategy/strategy_builder/strategy_builder.gd" id="1_3tvy4"]
+
+[node name="StrategyBuilder" type="Node"]
+script = ExtResource("1_3tvy4")

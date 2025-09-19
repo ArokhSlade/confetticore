@@ -4,6 +4,7 @@ class_name AIPlayer
 signal order_created(order)
 
 @export var affiliation = Mech.Affiliation.BLUE
+@export var order_builder : OrderBuilder
 
 var all_mechs : Mechs
 var hex_map : HexMap
@@ -21,15 +22,15 @@ func give_orders():
 	get_opposing_mechs()
 	for mech in owned_mechs:
 		var order = Order.new()
-		order.executor = mech
+		order_builder.set_executor(mech)
 		
 		var target_mech = pick_target_mech()
 		if target_mech != null:
-			order.type = Order.Type.ATTACK
-			order.attack_target = target_mech
-		else:	
-			order.type = Order.Type.MOVE
-			order.move_target = hex_map.get_hex(mech)
+			order_builder.set_mold(AttackOrder.new())
+			order_builder.set_attack_target(target_mech)
+		else:
+			order_builder.set_mold(StayOrder.new())
+		order = order_builder.finalize()
 		order_created.emit(order)
 		
 func get_opposing_mechs():

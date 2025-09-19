@@ -10,12 +10,13 @@ func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputStat
 			if mech.affiliation == player_input.affiliation:
 				super(global_viewport_coords)
 			else:
-				player_input.order_builder.set_type(Order.Type.ATTACK)
+				player_input.order_builder.set_mold(AttackOrder.new())
 				player_input.order_builder.set_attack_target(mech)
 				var order = player_input.order_builder.finalize()
 				player_input.order_created.emit(order)
 	else:
 		player_input.order_builder.set_type(Order.Type.MOVE)
+		player_input.order_builder.set_mold(MoveOrder.new())
 		player_input.order_builder.set_move_target(hex)
 		var order = player_input.order_builder.finalize()
 		player_input.order_created.emit(order)
