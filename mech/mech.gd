@@ -41,7 +41,6 @@ var action : MechAction
 
 #TODO(ArokhSlade 2025 09 18): obsolete?
 var state : MechState
-var plan : Plan
 
 func setup(in_hex_map):
 	for mech_state : MechState in $States.get_children():
@@ -75,59 +74,6 @@ func update_strategy():
 	strategy = strategy_builder.create_strategy(order, path_finder)	
 	strategy.setup(self)
 
-func update_plan():
-	if order == null:
-		order = Order.new()
-		order.type = Order.Type.NONE
-	match order.type:
-		Order.Type.ATTACK:
-			plan = make_attack_plan(order.attack_target)
-		Order.Type.MOVE:
-			plan = make_move_plan(order.move_target)
-		_:
-			plan = Plan.new()
-
-class Plan:
-	pass
-	
-class AttackPlan extends Plan:
-	var target : Mech
-	var path : Path
-
-enum Action {
-	NONE,
-	MOVE,
-	ATTACK,
-	IDLE
-}
-
-func make_attack_plan(enemy : Mech):
-	
-	var enemy_cube = hex_map.get_cube_coords(enemy)
-	var path = path_finder.compute_path(enemy_cube)
-	if path.back.cube_coords == enemy_cube:
-		path.pop_back()
-		
-	var attack_plan = AttackPlan.new()
-	
-	attack_plan.target = enemy
-	attack_plan.path = path
-	
-	return attack_plan
-	
-	
-class MovePlan extends Plan:
-	var path : Path
-		
-func make_move_plan(target_hex):
-	var path = path_finder.compute_path_to_hex(target_hex)	
-	var move_plan = MovePlan.new()
-	move_plan.path = path	
-	return move_plan	
-
-func decide_next_action():
-	action = strategy.decide_action()
-
 func modify_hp(value:int):
 	assert(state != dead_state)
 	hp += value
@@ -136,11 +82,6 @@ func modify_hp(value:int):
 
 func die():
 	state.die()
-
-func idle():
-	pass
-	
-
 
 func distance_to(target_node2d):
 	return hex_map.distance_node2d(self, target_node2d)
