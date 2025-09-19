@@ -21,7 +21,7 @@ const Hex = HexMap.Hex
 @export var attack_action : MechAction
 @export var idle_action : MechAction
 @export var move_action : MechAction
-@export var dead_action : MechAction
+@export var die_action : MechAction
 
 @export var pilot : Pilot
 @export var path_finder : PathFinder
@@ -30,6 +30,8 @@ const Hex = HexMap.Hex
 @export var affiliation = Affiliation.RED
 @export var attack_range : int = 1
 @export var strategy_builder : StrategyBuilder
+
+@export var animation_player : AnimationPlayer
 
 var path : Path
 var hex_map : HexMap
