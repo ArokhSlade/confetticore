@@ -10,11 +10,19 @@ signal execute_button_pressed
 func switch_to_planning_mode():
 	execute_button.disabled = false
 	tick_count_display.hide()
+	draw_arrows()
 	
 func switch_to_execute_mode(ticks_per_turn):
 	execute_button.disabled = true
 	tick_count_display.update(0, ticks_per_turn)
 	tick_count_display.show()
+	erase_arrows()
+
+func draw_arrows():
+	pass
+	
+func erase_arrows():
+	pass
 
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
