@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl1tqe4rawspk"]
+
+[ext_resource type="Script" uid="uid://dq6ex35tuw66k" path="res://ui/arrow/arrow.gd" id="1_j2djd"]
+[ext_resource type="PackedScene" uid="uid://cwnosaa0sbsbm" path="res://ui/arrow/arrow_head.tscn" id="2_ne6as"]
+[ext_resource type="PackedScene" uid="uid://nrnjr7utixdu" path="res://ui/arrow/arrow_neck.tscn" id="3_6kqm5"]
+
+[node name="Arrow" type="Node2D" node_paths=PackedStringArray("neck", "head")]
+script = ExtResource("1_j2djd")
+neck = NodePath("ArrowNeck")
+head = NodePath("ArrowHead")
+
+[node name="ArrowHead" parent="." instance=ExtResource("2_ne6as")]
+rotation = -1.5708
+
+[node name="ArrowNeck" parent="." instance=ExtResource("3_6kqm5")]
+points = PackedVector2Array(0, 0, 0, 0)

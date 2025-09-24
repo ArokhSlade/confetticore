@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cwnosaa0sbsbm"]
+
+[node name="ArrowHead" type="Polygon2D"]
+polygon = PackedVector2Array(0, 0, -64, 32, -48, 0, -64, -32)
+uv = PackedVector2Array(-150, 52, -74, -78, -15, 55, -75, 11)

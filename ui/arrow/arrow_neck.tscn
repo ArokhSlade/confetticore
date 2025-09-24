@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://nrnjr7utixdu"]
+
+[node name="ArrowNeck" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 64)
