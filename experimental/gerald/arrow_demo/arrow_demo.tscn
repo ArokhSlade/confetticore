@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b32v4l8c6pye4"]
+
+[ext_resource type="PackedScene" uid="uid://cbewjrret8wkg" path="res://game/game.tscn" id="1_5ctcb"]
+[ext_resource type="PackedScene" uid="uid://bl1tqe4rawspk" path="res://ui/arrow/arrow.tscn" id="2_m48sd"]
+
+[node name="Game" instance=ExtResource("1_5ctcb")]
+
+[node name="Arrow" parent="." index="4" instance=ExtResource("2_m48sd")]
+from = Vector2i(-45, 320)
+to = Vector2i(520, 0)
