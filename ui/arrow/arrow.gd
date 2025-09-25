@@ -21,7 +21,6 @@ func update_positions():
 	var look_at_target = (head.position) + look_direction
 	look_at_target = self.global_transform * look_at_target
 	head.look_at(look_at_target)
-	# print("point: %s, foot: %s, head: %s, look_direction: %s" % [point.position, foot.position, head.position, look_direction])
 
 func _process(_delta):
 	update_positions()

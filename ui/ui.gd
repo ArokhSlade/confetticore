@@ -7,11 +7,14 @@ signal order_created(order)
 @export var hud : HUD
 @export var player_input : PlayerInput
 
-func setup(hex_map):
+var PROTOTYPE_get_orders : Callable
+
+func setup(hex_map, get_orders):
 	player_input.setup(hex_map)
+	PROTOTYPE_get_orders = get_orders
 
 func switch_to_planning_mode():
-	hud.switch_to_planning_mode()
+	hud.switch_to_planning_mode(PROTOTYPE_get_orders)
 	player_input.wake_up()
 
 func switch_to_execute_mode(ticks_per_turn):

@@ -12,10 +12,17 @@ var tick_count = 0
 func _ready():
 	level.setup()
 	var hex_map = level.get_hex_map()
-	ui.setup(hex_map)
+	ui.setup(hex_map, PROTOTYPE_get_orders)
 	ai.setup(level.mechs, level.hex_map)	
 	DEBUG_initiate_planning_mode_for_the_first_time()
 
+func PROTOTYPE_get_orders():
+	var mechs = level.mechs.get_mechs()
+	var orders = []
+	for mech : Mech in mechs:
+		orders.append(mech.order)
+	return orders
+		
 func DEBUG_initiate_planning_mode_for_the_first_time():
 	ai.give_orders()
 
