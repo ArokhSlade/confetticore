@@ -4,7 +4,7 @@ class_name UI
 signal execute_phase_requested
 signal order_created(order)
 
-@export var hud : HUD
+@export var hud : ScreenHUD
 @export var world_space_hud : WorldSpaceHUD
 @export var player_input : PlayerInput
 
@@ -38,3 +38,4 @@ func _on_player_input_mech_deselected():
 
 func _on_player_input_order_created(order):
 	order_created.emit(order)
+	hud.render_order(order)
