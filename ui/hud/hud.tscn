@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy0tppwsy3m2i"]
+
+[ext_resource type="Script" uid="uid://buohndy36s36r" path="res://ui/hud/hud.gd" id="1_xmswo"]
+[ext_resource type="PackedScene" uid="uid://4bxvw6r457g0" path="res://ui/hud/screen_space_hud.tscn" id="2_4d6w6"]
+[ext_resource type="PackedScene" uid="uid://bky37aepocyi8" path="res://ui/hud/world_space_hud.tscn" id="3_e0nub"]
+
+[node name="HUD" type="Node" node_paths=PackedStringArray("screen_space_hud", "world_space_hud")]
+script = ExtResource("1_xmswo")
+screen_space_hud = NodePath("ScreenSpaceHUD")
+world_space_hud = NodePath("WorldSpaceHUD")
+
+[node name="ScreenSpaceHUD" parent="." instance=ExtResource("2_4d6w6")]
+
+[node name="WorldSpaceHUD" parent="." instance=ExtResource("3_e0nub")]
+
+[connection signal="execute_button_pressed" from="ScreenSpaceHUD" to="." method="_on_screen_space_hud_execute_button_pressed"]

@@ -1,5 +1,5 @@
 extends CanvasLayer
-class_name ScreenHUD
+class_name ScreenSpaceHUD
 
 signal execute_button_pressed
 
@@ -32,5 +32,3 @@ func hide_mech_info_panel():
 func update_tick_count_display(tick_count, ticks_per_turn):
 	tick_count_display.update(tick_count, ticks_per_turn)
 	
-func render_order(order):
-	pass

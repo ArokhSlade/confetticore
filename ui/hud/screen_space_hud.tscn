@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://4bxvw6r457g0"]
+
+[ext_resource type="Script" uid="uid://db3fj6iirdct4" path="res://ui/hud/screen_space_hud.gd" id="1_2diaa"]
+[ext_resource type="PackedScene" uid="uid://b1dkw3ad7aw8c" path="res://ui/mech_info_panel/mech_info_panel.tscn" id="2_bwbur"]
+[ext_resource type="PackedScene" uid="uid://d0twv4uiteecm" path="res://ui/tick_count_display.tscn" id="3_1otla"]
+
+[node name="ScreenSpaceHUD" type="CanvasLayer" node_paths=PackedStringArray("execute_button", "mech_info_panel")]
+script = ExtResource("1_2diaa")
+execute_button = NodePath("ExecuteButton")
+mech_info_panel = NodePath("MechInfoPanel")
+
+[node name="ExecuteButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.804688
+anchor_top = 0.847222
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Execute!"
+metadata/_edit_use_anchors_ = true
+
+[node name="MechInfoPanel" parent="." instance=ExtResource("2_bwbur")]
+visible = false
+
+[node name="TickCountDisplay" parent="." instance=ExtResource("3_1otla")]
+visible = false
+
+[connection signal="pressed" from="ExecuteButton" to="." method="_on_execute_button_pressed"]

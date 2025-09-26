@@ -1,29 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgauqy5f3cvfo"]
+[gd_scene load_steps=4 format=3 uid="uid://bgauqy5f3cvfo"]
 
-[ext_resource type="PackedScene" uid="uid://4bxvw6r457g0" path="res://ui/screen_hud.tscn" id="1_ks8t7"]
 [ext_resource type="Script" uid="uid://ro6q6pqtraxa" path="res://ui/ui.gd" id="1_wl5ax"]
+[ext_resource type="PackedScene" uid="uid://cy0tppwsy3m2i" path="res://ui/hud/hud.tscn" id="3_vkava"]
 [ext_resource type="PackedScene" uid="uid://dc5y0yr8gi5cp" path="res://ui/player_input/player_input.tscn" id="3_wl5ax"]
-[ext_resource type="Script" uid="uid://dpgrv3e6afqc4" path="res://ui/world_space_hud.gd" id="4_vkava"]
-[ext_resource type="PackedScene" uid="uid://bl1tqe4rawspk" path="res://ui/arrow/arrow.tscn" id="5_tf0e0"]
 
-[node name="UI" type="Node" node_paths=PackedStringArray("hud", "world_space_hud", "player_input")]
+[node name="UI" type="Node" node_paths=PackedStringArray("hud", "player_input")]
 script = ExtResource("1_wl5ax")
-hud = NodePath("ScreenHUD")
-world_space_hud = NodePath("WorldSpaceHUD")
+hud = NodePath("HUD")
 player_input = NodePath("PlayerInput")
-
-[node name="ScreenHUD" parent="." instance=ExtResource("1_ks8t7")]
 
 [node name="PlayerInput" parent="." instance=ExtResource("3_wl5ax")]
 
-[node name="WorldSpaceHUD" type="Node2D" parent="." node_paths=PackedStringArray("arrows")]
-script = ExtResource("4_vkava")
-arrow_scene = ExtResource("5_tf0e0")
-arrows = NodePath("Arrows")
+[node name="HUD" parent="." instance=ExtResource("3_vkava")]
 
-[node name="Arrows" type="Node2D" parent="WorldSpaceHUD"]
-
-[connection signal="execute_button_pressed" from="ScreenHUD" to="." method="_on_hud_execute_button_pressed"]
 [connection signal="mech_deselected" from="PlayerInput" to="." method="_on_player_input_mech_deselected"]
 [connection signal="mech_selected" from="PlayerInput" to="." method="_on_player_input_mech_selected"]
 [connection signal="order_created" from="PlayerInput" to="." method="_on_player_input_order_created"]
+[connection signal="execute_button_pressed" from="HUD" to="." method="_on_hud_execute_button_pressed"]

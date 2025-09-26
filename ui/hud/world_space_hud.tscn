@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bky37aepocyi8"]
+
+[ext_resource type="Script" uid="uid://dpgrv3e6afqc4" path="res://ui/hud/world_space_hud.gd" id="1_8xmys"]
+[ext_resource type="PackedScene" uid="uid://bl1tqe4rawspk" path="res://ui/arrow/arrow.tscn" id="2_42cr1"]
+
+[node name="WorldSpaceHUD" type="Node2D" node_paths=PackedStringArray("arrows")]
+script = ExtResource("1_8xmys")
+arrow_scene = ExtResource("2_42cr1")
+arrows = NodePath("Arrows")
+
+[node name="Arrows" type="Node2D" parent="."]
