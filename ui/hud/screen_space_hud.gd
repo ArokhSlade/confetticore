@@ -8,6 +8,14 @@ signal execute_button_pressed
 
 @onready var tick_count_display = $TickCountDisplay
 
+
+func update_mech_info_panel(mech):
+	if mech != null:
+		mech_info_panel.show()
+		mech_info_panel.update(mech)
+	else:
+		mech_info_panel.hide()
+
 func switch_to_planning_mode():
 	execute_button.disabled = false
 	tick_count_display.hide()
@@ -22,7 +30,7 @@ func switch_to_execute_mode(ticks_per_turn):
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
 	
-func update_mech_info_panel(mech):
+func show_mech_info_panel(mech):
 	mech_info_panel.show()
 	mech_info_panel.update(mech)
 

@@ -1,17 +1,29 @@
 extends Node
 class_name HUD
 
+const GameData = Game.GameData
+
 signal execute_button_pressed
 
 @export var screen_space_hud : ScreenSpaceHUD
 @export var world_space_hud : WorldSpaceHUD
 
+@export var planning_mode : PlanningMode
+@export var execution_mode : ExecutionMode
+
+@onready var current_mode : HUDMode
+
+func update(game_data, ui_data):
+	current_mode.update(game_data, ui_data)
+
 func switch_to_planning_mode(get_orders):
+	current_mode = planning_mode
 	screen_space_hud.switch_to_planning_mode()
 	var orders = get_orders.call()
 	world_space_hud.switch_to_planning_mode(orders)
 	
 func switch_to_execute_mode(ticks_per_turn):
+	current_mode = execution_mode
 	screen_space_hud.switch_to_execute_mode(ticks_per_turn)
 	world_space_hud.switch_to_execute_mode()
 
@@ -25,7 +37,7 @@ func _on_screen_space_hud_execute_button_pressed():
 	execute_button_pressed.emit()
 
 func on_mech_selected(mech):
-	screen_space_hud.update_mech_info_panel(mech)
+	screen_space_hud.show_mech_info_panel(mech)
 
 func on_mech_deselected():
 	screen_space_hud.hide_mech_info_panel()

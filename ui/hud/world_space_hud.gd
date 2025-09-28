@@ -21,6 +21,10 @@ func draw_arrows(orders):
 		update_order(order)
 
 func update_order(order):
+	if (order == null):
+		#BUG(ArokhSlade 2025 09 28): why does this happen
+		push_warning("upadte order requested on null order")
+		return
 	var order_visualizer = order_visualizers.get(order.executor)
 	if order_visualizer != null:
 		#TODO(ArokhSlade, 2025 09 26): order_visualizer.update()

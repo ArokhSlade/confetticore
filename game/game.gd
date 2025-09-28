@@ -9,12 +9,25 @@ class_name Game
 
 var tick_count = 0
 
+class GameData:
+	var ticks_per_turn = 0
+	var tick_count = 0
+
+
 func _ready():
 	level.setup()
 	var hex_map = level.get_hex_map()
 	ui.setup(hex_map, PROTOTYPE_get_orders)
+	ui.switch_to_planning_mode()
 	ai.setup(level.mechs, level.hex_map)	
 	DEBUG_initiate_planning_mode_for_the_first_time()
+
+func _process(_delta):
+	var game_data = GameData.new()
+	game_data.tick_count = tick_count
+	game_data.ticks_per_turn = level.ticks_per_turn
+	
+	ui.update(game_data)
 
 func PROTOTYPE_get_orders():
 	var mechs = level.mechs.get_mechs()
@@ -34,7 +47,7 @@ func start_execution_phase():
 func execute_tick():
 	level.execute_tick()
 	tick_count += 1
-	ui.update_tick_count_display(tick_count, level.ticks_per_turn)
+	# ui.update_tick_count_display(tick_count, level.ticks_per_turn)
 
 func start_planning_phase():
 	level.stop_execution()
@@ -54,7 +67,6 @@ func _on_tick_timer_timeout():
 
 func _on_ui_order_created(order):
 	level.update_order(order)
-
 
 func _on_ai_player_order_created(order):
 	level.update_order(order)
