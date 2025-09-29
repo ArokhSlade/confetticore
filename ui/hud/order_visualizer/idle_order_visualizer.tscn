@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://d2if50q7cjapl" path="res://ui/hud/order_visualizer/idle_order_visualizer.gd" id="1_gltwa"]
 
-[node name="IdleOrderVisualizer" type="Node"]
+[node name="IdleOrderVisualizer" type="Node2D"]
 script = ExtResource("1_gltwa")

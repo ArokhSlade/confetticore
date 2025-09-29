@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bky37aepocyi8"]
+[gd_scene load_steps=4 format=3 uid="uid://bky37aepocyi8"]
 
 [ext_resource type="Script" uid="uid://dpgrv3e6afqc4" path="res://ui/hud/world_space_hud.gd" id="1_8xmys"]
 [ext_resource type="PackedScene" uid="uid://bl1tqe4rawspk" path="res://ui/arrow/arrow.tscn" id="2_42cr1"]
+[ext_resource type="PackedScene" uid="uid://cir8l7nehtkmh" path="res://ui/hud/order_visualizer/order_visualizer_factory.tscn" id="3_42cr1"]
 
-[node name="WorldSpaceHUD" type="Node2D" node_paths=PackedStringArray("order_visualizers")]
+[node name="WorldSpaceHUD" type="Node2D" node_paths=PackedStringArray("order_visualizers", "order_visualizer_factory")]
 script = ExtResource("1_8xmys")
 arrow_scene = ExtResource("2_42cr1")
 order_visualizers = NodePath("OrderVisualizers")
+order_visualizer_factory = NodePath("OrderVisualizerFactory")
 
 [node name="OrderVisualizers" type="Node2D" parent="."]
+
+[node name="OrderVisualizerFactory" parent="." instance=ExtResource("3_42cr1")]

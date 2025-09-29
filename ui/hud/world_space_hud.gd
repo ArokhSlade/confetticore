@@ -3,15 +3,15 @@ class_name WorldSpaceHUD
 
 @export var arrow_scene : PackedScene
 @export var order_visualizers : Node2D
+@export var order_visualizer_factory : OrderVisualizerFactory
 
 const Arrow = preload("res://ui/arrow/arrow.gd")
 
-func visualize_orders(orders):	
-	_reset_order_visualizers()	
+func visualize_orders(orders):
+	_reset_order_visualizers()
 	for order in orders:
 		var order_visualizer = create_order_visualizer(order)
-		if order_visualizer != null:
-			order_visualizers.add_child(order_visualizer)
+		order_visualizers.add_child(order_visualizer)
 	order_visualizers.show()
 
 func hide_order_visualizers():
@@ -22,22 +22,7 @@ func _reset_order_visualizers():
 		order_visualizers.remove_child(arrow)
 		arrow.queue_free()
 
-func create_order_visualizer(order):	
-	if order == null or order is IdleOrder:
-		return null
-		
-	var arrow : Arrow = arrow_scene.instantiate()
-	arrow.from = order.executor.global_position
-	#HACK(ArokhSlade, 2025 09 29): hud is not supposed to know about orders or hexmap
-	var HACK_hex_map = order.executor.hex_map
-	if order is MoveOrder:
-		arrow.to = HACK_hex_map.hex_to_global(order.target)
-	elif order is AttackOrder:
-		arrow.to = order.target.global_position
-	arrow.from = arrow.to_local(arrow.from)
-	arrow.to = arrow.to_local(arrow.to)	
-	return arrow
-
-
-
-			
+func create_order_visualizer(order):
+	var result = order_visualizer_factory.create_order_visualizer(order)
+	assert (result != null)
+	return result
