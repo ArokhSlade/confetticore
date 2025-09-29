@@ -4,7 +4,7 @@ extends Node2D
 @export var from : Vector2i
 @export var to : Vector2i
 
-@export var neck : Line2D
+@export var shaft : Line2D
 @export var head : Polygon2D
 
 func _ready():
@@ -14,8 +14,8 @@ func setup():
 	update_positions()
 
 func update_positions():
-	neck.points[0] = from as Vector2
-	neck.points[1] = to as Vector2
+	shaft.points[0] = from as Vector2
+	shaft.points[1] = to as Vector2
 	head.position = to as Vector2 
 	var look_direction = (to - from) as Vector2
 	var look_at_target = (head.position) + look_direction
