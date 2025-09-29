@@ -13,6 +13,9 @@ signal execute_button_pressed
 
 @onready var current_mode : HUDMode
 
+func setup(hex_map):
+	world_space_hud.setup(hex_map)
+
 func update(game_data, ui_data):
 	current_mode.update(game_data, ui_data)
 

@@ -6,6 +6,11 @@ const IdleOrderVisualizer = preload("res://ui/hud/order_visualizer/idle_order_vi
 const MoveOrderVisualizer = preload("res://ui/hud/order_visualizer/move_order_visualizer.tscn")
 const AttackOrderVisualizer = preload("res://ui/hud/order_visualizer/attack_order_visualizer.tscn")
 
+var hex_map : HexMap
+
+func setup(in_hex_map):
+	hex_map = in_hex_map
+	
 func create_order_visualizer(in_order):	
 	var result = null
 		
@@ -19,9 +24,7 @@ func create_order_visualizer(in_order):
 		result = MoveOrderVisualizer.instantiate()
 		result.start_position = in_order.executor.global_position
 		
-		#HACK(ArokhSlade, 2025 09 29): is there a better way to get the target position? should this factory have access to the HexMap? should executor be required to expose a HexMap?
-		var HACK_hex_map = in_order.executor.hex_map		
-		result.target_position = HACK_hex_map.hex_to_global(in_order.target)
+		result.target_position = hex_map.hex_to_global(in_order.target)
 		
 	elif in_order is AttackOrder:
 		result = AttackOrderVisualizer.instantiate()

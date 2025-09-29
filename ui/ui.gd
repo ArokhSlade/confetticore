@@ -14,6 +14,7 @@ class UIData:
 
 func setup(hex_map):
 	player_input.setup(hex_map)
+	hud.setup(hex_map)
 
 func update(game_data):
 	var ui_data = UIData.new()

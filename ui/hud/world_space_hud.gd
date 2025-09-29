@@ -6,7 +6,10 @@ class_name WorldSpaceHUD
 
 func _ready():
 	clean_up_after_render()
-
+	
+func setup(in_hex_map):
+	order_visualizer_factory.setup(in_hex_map)
+	
 func clean_up_after_render():
 	while true:
 		await RenderingServer.frame_post_draw	
