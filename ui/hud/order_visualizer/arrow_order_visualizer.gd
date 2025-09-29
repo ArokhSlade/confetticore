@@ -22,10 +22,10 @@ extends OrderVisualizer
 			arrow.modulate = color
 
 func _ready():
-	refresh_values()
+	# trigger is_inside_tree()-restricted setter code that was skipped during _init()
+	_refresh_values()
 
-func refresh_values():
+func _refresh_values():
 	start_position = start_position
 	target_position = target_position
 	color = color
-	arrow.update_positions()
