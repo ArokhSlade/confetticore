@@ -27,10 +27,6 @@ func try_transition_to(new_state):
 		input_state = new_state
 		input_state.on_enter()
 
-
-func HACK_wake_up_first_time():
-	dormant = false
-
 func wake_up():
 	#HACK(ArokhSlade, 2025 09 29): we want the assertion for debugging, but it shouldn't fire on first load
 	if DEBUG_woke_up_once:
