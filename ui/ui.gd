@@ -44,4 +44,4 @@ func _on_player_input_mech_deselected():
 
 func _on_player_input_order_created(order):
 	order_created.emit(order)
-	hud.update_order(order)
+	#hud.update_order(order)
