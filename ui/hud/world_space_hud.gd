@@ -1,11 +1,8 @@
 extends Node2D
 class_name WorldSpaceHUD
 
-@export var arrow_scene : PackedScene
 @export var order_visualizers : Node2D
 @export var order_visualizer_factory : OrderVisualizerFactory
-
-const Arrow = preload("res://ui/arrow/arrow.gd")
 
 func _ready():
 	clean_up_after_render()
