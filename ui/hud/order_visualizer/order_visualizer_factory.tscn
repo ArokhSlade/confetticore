@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cir8l7nehtkmh"]
+
+[ext_resource type="Script" uid="uid://d0ltmsy4auq4k" path="res://ui/hud/order_visualizer/order_visualizer_factory.gd" id="1_ra1a4"]
+
+[node name="OrderVisualizerFactory" type="Node"]
+script = ExtResource("1_ra1a4")

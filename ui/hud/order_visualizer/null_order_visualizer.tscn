@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1gt7wash40ei"]
+
+[ext_resource type="Script" uid="uid://ltdogqs4yuol" path="res://ui/hud/order_visualizer/null_order_visualizer.gd" id="1_o01ay"]
+
+[node name="NullOrderVisualizer" type="Node2D"]
+script = ExtResource("1_o01ay")

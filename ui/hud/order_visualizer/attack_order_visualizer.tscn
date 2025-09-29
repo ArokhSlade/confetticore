@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6ug1b2grjpea"]
+
+[ext_resource type="Script" uid="uid://bwrkgx386lqx1" path="res://ui/hud/order_visualizer/attack_order_visualizer.gd" id="1_4rdtn"]
+[ext_resource type="PackedScene" uid="uid://bl1tqe4rawspk" path="res://ui/arrow/arrow.tscn" id="2_c32v8"]
+
+[node name="MoveOrderVisualizer" type="Node2D"]
+script = ExtResource("1_4rdtn")
+target_position = Vector2i(256, -256)
+color = Color(0.813057, 0.191284, 0.38305, 1)
+
+[node name="Arrow" parent="." instance=ExtResource("2_c32v8")]
+modulate = Color(0.813057, 0.191284, 0.38305, 1)
+to = Vector2i(256, -256)

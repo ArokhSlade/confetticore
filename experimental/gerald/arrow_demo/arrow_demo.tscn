@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b32v4l8c6pye4"]
+[gd_scene load_steps=5 format=3 uid="uid://b32v4l8c6pye4"]
 
 [ext_resource type="PackedScene" uid="uid://cbewjrret8wkg" path="res://game/game.tscn" id="1_5ctcb"]
 [ext_resource type="PackedScene" uid="uid://bl1tqe4rawspk" path="res://ui/arrow/arrow.tscn" id="2_m48sd"]
+[ext_resource type="PackedScene" uid="uid://bihadowgvagwv" path="res://ui/hud/order_visualizer/move_order_visualizer.tscn" id="3_lx0ec"]
+[ext_resource type="PackedScene" uid="uid://b6ug1b2grjpea" path="res://ui/hud/order_visualizer/attack_order_visualizer.tscn" id="4_5hkdh"]
 
 [node name="Game" instance=ExtResource("1_5ctcb")]
 
 [node name="Arrow" parent="." index="4" instance=ExtResource("2_m48sd")]
 from = Vector2i(-45, 320)
 to = Vector2i(520, 0)
+
+[node name="MoveOrderVisualizer" parent="." index="5" instance=ExtResource("3_lx0ec")]
+
+[node name="MoveOrderVisualizer2" parent="." index="6" instance=ExtResource("4_5hkdh")]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7eo2yj6nhoxv"]
+
+[ext_resource type="Script" uid="uid://d2if50q7cjapl" path="res://ui/hud/order_visualizer/idle_order_visualizer.gd" id="1_gltwa"]
+
+[node name="IdleOrderVisualizer" type="Node"]
+script = ExtResource("1_gltwa")
