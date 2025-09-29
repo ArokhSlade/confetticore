@@ -11,6 +11,7 @@ signal order_created(order)
 @export var affiliation : Mech.Affiliation
 @export var order_builder : OrderBuilder
 
+var DEBUG_woke_up_once = false
 var dormant = false
 var input_state : PlayerInputState
 var selected_mech : Mech = null
@@ -26,8 +27,16 @@ func try_transition_to(new_state):
 		input_state = new_state
 		input_state.on_enter()
 
+
+func HACK_wake_up_first_time():
+	dormant = false
+
 func wake_up():
-	assert(dormant, "tried to finish sleeping while not dormant")
+	#HACK(ArokhSlade, 2025 09 29): we want the assertion for debugging, but it shouldn't fire on first load
+	if DEBUG_woke_up_once:
+		assert(dormant, "tried to wake up while not dormant")
+	else:
+		DEBUG_woke_up_once = true
 	dormant = false
 	
 func go_to_sleep():
