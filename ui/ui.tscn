@@ -13,7 +13,5 @@ player_input = NodePath("PlayerInput")
 
 [node name="HUD" parent="." instance=ExtResource("3_vkava")]
 
-[connection signal="mech_deselected" from="PlayerInput" to="." method="_on_player_input_mech_deselected"]
-[connection signal="mech_selected" from="PlayerInput" to="." method="_on_player_input_mech_selected"]
 [connection signal="order_created" from="PlayerInput" to="." method="_on_player_input_order_created"]
 [connection signal="execute_button_pressed" from="HUD" to="." method="_on_hud_execute_button_pressed"]

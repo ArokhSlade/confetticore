@@ -34,14 +34,5 @@ func update_tick_count_display(tick_count, ticks_per_turn):
 func _on_hud_execute_button_pressed():
 	execute_phase_requested.emit()
 
-func _on_player_input_mech_selected(_mech):
-	pass
-	#hud.on_mech_selected(mech)
-
-func _on_player_input_mech_deselected():
-	pass
-	#hud.on_mech_deselected()
-
 func _on_player_input_order_created(order):
 	order_created.emit(order)
-	#hud.update_order(order)
