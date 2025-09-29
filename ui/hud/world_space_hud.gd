@@ -7,8 +7,15 @@ class_name WorldSpaceHUD
 
 const Arrow = preload("res://ui/arrow/arrow.gd")
 
+func _ready():
+	clean_up_after_render()
+
+func clean_up_after_render():
+	while true:
+		await RenderingServer.frame_post_draw	
+		_reset_order_visualizers()
+
 func visualize_orders(orders):
-	_reset_order_visualizers()
 	for order in orders:
 		var order_visualizer = create_order_visualizer(order)
 		order_visualizers.add_child(order_visualizer)
