@@ -12,12 +12,13 @@ var tick_count = 0
 class GameData:
 	var ticks_per_turn = 0
 	var tick_count = 0
+	var orders = []
 
 
 func _ready():
 	level.setup()
 	var hex_map = level.get_hex_map()
-	ui.setup(hex_map, PROTOTYPE_get_orders)
+	ui.setup(hex_map)
 	ui.switch_to_planning_mode()
 	ai.setup(level.mechs, level.hex_map)	
 	DEBUG_initiate_planning_mode_for_the_first_time()
@@ -26,10 +27,11 @@ func _process(_delta):
 	var game_data = GameData.new()
 	game_data.tick_count = tick_count
 	game_data.ticks_per_turn = level.ticks_per_turn
+	game_data.orders = _get_orders()	
 	
 	ui.update(game_data)
 
-func PROTOTYPE_get_orders():
+func _get_orders():
 	var mechs = level.mechs.get_mechs()
 	var orders = []
 	for mech : Mech in mechs:
@@ -42,7 +44,7 @@ func DEBUG_initiate_planning_mode_for_the_first_time():
 func start_execution_phase():
 	level.start_execution()
 	tick_timer.start(tick_duration)
-	ui.switch_to_execute_mode(level.ticks_per_turn)
+	ui.switch_to_execute_mode()
 
 func execute_tick():
 	level.execute_tick()

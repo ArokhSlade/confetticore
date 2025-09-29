@@ -8,11 +8,14 @@ const Arrow = preload("res://ui/arrow/arrow.gd")
 
 var order_visualizers : Dictionary[Mech, Arrow]
 
-func switch_to_planning_mode(orders):
+func visualize_orders(orders):	
+	order_visualizers.clear()
+	for order in orders:
+		update_order(order)
 	arrows.show()
 	draw_arrows(orders)
 
-func switch_to_execute_mode():
+func hide_order_visualizers():
 	arrows.hide()
 
 #HACK(Gerald, 2025 09 25): hud is not supposed to know about orders or HexMap, it's supposed to get OrderVisualizers not Orders

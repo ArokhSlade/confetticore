@@ -16,14 +16,11 @@ signal execute_button_pressed
 func update(game_data, ui_data):
 	current_mode.update(game_data, ui_data)
 
-func switch_to_planning_mode(get_orders):
+func switch_to_planning_mode():
 	current_mode = planning_mode
-	var orders = get_orders.call()
-	world_space_hud.switch_to_planning_mode(orders)
 	
 func switch_to_execute_mode():
 	current_mode = execution_mode
-	world_space_hud.switch_to_execute_mode()
 
 func update_tick_count_display(tick_count, ticks_per_turn):
 	screen_space_hud.update_tick_count_display(tick_count, ticks_per_turn)

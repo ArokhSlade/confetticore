@@ -9,14 +9,11 @@ signal order_created(order)
 @export var hud : HUD
 @export var player_input : PlayerInput
 
-var PROTOTYPE_get_orders : Callable
-
 class UIData:
 	var selected_mech : Mech = null
 
-func setup(hex_map, get_orders):
+func setup(hex_map):
 	player_input.setup(hex_map)
-	PROTOTYPE_get_orders = get_orders
 
 func update(game_data):
 	var ui_data = UIData.new()
@@ -24,11 +21,11 @@ func update(game_data):
 	hud.update(game_data, ui_data)
 
 func switch_to_planning_mode():
-	hud.switch_to_planning_mode(PROTOTYPE_get_orders)
+	hud.switch_to_planning_mode()
 	player_input.wake_up()
 
-func switch_to_execute_mode(ticks_per_turn):
-	hud.switch_to_execute_mode(ticks_per_turn)
+func switch_to_execute_mode():
+	hud.switch_to_execute_mode()
 	player_input.go_to_sleep()
 	
 func update_tick_count_display(tick_count, ticks_per_turn):

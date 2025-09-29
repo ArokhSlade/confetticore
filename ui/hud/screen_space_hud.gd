@@ -16,7 +16,6 @@ func update_mech_info_panel(mech):
 	else:
 		mech_info_panel.hide()
 
-
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
 	
