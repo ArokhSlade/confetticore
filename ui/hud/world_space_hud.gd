@@ -9,22 +9,19 @@ const Arrow = preload("res://ui/arrow/arrow.gd")
 var order_visualizers : Dictionary[Mech, Arrow]
 
 func visualize_orders(orders):	
-	order_visualizers.clear()
-	for arrow in arrows.get_children():
-		arrows.remove_child(arrow)
-		arrow.queue_free()
+	_reset_order_visualizers()	
 	for order in orders:
 		update_order(order)
 	arrows.show()
-	draw_arrows(orders)
 
 func hide_order_visualizers():
 	arrows.hide()
 
-#HACK(Gerald, 2025 09 25): hud is not supposed to know about orders or HexMap, it's supposed to get OrderVisualizers not Orders
-func draw_arrows(orders):
-	for order : Order in orders:
-		update_order(order)
+func _reset_order_visualizers():
+	order_visualizers.clear()
+	for arrow in arrows.get_children():
+		arrows.remove_child(arrow)
+		arrow.queue_free()
 
 func update_order(order):
 	if (order == null):
