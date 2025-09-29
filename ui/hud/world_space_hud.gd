@@ -10,6 +10,9 @@ var order_visualizers : Dictionary[Mech, Arrow]
 
 func visualize_orders(orders):	
 	order_visualizers.clear()
+	for arrow in arrows.get_children():
+		arrows.remove_child(arrow)
+		arrow.queue_free()
 	for order in orders:
 		update_order(order)
 	arrows.show()
