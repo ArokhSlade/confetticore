@@ -16,16 +16,6 @@ func update_mech_info_panel(mech):
 	else:
 		mech_info_panel.hide()
 
-func switch_to_planning_mode():
-	execute_button.disabled = false
-	tick_count_display.hide()
-	
-	
-func switch_to_execute_mode(ticks_per_turn):
-	execute_button.disabled = true
-	tick_count_display.update(0, ticks_per_turn)
-	tick_count_display.show()
-
 
 func _on_execute_button_pressed():
 	execute_button_pressed.emit()
