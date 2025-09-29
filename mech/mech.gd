@@ -70,7 +70,7 @@ func update_order(in_order:Order):
 
 func update_strategy():
 	if order == null:
-		order = StayOrder.new()
+		order = IdleOrder.new()
 	strategy = strategy_builder.create_strategy(order, path_finder)	
 	strategy.setup(self)
 

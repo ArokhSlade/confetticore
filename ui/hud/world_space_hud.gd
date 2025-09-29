@@ -9,7 +9,7 @@ const Arrow = preload("res://ui/arrow/arrow.gd")
 func visualize_orders(orders):	
 	_reset_order_visualizers()	
 	for order in orders:
-		var order_visualizer = try_create_order_visualizer(order)
+		var order_visualizer = create_order_visualizer(order)
 		if order_visualizer != null:
 			order_visualizers.add_child(order_visualizer)
 	order_visualizers.show()
@@ -22,8 +22,8 @@ func _reset_order_visualizers():
 		order_visualizers.remove_child(arrow)
 		arrow.queue_free()
 
-func try_create_order_visualizer(order):	
-	if order == null or order is StayOrder:
+func create_order_visualizer(order):	
+	if order == null or order is IdleOrder:
 		return null
 		
 	var arrow : Arrow = arrow_scene.instantiate()
@@ -37,3 +37,7 @@ func try_create_order_visualizer(order):
 	arrow.from = arrow.to_local(arrow.from)
 	arrow.to = arrow.to_local(arrow.to)	
 	return arrow
+
+
+
+			

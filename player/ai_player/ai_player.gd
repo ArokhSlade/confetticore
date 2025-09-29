@@ -29,7 +29,7 @@ func give_orders():
 			order_builder.set_mold(AttackOrder.new())
 			order_builder.set_attack_target(target_mech)
 		else:
-			order_builder.set_mold(StayOrder.new())
+			order_builder.set_mold(IdleOrder.new())
 		order = order_builder.finalize()
 		order_created.emit(order)
 		

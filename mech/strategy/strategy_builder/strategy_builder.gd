@@ -23,7 +23,7 @@ func _create_idle_strategy(idle_order):
 
 func create_strategy(order, path_finder):
 	var result = null
-	if order is StayOrder:
+	if order is IdleOrder:
 		result = _create_idle_strategy(order)
 	elif order is MoveOrder:
 		result = _create_move_strategy(order, path_finder)

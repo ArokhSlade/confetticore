@@ -19,8 +19,8 @@ func create_move_order(move_target):
 	order.move_target = move_target
 	return order
 
-func create_stay_order():
-	var order = StayOrder.new()
+func create_idle_order():
+	var order = IdleOrder.new()
 	return order
 
 func set_executor(mech):
@@ -40,7 +40,7 @@ func set_mold(specific_order : Order):
 
 func finalize() -> Order:
 	mold.executor = executor
-	if mold is StayOrder:
+	if mold is IdleOrder:
 		pass
 	elif mold is MoveOrder:
 		mold.target = move_target
