@@ -8,6 +8,6 @@ script = ExtResource("1_8xmys")
 order_visualizers = NodePath("OrderVisualizers")
 order_visualizer_factory = NodePath("OrderVisualizerFactory")
 
-[node name="OrderVisualizers" type="Node2D" parent="."]
-
 [node name="OrderVisualizerFactory" parent="." instance=ExtResource("3_42cr1")]
+
+[node name="OrderVisualizers" type="Node2D" parent="."]
