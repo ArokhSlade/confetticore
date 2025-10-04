@@ -1,9 +1,8 @@
-extends Node
-class_name PlayerInput
+extends Commander
+class_name PlayerCommander
 
 signal mech_selected(mech)
 signal mech_deselected
-signal order_created(order)
 
 @export var neutral_state : PlayerInputState
 @export var ally_mech_selected_state : PlayerInputState
@@ -17,9 +16,9 @@ var input_state : PlayerInputState
 var selected_mech : Mech = null
 var hex_map : HexMap
 
-func setup(new_hex_map):
+func setup(in_hex_map):
 	input_state = neutral_state
-	hex_map = new_hex_map
+	hex_map = in_hex_map
 
 func try_transition_to(new_state):
 	if new_state != input_state:

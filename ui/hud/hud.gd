@@ -16,8 +16,8 @@ signal execute_button_pressed
 func setup(hex_map):
 	world_space_hud.setup(hex_map)
 
-func update(game_data, ui_data):
-	current_mode.update(game_data, ui_data)
+func update(game_data):
+	current_mode.update(game_data)
 
 func switch_to_planning_mode():
 	current_mode = planning_mode

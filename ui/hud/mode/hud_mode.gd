@@ -6,5 +6,5 @@ const UIData = UI.UIData
 
 @export var hud : HUD
 
-func update(game_data, ui_data):
-	hud.screen_space_hud.update_mech_info_panel(ui_data.selected_mech)
+func update(game_data):
+	hud.screen_space_hud.update_mech_info_panel(game_data.selected_mech)

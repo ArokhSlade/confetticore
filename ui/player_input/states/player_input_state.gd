@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerInputState
 
-@export var player_input : PlayerInput
+@export var player_input : Node
 
 func on_primary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
 	return self

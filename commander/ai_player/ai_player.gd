@@ -1,7 +1,8 @@
-extends Commander
-class_name AICommander
+extends Node
+class_name AIPlayer
 
-#TODO(ArokhSlade 2025 10 04) migrate affiliation to Commander class
+signal order_created(order)
+
 @export var affiliation = Mech.Affiliation.BLUE
 @export var order_builder : OrderBuilder
 
@@ -12,7 +13,7 @@ var opposing_mechs : Array[Mech]
 var owned_mechs : Array[Mech]
 
 
-func setup(in_hex_map, mechs):
+func setup(mechs, in_hex_map):
 	all_mechs = mechs
 	hex_map = in_hex_map
 
@@ -30,7 +31,7 @@ func give_orders():
 		else:
 			order_builder.set_mold(IdleOrder.new())
 		order = order_builder.finalize()
-		order_submitted.emit(order)
+		order_created.emit(order)
 		
 func get_opposing_mechs():
 	for mech in all_mechs.get_mechs():
