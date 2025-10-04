@@ -15,7 +15,6 @@ func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputStat
 				var order = player_input.order_builder.finalize()
 				player_input.order_created.emit(order)
 	else:
-		player_input.order_builder.set_type(Order.Type.MOVE)
 		player_input.order_builder.set_mold(MoveOrder.new())
 		player_input.order_builder.set_move_target(hex)
 		var order = player_input.order_builder.finalize()
