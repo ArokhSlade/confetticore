@@ -67,8 +67,5 @@ func _on_tick_timer_timeout():
 	if tick_count == level.ticks_per_turn:
 		start_planning_phase()
 
-func _on_ui_order_created(order):
-	level.update_order(order)
-
-func _on_ai_player_order_created(order):
+func _on_commander_order_given(order):
 	level.update_order(order)
