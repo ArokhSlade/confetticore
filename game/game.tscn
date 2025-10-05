@@ -15,13 +15,16 @@ tick_timer = NodePath("TickTimer")
 
 [node name="Level" parent="." instance=ExtResource("1_feb5d")]
 
-[node name="UI" parent="." instance=ExtResource("6_mfdv2")]
+[node name="UI" parent="." node_paths=PackedStringArray("player_commander") instance=ExtResource("6_mfdv2")]
+player_commander = NodePath("Commander")
 
 [node name="Commander" parent="UI" instance=ExtResource("4_dxrkv")]
 
-[node name="AIPlayer" parent="." instance=ExtResource("6_dakft")]
+[node name="AIPlayer" parent="." node_paths=PackedStringArray("ai_commander") instance=ExtResource("6_dakft")]
+ai_commander = NodePath("Commander")
 
 [node name="Commander" parent="AIPlayer" instance=ExtResource("4_dxrkv")]
+affiliation = 2
 
 [node name="TickTimer" type="Timer" parent="."]
 

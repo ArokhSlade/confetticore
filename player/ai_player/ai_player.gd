@@ -3,8 +3,9 @@ class_name AIPlayer
 
 signal order_created(order)
 
-@export var affiliation = Mech.Affiliation.BLUE
-@export var order_builder : OrderBuilder
+@export var ai_commander : Commander
+
+@onready var order_builder = $OrderBuilder
 
 var all_mechs : Mechs
 var hex_map : HexMap
@@ -35,12 +36,12 @@ func give_orders():
 		
 func get_opposing_mechs():
 	for mech in all_mechs.get_mechs():
-		if mech.affiliation != affiliation:
+		if mech.affiliation != ai_commander.affiliation:
 			opposing_mechs.append(mech)
 			
 func get_owned_mechs():
 	for mech in all_mechs.get_mechs():
-		if mech.affiliation == affiliation:
+		if mech.affiliation == ai_commander.affiliation:
 			owned_mechs.append(mech)
 
 func pick_target_mech():

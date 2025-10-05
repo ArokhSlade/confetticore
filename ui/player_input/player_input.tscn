@@ -12,7 +12,6 @@ script = ExtResource("1_s86fl")
 neutral_state = NodePath("States/Neutral")
 ally_mech_selected_state = NodePath("States/AllyMechSelected")
 enemy_mech_selected_state = NodePath("States/EnemyMechSelected")
-affiliation = 1
 order_builder = NodePath("OrderBuilder")
 
 [node name="States" type="Node" parent="."]

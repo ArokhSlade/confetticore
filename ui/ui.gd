@@ -6,14 +6,16 @@ const GameData = Game.GameData
 signal execute_phase_requested
 signal order_created(order)
 
-@export var hud : HUD
-@export var player_input : PlayerInput
+@export var player_commander : Commander
+
+@onready var hud = $HUD
+@onready var player_input = $PlayerInput
 
 class UIData:
 	var selected_mech : Mech = null
 
 func setup(hex_map):
-	player_input.setup(hex_map)
+	player_input.setup(hex_map, player_commander)
 	hud.setup(hex_map)
 
 func update(game_data):

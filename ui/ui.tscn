@@ -4,10 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cy0tppwsy3m2i" path="res://ui/hud/hud.tscn" id="3_vkava"]
 [ext_resource type="PackedScene" uid="uid://dc5y0yr8gi5cp" path="res://ui/player_input/player_input.tscn" id="3_wl5ax"]
 
-[node name="UI" type="Node" node_paths=PackedStringArray("hud", "player_input")]
+[node name="UI" type="Node"]
 script = ExtResource("1_wl5ax")
-hud = NodePath("HUD")
-player_input = NodePath("PlayerInput")
 
 [node name="PlayerInput" parent="." instance=ExtResource("3_wl5ax")]
 
