@@ -7,7 +7,7 @@ signal order_created(order)
 
 @onready var order_builder = $OrderBuilder
 
-var all_mechs : Mechs
+var all_mechs : Node
 var hex_map : HexMap
 
 var opposing_mechs : Array[Mech]
@@ -16,6 +16,7 @@ var owned_mechs : Array[Mech]
 
 func setup(mechs, in_hex_map):
 	all_mechs = mechs
+	assert(all_mechs.has_method("get_mechs"))
 	hex_map = in_hex_map
 
 func give_orders():
@@ -36,12 +37,12 @@ func give_orders():
 		
 func get_opposing_mechs():
 	for mech in all_mechs.get_mechs():
-		if mech.affiliation != ai_commander.affiliation:
+		if mech.affiliation != ai_commander:
 			opposing_mechs.append(mech)
 			
 func get_owned_mechs():
 	for mech in all_mechs.get_mechs():
-		if mech.affiliation == ai_commander.affiliation:
+		if mech.affiliation == ai_commander:
 			owned_mechs.append(mech)
 
 func pick_target_mech():

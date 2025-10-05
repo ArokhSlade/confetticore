@@ -8,12 +8,13 @@ signal order_created(order)
 @export var neutral_state : PlayerInputState
 @export var ally_mech_selected_state : PlayerInputState
 @export var enemy_mech_selected_state : PlayerInputState
-@export var player_commander : Commander
 @export var order_builder : OrderBuilder
 
-var affiliation : Mech.Affiliation : 
+var player_commander : Commander
+
+var affiliation : Commander : 
 	get:
-		return player_commander.affiliation
+		return player_commander
 
 var DEBUG_woke_up_once = false
 var dormant = false
@@ -25,7 +26,7 @@ func setup(in_hex_map, commander):
 	input_state = neutral_state
 	hex_map = in_hex_map
 	player_commander = commander
-
+		
 func try_transition_to(new_state):
 	if new_state != input_state:
 		input_state.on_exit()

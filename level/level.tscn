@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=4 uid="uid://dqnfsgb18u6f6"]
+[gd_scene load_steps=12 format=4 uid="uid://dqnfsgb18u6f6"]
 
-[ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level/level.gd" id="1_0b4ue"]
+[ext_resource type="Script" uid="uid://cm32e6mlc1jmk" path="res://level/level.gd" id="1_0v1st"]
 [ext_resource type="Texture2D" uid="uid://c3tqvwb12rhq3" path="res://addons/hexagon_tilemaplayer/demo/tile_vertical.png" id="1_vonw3"]
-[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://level/hex_map.gd" id="3_1ainy"]
+[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://level/hex_map.gd" id="3_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://30ubfbepehwu" path="res://mech/mech.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://unqo5f8jesjm" path="res://mech/mechs.tscn" id="4_1ainy"]
+[ext_resource type="Script" uid="uid://crcp1r80hh2aw" path="res://commander/commanders.gd" id="4_6gtgk"]
+[ext_resource type="PackedScene" uid="uid://d10hfcl2bu5bw" path="res://commander/player_commander.tscn" id="5_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://c36lqqsnbslbl" path="res://pilot/pilot.tscn" id="5_f2txt"]
+[ext_resource type="PackedScene" uid="uid://dgma82407c7wk" path="res://commander/ai_commander.tscn" id="8_0v1st"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yx6j"]
 texture = ExtResource("1_vonw3")
@@ -38,33 +41,41 @@ custom_data_layer_0/name = "pathfinding"
 custom_data_layer_0/type = 3
 sources/2 = SubResource("TileSetAtlasSource_8yx6j")
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map", "mechs")]
-script = ExtResource("1_0b4ue")
+[node name="Level" type="Node2D" node_paths=PackedStringArray("hex_map")]
+script = ExtResource("1_0v1st")
 hex_map = NodePath("HexMap")
-mechs = NodePath("Mechs")
 
 [node name="HexMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAABAP//AgAAAAAAAAAAAAEAAgAAAAAAAgD//wAAAgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAIAAgAAAAAAAgD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAABAAIAAgAAAAAABQAFAP//AgAAAAAAAgADAAAAAgAAAAAAAwADAAEAAgAAAAAAAwACAAIAAgAAAAAABQADAAIAAgAAAAAAAwAEAAAAAgAAAAAAAwACAAMAAgAAAAAAAwAEAAIAAgAAAAAAAwAFAAEAAgAAAAAAAwAGAAIAAgAAAAAAAwAHAAEAAgAAAAAABQAFAAIAAgAAAAAAAgAHAAIAAgAAAAAABQAAAAMAAgAAAAAABQD//wMAAgAAAAAABQAAAAQAAgAAAAAABQABAAMAAgAAAAAABQD+/wQAAgAAAAAABQD9/wQAAgAAAAAABQD8/wQAAgAAAAAABQACAAAAAgAAAAAAAAABAAEAAgAAAAAAAgACAAEAAgAAAAAAAAABAAAAAgAAAAAAAgADAP//AgAAAAAAAgACAP//AgAAAAAAAgACAP7/AgAAAAAAAgABAP7/AgAAAAAAAgAAAP7/AgAAAAAAAgD///7/AgAAAAAAAgD+////AgAAAAAAAgD9////AgAAAAAAAgD9/wAAAgAAAAAAAgD8/wAAAgAAAAAAAgD8/wEAAgAAAAAAAgD8/wIAAgAAAAAAAgD9/wIAAgAAAAAAAgD9/wEAAgAAAAAAAgD9/wMAAgAAAAAAAgD+/wMAAgAAAAAAAgD8/wMAAgAAAAAAAwD7/wIAAgAAAAAAAwD7/wEAAgAAAAAAAwD7/wAAAgAAAAAAAwD7////AgAAAAAAAwD8////AgAAAAAAAwD9//7/AgAAAAAAAwD+//7/AgAAAAAAAwD///3/AgAAAAAAAwAAAP3/AgAAAAAAAwABAP3/AgAAAAAAAwACAP3/AgAAAAAAAwADAP3/AgAAAAAAAwABAPz/AgAAAAAAAwD///z/AgAAAAAAAwD+//3/AgAAAAAAAwD9//3/AgAAAAAAAwD8//7/AgAAAAAAAwD7//3/AgAAAAAAAwD6//7/AgAAAAAAAwD7//7/AgAAAAAAAwD6////AgAAAAAAAwD8//3/AgAAAAAAAwD6/wEAAgAAAAAAAAD6/wIAAgAAAAAAAAD6/wMAAgAAAAAAAAD6/wQAAgAAAAAAAAD7/wQAAgAAAAAAAAD7/wMAAgAAAAAAAAD8/wUAAgAAAAAAAAD9/wUAAgAAAAAAAAD+/wUAAgAAAAAAAAD//wUAAgAAAAAAAAD//wQAAgAAAAAAAAD+/wYAAgAAAAAAAAD8/wYAAgAAAAAAAAD7/wUAAgAAAAAAAAD6/wYAAgAAAAAAAAD9/wYAAgAAAAAAAAD6/wUAAgAAAAAAAAD+/wcAAgAAAAAAAAD//wcAAgAAAAAAAAAAAAcAAgAAAAAAAAABAAYAAgAAAAAAAAACAAYAAgAAAAAAAAABAAUAAgAAAAAAAAACAAUAAgAAAAAAAAAAAAYAAgAAAAAAAAAAAAUAAgAAAAAAAAABAAQAAgAAAAAAAAD//wYAAgAAAAAAAAACAAQAAgAAAAAAAAADAAMAAgAAAAAAAgADAAQAAgAAAAAAAgADAAUAAgAAAAAAAgAEAAUAAgAAAAAAAgAEAAQAAgAAAAAAAgAFAAMAAgAAAAAAAgAEAAMAAgAAAAAAAgAGAAMAAgAAAAAAAgAGAAQAAgAAAAAAAgAFAAQAAgAAAAAAAgAEAAEAAgAAAAAABQAFAAAAAgAAAAAABQAGAAEAAgAAAAAABQAHAAAAAgAAAAAABQAGAAAAAgAAAAAABQAGAP//AgAAAAAABQAFAP7/AgAAAAAABQAEAP7/AgAAAAAABQADAP7/AgAAAAAABQAEAP//AgAAAAAABQAEAP3/AgAAAAAABQADAPz/AgAAAAAABQAFAP3/AgAAAAAABQAGAP7/AgAAAAAABQAHAP7/AgAAAAAABQAGAP3/AgAAAAAABQAFAPz/AgAAAAAABQAEAPz/AgAAAAAABQAHAP//AgAAAAAABQAHAAMAAgAAAAAABQAHAAQAAgAAAAAAAAAHAAUAAgAAAAAAAgAGAAYAAgAAAAAAAgAFAAYAAgAAAAAAAgAEAAYAAgAAAAAAAgADAAYAAgAAAAAAAgAGAAUAAgAAAAAAAgAFAAUAAgAAAAAAAgACAPz/AgAAAAAAAAABAPv/AgAAAAAAAAAAAPz/AgAAAAAAAAD///v/AgAAAAAAAAD+//z/AgAAAAAAAAD9//v/AgAAAAAAAAD9//z/AgAAAAAAAAD8//z/AgAAAAAAAAD7//v/AgAAAAAAAAD6//z/AgAAAAAAAAD5//z/AgAAAAAAAAD6//3/AgAAAAAAAAD7//z/AgAAAAAAAAD5//3/AgAAAAAAAAD4//7/AgAAAAAAAAD4////AgAAAAAAAAD5//7/AgAAAAAAAAD5////AgAAAAAAAAD6/wAAAgAAAAAAAAD5/wEAAgAAAAAAAAAIAAQAAgAAAAAAAAAIAAMAAgAAAAAAAAAIAAIAAgAAAAAAAAAIAAEAAgAAAAAAAAAIAAAAAgAAAAAAAAAIAP//AgAAAAAAAAAIAP7/AgAAAAAAAAAJAP//AgAAAAAAAAAKAAAAAgAAAAAAAAALAAAAAgAAAAAAAAAKAAEAAgAAAAAAAAAKAAIAAgAAAAAAAAAJAAIAAgAAAAAAAAAJAAAAAgAAAAAAAAAJAAEAAgAAAAAAAAAJAAQAAgAAAAAAAAAKAAUAAgAAAAAAAAALAAUAAgAAAAAAAAAIAAUAAgAAAAAAAAAIAAYAAgAAAAAAAAAJAAUAAgAAAAAAAAAKAAYAAgAAAAAAAAAMAAYAAgAAAAAAAAAJAAYAAgAAAAAAAAAKAAcAAgAAAAAAAAALAAYAAgAAAAAAAAAMAAUAAgAAAAAAAAALAAQAAgAAAAAAAAAMAAQAAgAAAAAAAAANAAQAAgAAAAAAAAAOAAUAAgAAAAAAAAANAAUAAgAAAAAAAAANAAYAAgAAAAAAAAAMAAcAAgAAAAAAAAAOAAYAAgAAAAAAAAAPAAYAAgAAAAAAAAAQAAYAAgAAAAAAAAAPAAUAAgAAAAAAAAAHAP3/AgAAAAAAAgAHAPz/AgAAAAAAAgAHAPv/AgAAAAAAAgAIAPv/AgAAAAAAAgAJAPr/AgAAAAAAAgAKAPr/AgAAAAAAAgALAPr/AgAAAAAAAgAMAPr/AgAAAAAAAgANAPr/AgAAAAAAAgAOAPr/AgAAAAAAAgAPAPr/AgAAAAAAAgAQAPv/AgAAAAAAAgAQAPr/AgAAAAAAAgAPAPn/AgAAAAAAAgAOAPn/AgAAAAAAAgANAPj/AgAAAAAAAgAMAPn/AgAAAAAAAgAMAPj/AgAAAAAAAgALAPj/AgAAAAAAAgAKAPn/AgAAAAAAAgAJAPn/AgAAAAAAAgAJAPj/AgAAAAAAAgAIAPj/AgAAAAAAAgAIAPn/AgAAAAAAAgAHAPn/AgAAAAAAAgAIAPr/AgAAAAAAAgALAPn/AgAAAAAAAgANAPn/AgAAAAAAAgAHAPr/AgAAAAAAAgAGAPv/AgAAAAAAAgAGAPz/AgAAAAAAAgAFAPv/AgAAAAAAAgAFAPr/AgAAAAAAAgAGAPr/AgAAAAAAAgAHAPj/AgAAAAAAAgAIAPf/AgAAAAAAAgAJAPf/AgAAAAAAAgAJAPb/AgAAAAAAAgAIAPb/AgAAAAAAAgAIAPX/AgAAAAAAAgAEAPv/AgAAAAAAAgA=")
 tile_set = SubResource("TileSet_dhmdd")
-script = ExtResource("3_1ainy")
+script = ExtResource("3_6gtgk")
 pathfinding_enabled = true
 debug_mode = 1
 metadata/_custom_type_script = "uid://buj6ft1vvdf2f"
 
-[node name="Mechs" parent="." node_paths=PackedStringArray("hex_map") instance=ExtResource("4_1ainy")]
-hex_map = NodePath("../HexMap")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(317, 326)
+zoom = Vector2(0.54, 0.54)
 
-[node name="Mech" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Commanders" type="Node2D" parent="."]
+script = ExtResource("4_6gtgk")
+
+[node name="PlayerCommander" parent="Commanders" node_paths=PackedStringArray("mechs") instance=ExtResource("5_6gtgk")]
+mechs = NodePath("Mechs")
+
+[node name="Mechs" parent="Commanders/PlayerCommander" instance=ExtResource("4_1ainy")]
+
+[node name="Mech" parent="Commanders/PlayerCommander/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(0.941293, 0.937934, 7.70092e-07, 1)
 position = Vector2(379, 79)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="Mechs/Mech" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="Commanders/PlayerCommander/Mechs/Mech" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Label" type="Label" parent="Mechs/Mech"]
+[node name="Label" type="Label" parent="Commanders/PlayerCommander/Mechs/Mech"]
 offset_left = -39.0
 offset_top = -100.0
 offset_right = 45.0
@@ -74,17 +85,17 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mech2" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="Mech2" parent="Commanders/PlayerCommander/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(0.384608, 1, 0.93165, 1)
 position = Vector2(523, 157)
 pilot = NodePath("Pilot")
 
-[node name="Pilot" parent="Mechs/Mech2" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="Commanders/PlayerCommander/Mechs/Mech2" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Label" type="Label" parent="Mechs/Mech2"]
+[node name="Label" type="Label" parent="Commanders/PlayerCommander/Mechs/Mech2"]
 offset_left = -39.0
 offset_top = -105.0
 offset_right = 45.0
@@ -94,19 +105,23 @@ text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mech3" parent="Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
+[node name="AICommander" parent="Commanders" node_paths=PackedStringArray("mechs") instance=ExtResource("8_0v1st")]
+mechs = NodePath("Mechs")
+
+[node name="Mechs" parent="Commanders/AICommander" instance=ExtResource("4_1ainy")]
+
+[node name="Mech3" parent="Commanders/AICommander/Mechs" node_paths=PackedStringArray("pilot") instance=ExtResource("3_oi3di")]
 modulate = Color(0.03, 1, 0.401833, 1)
 position = Vector2(-45, 635)
 pilot = NodePath("Pilot")
-affiliation = 2
 metadata/_edit_group_ = true
 
-[node name="Pilot" parent="Mechs/Mech3" instance=ExtResource("5_f2txt")]
+[node name="Pilot" parent="Commanders/AICommander/Mechs/Mech3" instance=ExtResource("5_f2txt")]
 position = Vector2(0, -26)
 call_sign = "gerald"
 experience = 1336
 
-[node name="Label" type="Label" parent="Mechs/Mech3"]
+[node name="Label" type="Label" parent="Commanders/AICommander/Mechs/Mech3"]
 offset_left = -41.0
 offset_top = -104.0
 offset_right = 43.0
@@ -115,7 +130,3 @@ theme_override_font_sizes/font_size = 30
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(317, 326)
-zoom = Vector2(0.54, 0.54)

@@ -1,12 +1,9 @@
 extends Node2D
 class_name Mechs
 
-@export var hex_map : HexMap
-
-
-func setup():
+func setup(hex_map, affiliation):
 	for mech : Mech in get_children():
-		mech.setup(hex_map)
+		mech.setup(hex_map, affiliation)
 
 func get_mechs():
 	return get_children()

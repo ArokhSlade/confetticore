@@ -1,12 +1,6 @@
 extends Node2D
 class_name Mech
 
-enum Affiliation {
-	NONE,
-	RED,
-	BLUE
-}
-
 const Hex = HexMap.Hex
 
 @onready var idle_state = $States/Idle
@@ -27,7 +21,7 @@ const Hex = HexMap.Hex
 @export var path_finder : PathFinder
 @export var hp : int = 5
 @export var damage: int = 2
-@export var affiliation = Affiliation.RED
+@export var affiliation : Commander
 @export var attack_range : int = 1
 @export var strategy_builder : StrategyBuilder
 
@@ -42,7 +36,9 @@ var action : MechAction
 #TODO(ArokhSlade 2025 09 18): obsolete?
 var state : MechState
 
-func setup(in_hex_map):
+func setup(in_hex_map, in_affiliation):
+	affiliation = in_affiliation
+	
 	for mech_state : MechState in $States.get_children():
 		mech_state.setup(self)
 	for action : MechAction in $Actions.get_children():

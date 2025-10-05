@@ -9,23 +9,26 @@ enum GameState
 	PLAN,
 	EXECUTE
 }
+@onready var commanders = $Commanders
 
 @export var state = GameState.PLAN
 @export var hex_map : HexMap
-@export var mechs : Mechs
 @export var tick_timer : Timer
 @export var ticks_per_turn : int = 5
+
+func get_player_commander():
+	return commanders.player_commander
 
 func get_hex_map():
 	return hex_map
 
 func setup():
-	mechs.setup()
-	add_mechs_to_hex_data()	
+	commanders.setup(hex_map)
+	add_mechs_to_hex_data()
+	
 	
 func add_mechs_to_hex_data():
-	#TODO(ArokhSlade, 2025 08 09): composite pattern?
-	for mech in mechs.get_mechs():
+	for mech in commanders.get_mechs():
 		add_mech_to_hex_data(mech)
 #
 func add_mech_to_hex_data(mech : Mech):
@@ -34,18 +37,19 @@ func add_mech_to_hex_data(mech : Mech):
 	hex.occupant = mech
 
 func start_execution():
-	mechs.start_execution()
+	commanders.start_execution()
 	state = GameState.EXECUTE
 	
 func execute_tick():
-	mechs.execute_tick()
+	commanders.execute_tick()
 	
 func stop_execution():
-	mechs.stop_execution()
+	commanders.stop_execution()
 	state = GameState.PLAN
 
-func update_mech_orders(mech, target):
-	mechs.update_mech_orders(mech, target)
+func let_ai_give_orders():
+	commanders.let_ai_give_orders()
 
-func update_order(order):
-	mechs.update_order(order)
+func get_all_mechs():
+	var result = commanders.get_mechs()
+	return result

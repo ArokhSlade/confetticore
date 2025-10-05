@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://pwy3mhqby7yi" path="res://ui/mech_info_panel/mech_info_panel.gd" id="1_8lom7"]
 
 [node name="MechInfoPanel" type="Panel" node_paths=PackedStringArray("move_info_label")]
-offset_right = 160.0
+offset_right = 245.0
 offset_bottom = 165.0
 script = ExtResource("1_8lom7")
 move_info_label = NodePath("VBoxContainer/MoveInfoLabel")
@@ -28,3 +28,4 @@ Attack Range: ?
 Damage: ?
 Pilot: ?
 Affiliation: ?"
+text_overrun_behavior = 1
