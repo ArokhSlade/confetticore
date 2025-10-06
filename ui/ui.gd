@@ -1,15 +1,12 @@
 extends Node
 class_name UI
 
-const GameData = Game.GameData
-
 signal execute_phase_requested
 signal order_created(order)
 
 @export var player_commander : Commander
 
 @onready var hud = $HUD
-@onready var player_input = $PlayerInput
 
 class UIData:
 	var selected_mech : Mech = null

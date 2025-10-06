@@ -3,6 +3,15 @@ class_name Mech
 
 const Hex = HexMap.Hex
 
+class Data:
+	var order : Order.Data
+
+func get_data():
+	var result = Data.new()
+	if order:
+		result.order = order.get_data()
+	return result
+
 @onready var idle_state = $States/Idle
 @onready var moving_state = $States/Moving
 @onready var attacking_state = $States/Attacking

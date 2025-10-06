@@ -1,5 +1,14 @@
 extends Commander
 
+class Data extends Commander.Data:
+	pass	
+
+func get_data():
+	var result = Data.new()
+	result.mechs = mechs.get_data()
+	return result
+
+## NOTE(ArokhSlade 2025 10 06): needed to "overload" setup() for different sub-classes
 class InitData:
 	var hex_map : HexMap
 	var all_mechs : Node ## has_method("get_mechs")

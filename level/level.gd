@@ -2,6 +2,16 @@ extends Node
 class_name Level
 
 const Hex = HexMap.Hex
+const Commanders = preload("res://commander/commanders.gd")
+class Data:
+	var ticks_per_turn = 0
+	var commanders : Commanders.Data
+
+func get_data():
+	var result = Data.new()
+	result.ticks_per_turn = ticks_per_turn
+	result.commanders = commanders.get_data()
+	return result
 
 # TODO(Gerald 2025 08 22): do we really need this?
 enum GameState 
@@ -49,7 +59,3 @@ func stop_execution():
 
 func let_ai_give_orders():
 	commanders.let_ai_give_orders()
-
-func get_all_mechs():
-	var result = commanders.get_mechs()
-	return result

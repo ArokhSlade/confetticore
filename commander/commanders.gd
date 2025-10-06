@@ -3,6 +3,21 @@ extends Node2D
 const PlayerCommander = preload("res://commander/player_commander.gd")
 const AICommander = preload("res://commander/ai_commander.gd")
 
+class Data:
+	var player_commander : PlayerCommander.Data
+	var ai_commanders : Array[AICommander.Data]
+	var commanders : Array[Commander.Data]
+
+func get_data():
+	var result = Data.new()
+	result.player_commander = player_commander.get_data()
+	result.ai_commanders = [] as Array[AICommander.Data]
+	for ai_commander in ai_commanders:
+		result.ai_commanders.append(ai_commander.get_data())
+	for commander in get_children():
+		result.commanders.append(commander.get_data())
+	return result
+
 var player_commander : PlayerCommander
 var ai_commanders :  Array[AICommander]
 	

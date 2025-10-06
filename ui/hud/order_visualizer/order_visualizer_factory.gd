@@ -17,16 +17,16 @@ func create_order_visualizer(in_order):
 	if in_order == null:
 		result = NullOrderVisualizer.instantiate()
 		
-	elif in_order is IdleOrder:
+	elif in_order is IdleOrder.Data:
 		result = IdleOrderVisualizer.instantiate()
 		
-	elif in_order is MoveOrder:
+	elif in_order is MoveOrder.Data:
 		result = MoveOrderVisualizer.instantiate()
 		result.start_position = in_order.executor.global_position
 		
 		result.target_position = hex_map.hex_to_global(in_order.target)
 		
-	elif in_order is AttackOrder:
+	elif in_order is AttackOrder.Data:
 		result = AttackOrderVisualizer.instantiate()
 		result.start_position = in_order.executor.global_position
 		result.target_position = in_order.target.global_position

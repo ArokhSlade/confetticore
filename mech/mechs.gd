@@ -1,6 +1,17 @@
 extends Node2D
 class_name Mechs
 
+class Data:
+	var mechs : Array[Mech.Data]
+
+func get_data():
+	var result = Data.new()
+	result.mechs = [] as Array[Mech.Data]
+	for mech in get_children():
+		result.mechs.append(mech.get_data())
+	return result
+
+
 func setup(hex_map, affiliation):
 	for mech : Mech in get_children():
 		mech.setup(hex_map, affiliation)

@@ -1,6 +1,14 @@
 extends Node
 class_name Commander
 
+class Data:
+	var mechs : Mechs.Data
+
+func get_data():
+	var result = Data.new()
+	result.mechs = mechs.get_data()
+	return result
+
 @export var mechs : Mechs
 
 func setup(hex_map):

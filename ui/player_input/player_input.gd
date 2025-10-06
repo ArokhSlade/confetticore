@@ -1,6 +1,14 @@
 extends Node
 class_name PlayerInput
 
+class Data:
+	var selected_mech : Mech
+
+func get_data():
+	var result = Data.new()
+	result.selected_mech = selected_mech
+	return result
+
 signal mech_selected(mech)
 signal mech_deselected
 signal order_created(order)

@@ -6,44 +6,32 @@ class_name Game
 @export var ui : UI
 @export var tick_timer : Timer
 
-
 var tick_count = 0
-var player_input : PlayerInput
 
-class GameData:
-	var ticks_per_turn = 0
+class Data:
+	var level : Level.Data
 	var tick_count = 0
-	var orders = []
-	var selected_mech = null
 
+func get_data():
+	var result = Data.new()
+	result.tick_count = tick_count
+	result.level = level.get_data()
+	return result
 
 func _ready():
 	level.setup()
-	player_input = level.get_player_commander().player_input
 	var hex_map = level.get_hex_map()
 	
 	var player_commander = level.get_player_commander()
 	ui.setup(hex_map, player_commander)
-	ui.switch_to_planning_mode()
-	
+	ui.switch_to_planning_mode()	
 	
 	DEBUG_initiate_planning_mode_for_the_first_time()
 
-func _process(_delta):
-	var game_data = GameData.new()
-	game_data.tick_count = tick_count
-	game_data.ticks_per_turn = level.ticks_per_turn
-	game_data.orders = _get_orders()
-	game_data.selected_mech = player_input.selected_mech
-	
-	ui.update(game_data)
 
-func _get_orders():
-	var mechs = level.get_all_mechs()
-	var orders = []
-	for mech : Mech in mechs:
-		orders.append(mech.order)
-	return orders
+func _process(_delta):
+	var game_data = get_data()	
+	ui.update(game_data)
 		
 func DEBUG_initiate_planning_mode_for_the_first_time():
 	level.let_ai_give_orders()
