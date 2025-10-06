@@ -23,4 +23,4 @@ func stop_execution():
 	mechs.stop_execution()
 	
 func _to_string():
-	return name
+	return str(name)
