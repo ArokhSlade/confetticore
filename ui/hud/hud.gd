@@ -1,8 +1,6 @@
 extends Node
 class_name HUD
 
-const GameData = Game.GameData
-
 signal execute_button_pressed
 
 @export var screen_space_hud : ScreenSpaceHUD

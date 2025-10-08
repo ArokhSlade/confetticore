@@ -1,26 +1,20 @@
 extends Node
 class_name Level
 
-const Hex = HexMap.Hex
-
 # TODO(Gerald 2025 08 22): do we really need this?
 enum GameState 
 {
 	PLAN,
 	EXECUTE
 }
-@onready var commanders = $Commanders
-
-@export var state = GameState.PLAN
-@export var hex_map : HexMap
 @export var tick_timer : Timer
 @export var ticks_per_turn : int = 5
+@export var state = GameState.PLAN
 
-func get_player_commander():
-	return commanders.player_commander
+@onready var commanders = $Commanders
+@onready var hex_map = $HexMap
 
-func get_hex_map():
-	return hex_map
+const Hex = HexMap.Hex
 
 func setup():
 	commanders.setup(hex_map)
@@ -49,7 +43,3 @@ func stop_execution():
 
 func let_ai_give_orders():
 	commanders.let_ai_give_orders()
-
-func get_all_mechs():
-	var result = commanders.get_mechs()
-	return result

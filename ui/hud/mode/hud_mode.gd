@@ -1,9 +1,6 @@
 extends Node
 class_name HUDMode
 
-const GameData = Game.GameData
-const UIData = UI.UIData
-
 @export var hud : HUD
 
 func update(game_data):
