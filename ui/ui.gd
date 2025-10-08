@@ -6,8 +6,6 @@ signal order_created(order)
 
 @export var player_commander : Commander
 
-@onready var hud = $HUD
-
 var data_collector : DataCollector
 
 const DataCollector = preload("res://game/data_collector.gd")

@@ -11,10 +11,17 @@ signal execute_button_pressed
 
 @onready var current_mode : HUDMode
 
-func setup(hex_map):
+var data_collector : DataCollector
+
+const DataCollector = preload("res://game/data_collector.gd")
+
+
+func setup(hex_map, data_collector):
+	self.data_collector = data_collector
 	world_space_hud.setup(hex_map)
 
-func update(game_data):
+func update():
+	var game_data = data_collector.collect_data()
 	current_mode.update(game_data)
 
 func switch_to_planning_mode():
