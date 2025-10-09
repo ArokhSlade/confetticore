@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgauqy5f3cvfo"]
+[gd_scene load_steps=4 format=3 uid="uid://cugi7gdwpyyph"]
 
 [ext_resource type="Script" uid="uid://ro6q6pqtraxa" path="res://ui/ui.gd" id="1_wl5ax"]
 [ext_resource type="PackedScene" uid="uid://cy0tppwsy3m2i" path="res://ui/hud/hud.tscn" id="3_vkava"]
+[ext_resource type="PackedScene" uid="uid://dc5y0yr8gi5cp" path="res://ui/player_input/player_input.tscn" id="3_wl5ax"]
 
 [node name="UI" type="Node"]
 script = ExtResource("1_wl5ax")
 
 [node name="HUD" parent="." instance=ExtResource("3_vkava")]
 
+[node name="PlayerInput" parent="." instance=ExtResource("3_wl5ax")]
+
 [connection signal="execute_button_pressed" from="HUD" to="." method="_on_hud_execute_button_pressed"]
+[connection signal="mech_deselected" from="PlayerInput" to="." method="_on_player_input_mech_deselected"]
+[connection signal="mech_selected" from="PlayerInput" to="." method="_on_player_input_mech_selected"]

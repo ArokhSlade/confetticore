@@ -3,7 +3,6 @@ class_name PlayerInput
 
 signal mech_selected(mech)
 signal mech_deselected
-signal order_created(order)
 
 @export var neutral_state : PlayerInputState
 @export var ally_mech_selected_state : PlayerInputState
@@ -11,16 +10,12 @@ signal order_created(order)
 @export var order_builder : OrderBuilder
 
 var player_commander : Commander
-
-var affiliation : Commander : 
-	get:
-		return player_commander
+var hex_map : HexMap
 
 var DEBUG_woke_up_once = false
 var dormant = false
 var input_state : PlayerInputState
 var selected_mech : Mech = null
-var hex_map : HexMap
 
 func setup(in_hex_map, commander):
 	input_state = neutral_state

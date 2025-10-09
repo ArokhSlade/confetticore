@@ -13,8 +13,8 @@ var tick_count = 0
 func _ready():
 	level.setup()
 	var hex_map = level.hex_map
-	
-	ui.setup(hex_map, data_collector)
+	var player_commander = level.commanders.player_commander
+	ui.setup(hex_map, player_commander, data_collector)
 	ui.switch_to_planning_mode()
 	
 	DEBUG_initiate_planning_mode_for_the_first_time()

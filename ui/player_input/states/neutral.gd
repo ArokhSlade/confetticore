@@ -10,7 +10,7 @@ func on_primary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputSta
 	var mouse_hex = player_input.hex_map.get_closest_hex_from_mouse()
 	if mouse_hex.occupant is Mech:
 		var mech = mouse_hex.occupant
-		if mech.affiliation == player_input.affiliation:
+		if mech.affiliation == player_input.player_commander:
 			player_input.order_builder.executor = mech
 			result = player_input.ally_mech_selected_state
 		else:

@@ -6,7 +6,7 @@ func on_primary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputSta
 	if (hex.is_occupied()):
 		if hex.occupant is Mech:
 			var mech = hex.occupant as Mech
-			if mech.affiliation == player_input.affiliation:
+			if mech.affiliation == player_input.player_commander:
 				player_input.order_builder.set_executor(mech)
 				player_input.selected_mech = mech
 				player_input.mech_selected.emit(player_input.selected_mech)				
