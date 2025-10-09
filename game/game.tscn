@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbewjrret8wkg"]
+[gd_scene load_steps=6 format=3 uid="uid://cbewjrret8wkg"]
 
 [ext_resource type="Script" uid="uid://bkyplmgv0gi68" path="res://game/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dqnfsgb18u6f6" path="res://level/level.tscn" id="2_h7iqs"]
 [ext_resource type="Script" uid="uid://bc5087ornvkxc" path="res://game/data_collector.gd" id="4_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://dmh7amuaaqpmd" path="res://player/ai_player/ai_player.tscn" id="5_dxrkv"]
 [ext_resource type="PackedScene" uid="uid://cugi7gdwpyyph" path="res://ui/ui.tscn" id="6_mfdv2"]
 
 [node name="Game" type="Node"]
@@ -17,6 +18,8 @@ script = ExtResource("1_fc0e3")
 [node name="DataCollector" type="Node" parent="." node_paths=PackedStringArray("game")]
 script = ExtResource("4_4fuuu")
 game = NodePath("..")
+
+[node name="AIPlayer" parent="." instance=ExtResource("5_dxrkv")]
 
 [connection signal="execute_phase_requested" from="UI" to="." method="_on_ui_execute_phase_requested"]
 [connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

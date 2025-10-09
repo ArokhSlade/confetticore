@@ -55,7 +55,3 @@ func execute_tick():
 func stop_execution():
 	for commander : Commander in get_children():
 		commander.stop_execution()
-
-func let_ai_give_orders():
-	for commander : AICommander in ai_commanders:
-		commander.give_orders()

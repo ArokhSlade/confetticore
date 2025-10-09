@@ -40,6 +40,3 @@ func execute_tick():
 func stop_execution():
 	commanders.stop_execution()
 	state = GameState.PLAN
-
-func let_ai_give_orders():
-	commanders.let_ai_give_orders()

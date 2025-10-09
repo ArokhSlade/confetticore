@@ -1,13 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgma82407c7wk"]
+[gd_scene load_steps=3 format=3 uid="uid://dgma82407c7wk"]
 
-[ext_resource type="PackedScene" uid="uid://2ut7rwjclkjb" path="res://commander/commander.tscn" id="1_1ompx"]
-[ext_resource type="PackedScene" uid="uid://dmh7amuaaqpmd" path="res://player/ai_player/ai_player.tscn" id="2_q2ml4"]
+[ext_resource type="PackedScene" uid="uid://2ut7rwjclkjb" path="res://commander/Commander.tscn" id="1_1ompx"]
 [ext_resource type="Script" uid="uid://cj224204rroa4" path="res://commander/ai_commander.gd" id="2_syb1v"]
 
 [node name="AICommander" instance=ExtResource("1_1ompx")]
 script = ExtResource("2_syb1v")
-
-[node name="AIPlayer" parent="." index="0" node_paths=PackedStringArray("ai_commander") instance=ExtResource("2_q2ml4")]
-ai_commander = NodePath("..")
-
-[connection signal="order_created" from="AIPlayer" to="." method="_on_ai_player_order_created"]

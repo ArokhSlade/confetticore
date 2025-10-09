@@ -7,6 +7,7 @@ class_name Game
 @onready var level = $Level
 @onready var tick_timer = $TickTimer
 @onready var data_collector = $DataCollector
+@onready var ai_player = $AIPlayer
 
 var tick_count = 0
 
@@ -16,16 +17,20 @@ func _ready():
 	var player_commander = level.commanders.player_commander
 	ui.setup(hex_map, player_commander, data_collector)
 	ui.switch_to_planning_mode()
+	var ai_commander = level.commanders.ai_commanders[0]
+	var all_mechs = level.commanders
+	ai_player.setup(hex_map, ai_commander, all_mechs)
 	
 	DEBUG_initiate_planning_mode_for_the_first_time()
 
 
 func _process(_delta):
 	ui.update()
+	ai_player.generate_orders()
 
 
 func DEBUG_initiate_planning_mode_for_the_first_time():
-	level.let_ai_give_orders()
+	ai_player.generate_orders()
 
 
 func start_execution_phase():
@@ -44,7 +49,7 @@ func start_planning_phase():
 	level.stop_execution()
 	tick_timer.stop()
 	tick_count = 0
-	level.let_ai_give_orders()
+	ai_player.generate_orders()
 	ui.switch_to_planning_mode()
 
 

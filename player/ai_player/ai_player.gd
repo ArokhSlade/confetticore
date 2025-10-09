@@ -1,9 +1,7 @@
 extends Node
 class_name AIPlayer
 
-signal order_created(order)
-
-@export var ai_commander : Commander
+var ai_commander : Commander
 
 @onready var order_builder = $OrderBuilder
 
@@ -13,13 +11,13 @@ var hex_map : HexMap
 var opposing_mechs : Array[Mech]
 var owned_mechs : Array[Mech]
 
-
-func setup(mechs, in_hex_map):
-	all_mechs = mechs
+func setup(hex_map, ai_commander, all_mechs):
+	self.hex_map = hex_map
+	self.ai_commander = ai_commander
 	assert(all_mechs.has_method("get_mechs"))
-	hex_map = in_hex_map
+	self.all_mechs = all_mechs
 
-func give_orders():
+func generate_orders():
 	get_owned_mechs()
 	get_opposing_mechs()
 	for mech in owned_mechs:
@@ -33,7 +31,7 @@ func give_orders():
 		else:
 			order_builder.set_mold(IdleOrder.new())
 		order = order_builder.finalize()
-		order_created.emit(order)
+		ai_commander.give_order(order)
 		
 func get_opposing_mechs():
 	for mech in all_mechs.get_mechs():
@@ -41,9 +39,11 @@ func get_opposing_mechs():
 			opposing_mechs.append(mech)
 			
 func get_owned_mechs():
-	for mech in all_mechs.get_mechs():
-		if mech.affiliation == ai_commander:
-			owned_mechs.append(mech)
+	#ERROR(2025 10 09, ArokhSlade): Trying to assign an array of type "Array[Node]" to a variable of type "Array[Mech]".
+	#owned_mechs = ai_commander.get_mechs() as Array[Mech]
+	owned_mechs = []
+	for mech : Mech in ai_commander.get_mechs():
+		owned_mechs.append(mech)
 
 func pick_target_mech():
 	var result = null
