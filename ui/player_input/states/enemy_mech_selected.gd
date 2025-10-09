@@ -2,7 +2,15 @@ extends "res://ui/player_input/states/mech_selected.gd"
 
 func on_primary_click(global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
 	var next_state = self
-	var hex = player_input.hex_map.get_closest_hex_from_mouse()
+	
+	var hex = null
+	player_input.request_mouse_hex()
+	hex = player_input._mouse_hex
+	
+	if hex == null:
+		push_warning("mouse_hex requested, received null")
+		return self
+	
 	if hex.is_occupied():
 		if hex.occupant is Mech:
 			var mech = hex.occupant as Mech

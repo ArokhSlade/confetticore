@@ -59,3 +59,8 @@ func stop_execution():
 func let_ai_give_orders():
 	for commander : AICommander in ai_commanders:
 		commander.give_orders()
+
+func update_order(order, in_commander):
+	for commander : Commander in get_children():
+		if commander == in_commander:
+			commander.give_order(order)

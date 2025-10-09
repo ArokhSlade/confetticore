@@ -3,29 +3,26 @@ class_name PlayerInput
 
 signal mech_selected(mech)
 signal mech_deselected
-signal order_created(order)
+signal order_created(order,commander)
+signal closest_hex_from_mouse_requested
 
 @export var neutral_state : PlayerInputState
 @export var ally_mech_selected_state : PlayerInputState
 @export var enemy_mech_selected_state : PlayerInputState
 @export var order_builder : OrderBuilder
 
-var player_commander : Commander
-
-var affiliation : Commander : 
-	get:
-		return player_commander
+@export var affiliation : Commander
 
 var DEBUG_woke_up_once = false
 var dormant = false
 var input_state : PlayerInputState
 var selected_mech : Mech = null
-var hex_map : HexMap
 
-func setup(in_hex_map, commander):
+var _mouse_hex : HexMap.Hex
+
+func setup(affiliation):
 	input_state = neutral_state
-	hex_map = in_hex_map
-	player_commander = commander
+	self.affiliation = affiliation
 		
 func try_transition_to(new_state):
 	if new_state != input_state:
@@ -65,3 +62,10 @@ func global_viewport_to_world_coords(global_viewpoint_coords):
 	var viewport_to_world_transform = viewport.get_canvas_transform().affine_inverse()
 	var global_coords = viewport_to_world_transform * global_viewpoint_coords
 	return global_coords
+
+func update_closest_hex_from_mouse(hex):
+	_mouse_hex = hex
+
+func request_mouse_hex():
+	closest_hex_from_mouse_requested.emit()
+	# expected signal receiver to set mouse_hex

@@ -14,7 +14,7 @@ func collect_data():
 	game_data.tick_count = game.tick_count
 	game_data.ticks_per_turn = game.level.ticks_per_turn
 	game_data.orders = get_all_orders()
-	game_data.selected_mech = game.level.commanders.player_commander.player_input.selected_mech
+	game_data.selected_mech = game.ui.player_input.selected_mech
 	return game_data
 	
 

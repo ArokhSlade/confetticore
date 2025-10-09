@@ -43,3 +43,10 @@ func stop_execution():
 
 func let_ai_give_orders():
 	commanders.let_ai_give_orders()
+	
+func update_order(order, commander):
+	commanders.update_order(order, commander)
+
+func get_closest_hex_from_mouse():
+	var hex = hex_map.get_closest_hex_from_mouse()
+	return hex

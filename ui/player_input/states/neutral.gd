@@ -6,8 +6,15 @@ func on_enter():
 
 func on_primary_click(_global_viewport_coords = Vector2i.ZERO) -> PlayerInputState:
 	var result = self
+		
+	var mouse_hex = null
+	player_input.request_mouse_hex()
+	mouse_hex = player_input._mouse_hex
 	
-	var mouse_hex = player_input.hex_map.get_closest_hex_from_mouse()
+	if mouse_hex == null:
+		push_warning("mouse_hex requested, received null")
+		return self
+	
 	if mouse_hex.occupant is Mech:
 		var mech = mouse_hex.occupant
 		if mech.affiliation == player_input.affiliation:
