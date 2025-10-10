@@ -9,7 +9,7 @@
 - Psyche system includes social relationships between pilots. E.g. overriding and going against an order to help a friend in dire straits.
 ## Documentation
 - [Technical Design Document](https://docs.google.com/document/d/14xsRx_NeKTQH0zKv_amdp5cuLRJw7PbQz_LWp2n0DBo/edit?usp=drive_link)
-- [TDD Diagrams](https://drive.google.com/file/d/1thbd-FBKSbPvTallmOMGecIDh3N_czDb/view?usp=drive_link)
+- [TDD Diagrams](https://drive.google.com/file/d/16xqOg87J9RUO1X9MrZPc5XjdYffG2_wZ/view?usp=sharing)
 - [Project Management with Taiga](https://tree.taiga.io/project/gerald_as-confetticore)
 - [Production Document](https://docs.google.com/document/d/1UwyHf1eg3D7vivbMB-8hrbXGqYYesqqeyvpzFDUtX_w/edit?usp=drive_link)
 - [Game Design Document](https://docs.google.com/document/d/1S1yylPZWGxEKbrGrr7b4o4ZVpSo6_vDY479FvE0vAE4/edit?usp=drive_link)
