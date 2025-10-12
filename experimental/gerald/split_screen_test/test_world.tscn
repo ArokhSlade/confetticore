@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp81r7hfydpfj"]
+
+[ext_resource type="Script" uid="uid://c5r04kcwemmsn" path="res://experimental/gerald/split_screen_test/test_world.gd" id="1_r0bxu"]
+[ext_resource type="TileSet" uid="uid://goiedgftrwpr" path="res://level/hexagon_tile_map_layer.tres" id="2_83d41"]
+[ext_resource type="Script" uid="uid://bpjinj1osdng4" path="res://level/hex_map.gd" id="3_isxt8"]
+
+[node name="TestWorld" type="Node2D"]
+script = ExtResource("1_r0bxu")
+
+[node name="HexMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0)
+tile_set = ExtResource("2_83d41")
+script = ExtResource("3_isxt8")
+metadata/_custom_type_script = "uid://bpjinj1osdng4"
