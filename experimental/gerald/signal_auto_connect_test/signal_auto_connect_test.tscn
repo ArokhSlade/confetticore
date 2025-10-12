@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbrhdd6y32b87"]
+
+[ext_resource type="Script" uid="uid://bipj86ns4v0df" path="res://experimental/gerald/signal_auto_connect_test/signal_auto_connect_test.gd" id="1_sun8p"]
+
+[node name="SignalAutoConnectTest" type="Node2D"]
+script = ExtResource("1_sun8p")
