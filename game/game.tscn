@@ -11,8 +11,6 @@ script = ExtResource("1_fc0e3")
 
 [node name="Level" parent="." instance=ExtResource("2_h7iqs")]
 
-[node name="UI" parent="." instance=ExtResource("6_mfdv2")]
-
 [node name="TickTimer" type="Timer" parent="."]
 
 [node name="DataCollector" type="Node" parent="." node_paths=PackedStringArray("game")]
@@ -21,5 +19,6 @@ game = NodePath("..")
 
 [node name="AIPlayer" parent="." instance=ExtResource("5_dxrkv")]
 
-[connection signal="execute_phase_requested" from="UI" to="." method="_on_ui_execute_phase_requested"]
+[node name="UI" parent="." instance=ExtResource("6_mfdv2")]
+
 [connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]

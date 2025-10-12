@@ -15,7 +15,8 @@ func _ready():
 	level.setup()
 	var hex_map = level.hex_map
 	var player_commander = level.commanders.player_commander
-	ui.setup(hex_map, player_commander, data_collector)
+	var player_input = player_commander.player_input
+	ui.setup(hex_map, data_collector, player_input)
 	ui.switch_to_planning_mode()
 	var ai_commander = level.commanders.ai_commanders[0]
 	var all_mechs = level.commanders

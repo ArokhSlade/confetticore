@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://d10hfcl2bu5bw"]
+[gd_scene load_steps=4 format=3 uid="uid://d10hfcl2bu5bw"]
 
 [ext_resource type="PackedScene" uid="uid://2ut7rwjclkjb" path="res://commander/Commander.tscn" id="1_g0o5g"]
 [ext_resource type="Script" uid="uid://doupx0vjbphmf" path="res://commander/player_commander.gd" id="2_ikmyb"]
+[ext_resource type="PackedScene" uid="uid://dc5y0yr8gi5cp" path="res://ui/player_input/player_input.tscn" id="3_ikmyb"]
 
 [node name="PlayerCommander" instance=ExtResource("1_g0o5g")]
 script = ExtResource("2_ikmyb")
+
+[node name="PlayerInput" parent="." index="0" instance=ExtResource("3_ikmyb")]
