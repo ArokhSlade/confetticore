@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc5y0yr8gi5cp"]
+[gd_scene load_steps=6 format=3 uid="uid://dc5y0yr8gi5cp"]
 
 [ext_resource type="Script" uid="uid://ovsxn7rfo4ye" path="res://ui/player_input/player_input.gd" id="1_s86fl"]
 [ext_resource type="Script" uid="uid://di5a2ofw37ihc" path="res://ui/player_input/states/neutral.gd" id="2_5ecqg"]
 [ext_resource type="Script" uid="uid://bgus11ckcpim2" path="res://ui/player_input/states/ally_mech_selected.gd" id="3_fb735"]
-[ext_resource type="Script" uid="uid://rlwj7spucy7n" path="res://ui/input_receiver.gd" id="4_fb735"]
 [ext_resource type="Script" uid="uid://drwgl8xdxhs66" path="res://ui/player_input/states/enemy_mech_selected.gd" id="4_jj41r"]
 [ext_resource type="PackedScene" uid="uid://7wcgbgnxj4ed" path="res://order/order_builder/order_builder.tscn" id="6_6ebv2"]
 
@@ -28,11 +27,4 @@ player_input = NodePath("../..")
 script = ExtResource("4_jj41r")
 player_input = NodePath("../..")
 
-[node name="InputReceiver" type="Node" parent="."]
-script = ExtResource("4_fb735")
-
 [node name="OrderBuilder" parent="." instance=ExtResource("6_6ebv2")]
-
-[connection signal="pointer_moved" from="InputReceiver" to="." method="_on_input_receiver_pointer_moved"]
-[connection signal="primary_click_pressed" from="InputReceiver" to="." method="_on_input_receiver_primary_click_pressed"]
-[connection signal="secondary_click_pressed" from="InputReceiver" to="." method="_on_input_receiver_secondary_click_pressed"]
