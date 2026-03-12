@@ -4,7 +4,14 @@
 - Watch them act out these Orders in Execution Phase
 - Execution Phase simulates Units' moves simultaneously on a Hexagonal tile map.
 - Units - Mechs controlled by Pilots - adjust their actions based on the situation - similar to auto battler games.
-## Goals
+
+## Learning Goals
+Basically I want to practice cleaner code structure.
+Specifically, I am working on a rigorous Model-View-Presenter implementation to separate game logic from presentation.
+A strategy game lends itself very well to it.
+I'm using concepts such as Data Transfer Objects and Chain of Responsibility.
+
+## Future Feature Goals
 - Unit Pilots will have a Psyche system, allowing them to re-interpret Orders and select preferred Strategies based on assessment on their current situation.
 - Psyche system includes social relationships between pilots. E.g. overriding and going against an order to help a friend in dire straits.
 ## Documentation
