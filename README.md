@@ -1,9 +1,11 @@
 # Confetticore
+![Planning Phase](image/confetticore_screenshot_02.png)
 - Turn-based tactics game serving as a exercise in code architecture and project management.
 - Give Orders to Units in Planning Phase.
 - Watch them act out these Orders in Execution Phase
 - Execution Phase simulates Units' moves simultaneously on a Hexagonal tile map.
 - Units - Mechs controlled by Pilots - adjust their actions based on the situation - similar to auto battler games.
+![Planning Phase](image/confetticore_screenshot_03.png)
 
 ## Learning Goals
 Basically I want to practice cleaner code structure.
